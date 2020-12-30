@@ -33,7 +33,7 @@ in normal mode.
   
 ## Commands
 1. *start* start the game create pieces on the board.
-2. *mov* motion mode moving pieces.<br>  
+2. *mov* motion mode moving pieces.<\n>  
 2.1. *back* back to normal mode.
 3. *output* print the movement stack list.
 ## Modes
