@@ -14,28 +14,28 @@ Command line chess game written in C for Windows
 # How to play
 ## Starting the pieces
 <p>for start the pieces in their initial positions on the board type:<br /> 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*start*<br /> 
-<p>in normal mode.<br />
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*start*<br /> 
+in normal mode.
 ## Moviment mode
 <p>for make a move type:<br />
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*mov*<br /> 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*mov*<br /> 
 <p>int normal mode. Once entering in moviment mode you remain in movement mode type:<br /> 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*back*<br /> 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*back*<br /> 
 <p>to exit and back to the normal mode.<br /> 
 <p>for make a move you first type the name of the piece and the algebraic notation.<br /> 
 <p>Exemple:<br /> 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*P1w a5*<br />  
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*P1w a5*<br />  
 <p>and type enter.<br />  
-&nbsp;&nbsp;&nbsp;&nbsp; P1w<space>a5<enter>
-Attention!
-The name of the piece must be typed as shown on the board and the algebraic notation must always be in lowercase.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P1w<space>a5<enter><br /> 
+<p>Attention!<br />  
+<p>The name of the piece must be typed as shown on the board and the algebraic notation must always be in lowercase.<br />  
 ## Pieces and Chessboard
   
 ## Commands
 1. *start* start the game create pieces on the board.
-2. *mov* motion mode moving pieces.
-3. *back* back to normal mode.
-4. *output* print the movement stack list.
+2. *mov* motion mode moving pieces.<br />  
+2.1. *back* back to normal mode.
+3. *output* print the movement stack list.
 ## Modes
 * *:* Normal mode.
 * *mov:* Moviment mode.
