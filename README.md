@@ -24,9 +24,9 @@ int normal mode. Once entering in moviment mode you remain in movement mode type
 to exit and back to the normal mode.
 for make a move you first type the name of the piece and the algebraic notation.
 Exemple:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*P1w a5*
+*P1w a5*
 and type enter.
-P1w<space>a5<enter>
+<p>P1w<space>a5<enter></p>
 Attention!  
 The name of the piece must be typed as shown on the board and the algebraic notation must always be in lowercase. 
 ## Pieces and Chessboard
