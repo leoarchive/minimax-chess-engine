@@ -22,44 +22,44 @@ Command line chess game written in C for Windows
 * Death notes only for pawns.
 # How to play
 ## Starting the pieces
->for start the pieces in their initial positions on the board type:
->
-*start*
->in normal mode.
+for start the pieces in their initial positions on the board type:
+> *start*
+> 
+in normal mode.
 ## Moviment mode
-> for make a move type:
+for make a move type:
+> *mov*
 > 
-*mov*
-
-> int normal mode. Once entering in moviment mode you remain in movement mode type:
+ int normal mode. Once entering in moviment mode you remain in movement mode type:
+> *back*
 > 
-*back*
->to exit and back to the normal mode.
+to exit and back to the normal mode.
 for make a move you first type the name of the piece and the algebraic notation.
-Exemple:
+*Exemple:*
 
-*P1w a5*
->and type enter.
->
-P1w<space\>a5<enter\>
->Attention!  
+> *P1w a5*
+> 
+and type enter.
+> P1w<space\>a5<enter\>
+> 
+*Attention!* 
 The name of the piece must be typed as shown on the board and the algebraic notation must always be in lowercase. 
 ## Pieces and Chessboard
-> *Black pieces*
+> Black pieces
 > 
   | ♜ | ♞ | ♝ | ♛ | ♚ | ♝ | ♞ | ♜ |
   |----|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
   | ♟ | ♟ | ♟ | ♟ | ♟ | ♟ | ♟ | ♟ |
   | T1b | C1b | B1b | R1b | D1b | B2b | C2b | T2b |
  | P1b | P2b | P3b | P4b | P5b | P6b | P7b | P8b |
- > *White pieces*
+ > White pieces
  > 
   | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ |
   |----|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
   | ♖ | ♘ | ♗ | ♔ | ♕ | ♗ | ♘ | ♖ |
   | P1w | P2w | P3w | P4w | P5w | P6w | P7w | P8w |
   | T1w | C1w | B1w | R1w | D1b | B2b | C2b | T2w |
-  > *Chessboard*
+  > Chessboard
   >
   | 1a | 1b | 1c | 1d | 1e | 1f | 1g | 1h | 
   |----|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
