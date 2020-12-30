@@ -63,7 +63,7 @@ The name of the piece must be typed as shown on the board and the algebraic nota
   | T1w | C1w | B1w | R1w | D1b | B2b | C2b | T2w |
   > Chessboard
   > 
- |  | a | b | c | d | e | f | g | h | 
+ | &nbsp; | a | b | c | d | e | f | g | h | 
   |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
   | 1 | a1 | b1 | c1 | d1 | e1 | f1 | g1 | h1 | 
   | 2 | a2 | b1 | c1 | d1 | e1 | f1 | g1 | h1 |
