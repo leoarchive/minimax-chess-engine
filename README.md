@@ -11,6 +11,7 @@ Command line chess game written in C for Windows
  | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ |
   | ♖ | ♘ | ♗ | ♔ | ♕ | ♗ | ♘ | ♖ |
 # Versions
+All updates.
 ## Version 0.1
 * 510 lines.
 * Chess game.
@@ -23,7 +24,6 @@ Command line chess game written in C for Windows
 
 *12/30/2020*
 # How to play
-## Starting the pieces
 for start the pieces in their initial positions on the board type:
 > *start*
 > 
