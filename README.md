@@ -26,7 +26,7 @@ for make a move you first type the name of the piece and the algebraic notation.
 Exemple:
 *P1w a5*
 and type enter.
-<p>P1w<space>a5<enter></p>
+> P1w<space>a5<enter>
 Attention!  
 The name of the piece must be typed as shown on the board and the algebraic notation must always be in lowercase. 
 ## Pieces and Chessboard
