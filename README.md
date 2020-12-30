@@ -47,22 +47,22 @@ and type enter.
 *Attention!* 
 The name of the piece must be typed as shown on the board and the algebraic notation must always be in lowercase. 
 ## Pieces and Chessboard
- Black pieces
- 
+ > Black pieces
+ > 
   | ♜ | ♞ | ♝ | ♛ | ♚ | ♝ | ♞ | ♜ |
   |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
   | ♟ | ♟ | ♟ | ♟ | ♟ | ♟ | ♟ | ♟ |
   | T1b | C1b | B1b | R1b | D1b | B2b | C2b | T2b |
  | P1b | P2b | P3b | P4b | P5b | P6b | P7b | P8b |
-  White pieces
-  
+  > White pieces
+  > 
   | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ |
   |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
   | ♖ | ♘ | ♗ | ♔ | ♕ | ♗ | ♘ | ♖ |
   | P1w | P2w | P3w | P4w | P5w | P6w | P7w | P8w |
   | T1w | C1w | B1w | R1w | D1b | B2b | C2b | T2w |
-  Chessboard
-  
+  > Chessboard
+  > 
  |  | a | b | c | d | e | f | g | h | 
   |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
   | 1 | a1 | b1 | c1 | d1 | e1 | f1 | g1 | h1 | 
@@ -76,7 +76,7 @@ The name of the piece must be typed as shown on the board and the algebraic nota
 ## Commands
 1. *start* start the game create pieces on the board.
 2. *mov* motion mode moving pieces.
-2.1 *back* back to normal mode.
+2.1. *back* back to normal mode.
 4. *output* print the movement stack list.
 ## Modes
 * *:* Normal mode.
