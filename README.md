@@ -34,7 +34,7 @@ The name of the piece must be typed as shown on the board and the algebraic nota
 ## Commands
 1. *start* start the game create pieces on the board
 2. *mov* motion mode moving pieces
-2.1. *back* back to normal mode
+..2.1. *back* back to normal mode
 3. *output* print the movement stack list
 ## Modes
 * *:* Normal mode
