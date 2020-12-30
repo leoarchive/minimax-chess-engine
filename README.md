@@ -13,22 +13,22 @@ Command line chess game written in C for Windows
 * Death notes only for pawns.
 # How to play
 ## Starting the pieces
-<p>for start the pieces in their initial positions on the board type:<br /> 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*start*<br /> 
-in normal mode.<br />
+for start the pieces in their initial positions on the board type:
+*start*
+in normal mode.
 ## Moviment mode
-<p>for make a move type:<br />
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*mov*<br /> 
-<p>int normal mode. Once entering in moviment mode you remain in movement mode type:<br /> 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*back*<br /> 
-<p>to exit and back to the normal mode.<br /> 
-<p>for make a move you first type the name of the piece and the algebraic notation.<br /> 
-<p>Exemple:<br /> 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*P1w a5*<br />  
-<p>and type enter.<br />  
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P1w<space>a5<enter><br /> 
-<p>Attention!<br />  
-<p>The name of the piece must be typed as shown on the board and the algebraic notation must always be in lowercase.<br />  
+for make a move type:
+*mov*
+int normal mode. Once entering in moviment mode you remain in movement mode type:
+*back*
+to exit and back to the normal mode.
+for make a move you first type the name of the piece and the algebraic notation.
+Exemple:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*P1w a5*
+and type enter.
+P1w<space>a5<enter>
+Attention!  
+The name of the piece must be typed as shown on the board and the algebraic notation must always be in lowercase. 
 ## Pieces and Chessboard
   
 ## Commands
