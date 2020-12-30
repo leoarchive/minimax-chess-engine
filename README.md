@@ -15,7 +15,7 @@ Command line chess game written in C for Windows
 ## Starting the pieces
 <p>for start the pieces in their initial positions on the board type:<br /> 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*start*<br /> 
-in normal mode.
+in normal mode.<br />
 ## Moviment mode
 <p>for make a move type:<br />
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*mov*<br /> 
@@ -33,7 +33,7 @@ in normal mode.
   
 ## Commands
 1. *start* start the game create pieces on the board.
-2. *mov* motion mode moving pieces.<\n>  
+2. *mov* motion mode moving pieces.
 2.1. *back* back to normal mode.
 3. *output* print the movement stack list.
 ## Modes
