@@ -64,7 +64,7 @@ The name of the piece must be typed as shown on the board and the algebraic nota
   | 8 | a8 | b8 | c8 | d8 | e8 | f8 | g8 | h8 |
 ## Historic
 The historic is located below the command line, is responsible for showing the last movements and print the movement list. In normal mode type
-> cls
+> *cls*
 >
 for clear the historic.
 ## Commands
