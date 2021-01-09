@@ -1,5 +1,12 @@
-## Versions
-# Version 0.1
+# Versions
+## Version 0.2
+* New header.
+* Chess game.
+* [Separate file for rules](https://en.wikipedia.org/wiki/Rules_of_chess)
+* New "cls" command.
+
+*01/08/2021*
+## Version 0.1
 * 510 lines.
 * Chess game.
 * [Chessboard with algebraic notation](https://en.wikipedia.org/wiki/Algebraic_notation_(chess)#:~:text=Algebraic%20notation%20(or%20AN)%20is,books%2C%20magazines%2C%20and%20newspapers.).
@@ -8,4 +15,5 @@
 * [Incomplete chess rules](https://en.wikipedia.org/wiki/Rules_of_chess)
 * Rules only for pawns.
 * Death notes only for pawns.
+
 *12/30/2020*
