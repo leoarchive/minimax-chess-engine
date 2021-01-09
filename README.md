@@ -21,7 +21,7 @@ in normal mode.
 for make a move type:
 > *mov*
 > 
- int normal mode. Once entering in moviment mode you remain in movement mode type:
+ in normal mode. Once entering in moviment mode you remain in movement mode type:
 > *back*
 > 
 to exit and back to the normal mode.
@@ -62,11 +62,17 @@ The name of the piece must be typed as shown on the board and the algebraic nota
   | 6 | a6 | b6 | c6 | d6 | e6 | f6 | g6 | h6 |
   | 7 | a7 | b7 | c7 | d7 | e7 | f7 | g7 | h7 |
   | 8 | a8 | b8 | c8 | d8 | e8 | f8 | g8 | h8 |
+## Historic
+the history is located below the command line, it is responsible for showing the last movements and print of the movement list. 
+> cls
+>
+clear the historic.
 ## Commands
-1. *start* start the game create pieces on the board.
-2. *mov* motion mode moving pieces.
-3. *back* back to normal mode.
-4. *output* print the movement stack list.
+1. *start* in normal mode, start the game create pieces on the board.
+2. *mov* in normal mode, moviment mode moving pieces.
+3. *back* in moviment mode, back to normal mode.
+4. *output* in normal mode, print the movement stack list.
+5. *cls* in normal mode, clear the historic.
 ## Modes
 * *:* Normal mode.
 * *mov:* Moviment mode.
