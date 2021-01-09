@@ -1,7 +1,6 @@
 # Versions
 ## Version 0.2
 * New header.
-* Chess game.
 * [Separate file for rules](https://en.wikipedia.org/wiki/Rules_of_chess).
 * New "cls" command.
 
