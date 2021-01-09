@@ -11,18 +11,7 @@ Command line chess game written in C for Windows
  | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ |
   | ♖ | ♘ | ♗ | ♔ | ♕ | ♗ | ♘ | ♖ |
 # Versions
-All updates.
-## Version 0.1
-* 510 lines.
-* Chess game.
-* [Chessboard with algebraic notation](https://en.wikipedia.org/wiki/Algebraic_notation_(chess)#:~:text=Algebraic%20notation%20(or%20AN)%20is,books%2C%20magazines%2C%20and%20newspapers.).
-* All movements.
-* Movement stack list.
-* [Incomplete chess rules](https://en.wikipedia.org/wiki/Rules_of_chess)
-* Rules only for pawns.
-* Death notes only for pawns.
-
-*12/30/2020*
+[All updates](https://github.com/leozamboni/Chess/VERSIONS.md)
 # How to play
 for start the pieces in their initial positions on the board type:
 > *start*
