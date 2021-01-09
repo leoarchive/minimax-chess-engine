@@ -11,7 +11,7 @@ Command line chess game written in C for Windows
  | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ |
   | ♖ | ♘ | ♗ | ♔ | ♕ | ♗ | ♘ | ♖ |
 # Versions
-[All updates](https://github.com/leozamboni/Chess/VERSIONS.md)
+[All updates](https://github.com/leozamboni/Chess/blob/master/VERSIONS.md)
 # How to play
 for start the pieces in their initial positions on the board type:
 > *start*
