@@ -1,5 +1,6 @@
 # Versions
 ## Version 0.2
+* Refactoring.
 * New header.
 * [Separate file for rules](https://en.wikipedia.org/wiki/Rules_of_chess).
 * New "cls" command.
