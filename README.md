@@ -11,18 +11,7 @@ Command line chess game written in C for Windows
  | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ |
   | ♖ | ♘ | ♗ | ♔ | ♕ | ♗ | ♘ | ♖ |
 # Versions
-All updates.
-## Version 0.1
-* 510 lines.
-* Chess game.
-* [Chessboard with algebraic notation](https://en.wikipedia.org/wiki/Algebraic_notation_(chess)#:~:text=Algebraic%20notation%20(or%20AN)%20is,books%2C%20magazines%2C%20and%20newspapers.).
-* All movements.
-* Movement stack list.
-* [Incomplete chess rules](https://en.wikipedia.org/wiki/Rules_of_chess)
-* Rules only for pawns.
-* Death notes only for pawns.
-
-*12/30/2020*
+[All updates](https://github.com/leozamboni/Chess/blob/master/VERSIONS.md)
 # How to play
 for start the pieces in their initial positions on the board type:
 > *start*
@@ -32,7 +21,7 @@ in normal mode.
 for make a move type:
 > *mov*
 > 
- int normal mode. Once entering in moviment mode you remain in movement mode type:
+ in normal mode. Once entering in moviment mode you remain in movement mode type:
 > *back*
 > 
 to exit and back to the normal mode.
@@ -73,11 +62,17 @@ The name of the piece must be typed as shown on the board and the algebraic nota
   | 6 | a6 | b6 | c6 | d6 | e6 | f6 | g6 | h6 |
   | 7 | a7 | b7 | c7 | d7 | e7 | f7 | g7 | h7 |
   | 8 | a8 | b8 | c8 | d8 | e8 | f8 | g8 | h8 |
+## Historic
+The historic is located below the command line, is responsible for showing the last movements and print the movement list. In normal mode type
+> *cls*
+>
+for clear the historic.
 ## Commands
-1. *start* start the game create pieces on the board.
-2. *mov* motion mode moving pieces.
-3. *back* back to normal mode.
-4. *output* print the movement stack list.
+1. *start* in normal mode, start the game create pieces on the board.
+2. *mov* in normal mode, moviment mode moving pieces.
+3. *back* in moviment mode, back to normal mode.
+4. *output* in normal mode, print the movement stack list.
+5. *cls* in normal mode, clear the historic.
 ## Modes
 * *:* Normal mode.
 * *mov:* Moviment mode.
