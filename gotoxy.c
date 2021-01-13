@@ -1,5 +1,7 @@
 #include <windows.h>
 
+#define WHITE 15
+
 typedef
 struct text_info {
     unsigned char winleft;        /* left window coordinate */
@@ -14,25 +16,6 @@ struct text_info {
     unsigned char curx;           /* x-coordinate in current window */
     unsigned char cury;           /* y-coordinate in current window */
 } text_info;
-
-typedef enum {
-    BLACK,
-    BLUE,
-    GREEN,
-    CYAN,
-    RED,
-    MAGENTA,
-    BROWN,
-    LIGHTGRAY,
-    DARKGRAY,
-    LIGHTBLUE,
-    LIGHTGREEN,
-    LIGHTCYAN,
-    LIGHTRED,
-    LIGHTMAGENTA,
-    YELLOW,
-    WHITE
-} COLORS;
 
 enum text_modes {
     LASTMODE=-1,

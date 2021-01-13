@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Leonardo/Documents/GitHub/Chess/chess.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+
+C:/Users/Leonardo/Documents/GitHub/Chess/gotoxy.c
+windows.h
+-
+
+C:/Users/Leonardo/Documents/GitHub/Chess/main.c
+chess.h
+C:/Users/Leonardo/Documents/GitHub/Chess/chess.h
+gotoxy.c
+C:/Users/Leonardo/Documents/GitHub/Chess/gotoxy.c
+rules.c
+C:/Users/Leonardo/Documents/GitHub/Chess/rules.c
+
+C:/Users/Leonardo/Documents/GitHub/Chess/rules.c
+

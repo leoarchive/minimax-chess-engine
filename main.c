@@ -39,7 +39,7 @@ int main(void) {
         else if (strcmp(input, "output")    ==  0)      printList(list);
         else if (strcmp(input, "cls")       ==  0) {
             for (size_t i = 10; i < historic + 1; ++i)
-                printf("              \n");
+                printf("%25c\n", 32);
             historic    =   10;
         }
         else {  gotoxy(1, ++historic); printf(RED "Error0: invalid command" RESET); }
