@@ -1,7 +1,7 @@
 # Versions
 ## Version 0.3
 * Refactoring.
-* Rename "back" command for "return".
+* Rename "back" old command for "return".
 * New "back" command.
 
 *01/17/2021*
