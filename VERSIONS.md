@@ -1,4 +1,10 @@
 # Versions
+## Version 0.3
+* Refactoring.
+* Rename "back" command for "return".
+* New "back" command.
+
+*01/17/2021*
 ## Version 0.2
 * Refactoring.
 * New header.
