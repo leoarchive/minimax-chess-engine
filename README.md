@@ -69,11 +69,12 @@ The historic is located below the command line, is responsible for showing the l
 for clear the historic.
 ## Commands
 1. *start* in normal mode, start the game create pieces on the board.
-2. *mov* in normal mode, moviment mode moving pieces.
-3. *back* in moviment mode, back to normal mode.
-4. *output* in normal mode, print the movement stack list.
-5. *cls* in normal mode, clear the historic.
+2. *exit* in normal mode, exit the program.
+3. *mov* in normal mode, moviment mode moving pieces.
+4. *back*, in moviment mode, back the last moviment.
+5. *return* in moviment mode, return to normal mode.
+6. *output* in normal mode, print the movement stack list.
+7. *cls* in normal mode, clear the historic.
 ## Modes
 * *:* Normal mode.
 * *mov:* Moviment mode.
-
