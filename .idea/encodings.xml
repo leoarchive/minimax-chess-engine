@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/main.c" charset="US-ASCII" />
-    <file url="file://L:/Development files/C/Programação e Estruturas de Dados II/Aulas da 6a. Semana - Aula de 2a/Matrizes.cpp" charset="windows-1252" />
-    <file url="file://L:/Development files/C/Programação e Estruturas de Dados II/Aulas da 6a. Semana - Aula de 2a/MatrizesDinamicas.cpp" charset="windows-1252" />
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8" addBOMForNewFiles="with BOM">
+    <file url="file://$PROJECT_DIR$/main.c" charset="UTF-8" />
+    <file url="file://L:/Development files/C/Programação e Estruturas de Dados II/Aula Semana 11 - 12-01-21 - Terça/Dijkstra_v01 - OK.c" charset="windows-1252" />
+    <file url="file://L:/Development files/C/Programação e Estruturas de Dados II/Aula da 11.a Semana - 11-01-21 - Segunda/BuscaEmLargura.c" charset="windows-1252" />
+    <file url="file://L:/Development files/C/Programação e Estruturas de Dados II/Aula da 11.a Semana - 11-01-21 - Segunda/BuscaEmProfundidade.c" charset="windows-1252" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

@@ -1,9 +1,10 @@
 /* Hey, come on! https://github.com/leozamboni/Chess */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+#define false   0
+#define true    1
 #define RED     "\x1b[31m"
 #define GREEN   "\x1b[32m"
 #define RESET   "\x1b[0m"
@@ -27,10 +28,10 @@ typedef struct convert{
     int column;
 }Convert;
 
-void clearBuffer(void);
 void board(void);
 void printList(List *list);
 void clearMov(List *list, char *piece);
+void backMov(List *list, char *piece, char letter, int number);
 void stackInsert(List *list, int column, int line);
 void move(List *list, char *piece, char letter, int number);
 void insertfxy(List *list, int x, int y, char *print);

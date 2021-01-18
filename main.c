@@ -5,49 +5,45 @@
 int main(void) {
     system("cls");
 
-    char input[5];
-    char inputMov[6];
-    char letter;
+    char *input     =   (char *) malloc(5 * sizeof(char));
+    char *inputMov  =   (char *) malloc(6 * sizeof(char));
+    char *pieceAux  =   (char *) malloc(3 * sizeof(char));
     char *piece;
+    char letter;
     int number;
     List *list = NULL;
 
     board();
     while (1) {
-        gotoxy(1, 10);  printf("              ");
+        gotoxy(1, 10);  printf("%30c\n", 32);
         gotoxy(1, 10);  printf(":");
-        scanf("%s", input);   clearBuffer();
+        scanf(" %[^\n]s", input);
 
         if (strcmp(input, "exit")           ==  0)      return 0;
         else if (strcmp(input, "start")     ==  0)      list = start();
         else if (strcmp(input, "mov")       ==  0) {
-            do {
+            while (1) {
                 gotoxy(1, 10); printf("mov:");
-                scanf("%[^\n]", inputMov);
-                clearBuffer();
+                scanf(" %[^\n]s", inputMov);
 
-                if (strcmp(inputMov, "back") == 0)      break;
-
-                piece   =   strtok(inputMov, " ");
-                letter  =   inputMov[4];
-                number  =   inputMov[5] - '0';
-
-                move(list, piece, letter, number);
-                gotoxy(1, 10);  printf("              ");
-            } while (1);
+                if (strcmp(inputMov, "return")      ==  0)  break;
+                else if (strcmp(inputMov, "back")   ==  0)  backMov(list, pieceAux, letter, number);
+                else {
+                    piece   =   strtok(inputMov, " ");
+                    letter  =   inputMov[4];
+                    number  =   inputMov[5] - '0';
+                    move(list, piece, letter, number);
+                    strcpy(pieceAux, piece);
+                }
+                gotoxy(1, 10); printf("%30c\n", 32);
+            }
         }
         else if (strcmp(input, "output")    ==  0)      printList(list);
         else if (strcmp(input, "cls")       ==  0) {
-            for (size_t i = 10; i < historic + 1; ++i)
-                printf("%25c\n", 32);
-            historic    =   10;
+            for (size_t i = 10; i < historic + 1; ++i)  printf("%30c\n", 32); historic = 10;
         }
         else {  gotoxy(1, ++historic); printf(RED "Error0: invalid command" RESET); }
     }
-}
-
-void clearBuffer(void) {
-    int c; while ((c = getchar()) != '\n' && c != EOF);
 }
 
 List *create(void) {
@@ -80,13 +76,13 @@ void printList(List *list) {
     List *output = list->next;
     Node *outputNode;
 
-    gotoxy(1, ++historic);  printf(GREEN "Moviment List\n" RESET);
+    gotoxy(1, ++historic);          printf(GREEN "Moviment List\n" RESET);
     while(output != NULL) {
         gotoxy(1, ++historic);      printf("Piece %s\n", output->piece);
         outputNode = output->top;
         while (outputNode != NULL) {
             gotoxy(1, ++historic);  printf("%c%d ", outputNode->column, outputNode->line);
-            outputNode  =   outputNode->next;
+            outputNode = outputNode->next;
         }
         output = output->next;         puts("");
     }
@@ -102,6 +98,33 @@ void stackInsertOrder(List *list, char *piece, char letter, int number) {
         }
         else stackInsertOrder(list->next, piece, letter, number);
     }
+}
+
+void backMov(List *list, char *piece, char letter, int number) {
+    List *output        =   list->next;
+    Node *outputNode    =   NULL;
+
+    while (output) {
+        outputNode = output->top;
+        while (outputNode) {
+            if (outputNode->column == letter && outputNode->line == number && strcmp(output->piece, piece) != 0) {
+                Convert xy = letterNumberforxy(outputNode->column, outputNode->line);
+                gotoxy(xy.column, xy.line); printf("%s", output->piece);
+                break;
+            }
+            outputNode = outputNode->next;
+        }
+        if (outputNode) break;
+        output = output->next;
+    }
+    if (!output) clearMov(list->next, piece);
+
+    output  = list->next;
+    while   (strcmp(output->piece, piece) != 0)     output      =   output->next;
+    if      (output->top->next)                     output->top =   output->top->next;
+    else    return;
+    Convert xy = letterNumberforxy(output->top->column, output->top->line);
+    gotoxy(xy.column, xy.line); printf("%s", piece);
 }
 
 void clearMov(List *list, char *piece) {
@@ -125,15 +148,19 @@ void clearMov(List *list, char *piece) {
 }
 
 void move(List *list, char *piece, char letter, int number) {
-    int verify;
+//    int verify;
     Convert xy = letterNumberforxy(letter, number);
 
-    verify = rules(list, piece, letter, number);
-    if (!verify) {
-        gotoxy(xy.column, xy.line);     printf("%s", piece);
-        clearMov(list->next, piece);
-        stackInsertOrder(list->next, piece, letter, number);
-    }
+//    verify = rules(list, piece, letter, number);
+//    if (!verify) {
+//        gotoxy(xy.column, xy.line);     printf("%s", piece);
+//        clearMov(list->next, piece);
+//        stackInsertOrder(list->next, piece, letter, number);
+//    }
+
+    gotoxy(xy.column, xy.line);     printf("%s", piece);
+    clearMov(list->next, piece);
+    stackInsertOrder(list->next, piece, letter, number);
 
     gotoxy(1, 10);
 }

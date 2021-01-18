@@ -1,4 +1,4 @@
-"O:\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\Users\Leonardo\Documents\GitHub\Chess
+"O:\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\Users\Leonardo\CLionProjects\untitled
 -- The C compiler identification is GNU 6.3.0
 -- Check for working C compiler: C:/MinGW/bin/gcc.exe
 -- Check for working C compiler: C:/MinGW/bin/gcc.exe - works
@@ -8,4 +8,4 @@
 -- Detecting C compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: C:/Users/Leonardo/Documents/GitHub/Chess/cmake-build-debug
+-- Build files have been written to: C:/Users/Leonardo/CLionProjects/untitled/cmake-build-debug
