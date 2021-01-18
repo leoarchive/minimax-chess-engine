@@ -9,7 +9,7 @@ Command line chess game written in C for Windows
   | a5 | b5 | c5 | d5 | e5 | f5 | g5 | h5 |
   | a6 | b6 | c6 | d6 | e6 | f6 | g6 | h6 |
  | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ |
-  | ♖ | ♘ | ♗ | ♔ | ♕ | ♗ | ♘ | ♖ |
+  | ♖ | ♘ | ♗ | ♕ | ♔ | ♗ | ♘ | ♖ |
 # Versions
 [All updates](https://github.com/leozamboni/Chess/blob/master/VERSIONS.md)
 # How to play
@@ -41,15 +41,15 @@ The name of the piece must be typed as shown on the board and the algebraic nota
   | ♜ | ♞ | ♝ | ♛ | ♚ | ♝ | ♞ | ♜ |
   |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
   | ♟ | ♟ | ♟ | ♟ | ♟ | ♟ | ♟ | ♟ |
-  | T1b | C1b | B1b | R1b | D1b | B2b | C2b | T2b |
+  | T1b | C1b | B1b | D1b | R1b | B2b | C2b | T2b |
  | P1b | P2b | P3b | P4b | P5b | P6b | P7b | P8b |
   > White pieces
   > 
   | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ | ♙ |
   |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-  | ♖ | ♘ | ♗ | ♔ | ♕ | ♗ | ♘ | ♖ |
+  | ♖ | ♘ | ♗ | ♕ | ♔ | ♗ | ♘ | ♖ |
   | P1w | P2w | P3w | P4w | P5w | P6w | P7w | P8w |
-  | T1w | C1w | B1w | R1w | D1b | B2b | C2b | T2w |
+  | T1w | C1w | B1w | D1w | R1b | B2b | C2b | T2w |
   > Chessboard
   > 
  |  | a | b | c | d | e | f | g | h | 
