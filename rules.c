@@ -20,7 +20,8 @@ act pawnRules(List *list, char *piece, char letter, int number) {
         if (letter != output->top->column) {
             outputAux = list->next;
             while (outputAux) {
-				if (outputAux->top->column == letter && outputAux->top->line == number && outputAux->piece[2] == 'b') break;
+                if (outputAux->top->column == letter && outputAux->top->line == number
+                && outputAux->piece[2] == 'b') break;
                 outputAux = outputAux->next;
 			}
            	if (!outputAux || number != output->top->line - 1) return error;
@@ -42,7 +43,8 @@ act pawnRules(List *list, char *piece, char letter, int number) {
         if (letter != output->top->column) {
             outputAux = list->next;
             while (outputAux) {
-                if (outputAux->top->column == letter && outputAux->top->line == number && outputAux->piece[2] == 'w') break;
+                if (outputAux->top->column == letter && outputAux->top->line == number
+                && outputAux->piece[2] == 'w') break;
                 outputAux = outputAux->next;
             }
             if (!outputAux || number != output->top->line + 1) return error;
