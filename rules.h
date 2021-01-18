@@ -11,3 +11,5 @@ char catchPiece[3];
 
 act rules(List *list, char *piece, char letter, int number);
 act pawnRules(List *list, char *piece, char letter, int number);
+act knightRules(List *list, char *piece, char letter, int number);
+act rookRules(List *list, char *piece, char letter, int number);
