@@ -119,6 +119,7 @@ void stackInsertOrder(List *list, char *piece, char letter, int number) {
 
 void backMov(List *list, List *stack) {
     if (!stack->top)    return;
+    movimentTurn = movimentTurn == 1 ? 0 : 1;
     List *output        =   list->next;
     Node *outputStack   =   stack->top;
     Node *outputNode    =   NULL;

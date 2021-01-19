@@ -7,7 +7,8 @@
 #define GREEN   "\x1b[32m"
 #define RESET   "\x1b[0m"
 
-int historic    =   10;
+int historic        =   10;
+int movimentTurn    =   1;
 
 typedef struct node {
     int line;
