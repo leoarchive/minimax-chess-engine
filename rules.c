@@ -143,7 +143,7 @@ act rookRules(List *list, char *piece, char letter, int number) {
             else { strcpy(catchPiece, outputAux->piece); return catch;}
         }
     }
-    if (piece[2] == 'b') {
+    else if (piece[2] == 'b') {
         lowest      =   output->top->line > number ? number : output->top->line;
         biggest     =   output->top->line > number ? output->top->line : number;
         for (size_t i = lowest; i < biggest; ++i) {
