@@ -1,6 +1,9 @@
 #include "rules.h"
 
 act rules(List *list, char *piece, char letter, int number) {
+    if (movimentTurn == 1) { if (piece[2] == 'b') goto error2; else movimentTurn = 0;}
+    else { if (piece[2] == 'w') goto error2; else movimentTurn = 1;}
+
     if (piece[0] == 'P') {
         if (pawnRules(list, piece, letter, number) == normal)       return normal;
         else if (pawnRules(list, piece, letter, number) == error)   goto error1;
@@ -18,6 +21,7 @@ act rules(List *list, char *piece, char letter, int number) {
     }
 
     error1: gotoxy(1, ++historic); printf(RED "Error3: invalid movement for %s" RESET, piece);  return error;
+    error2: gotoxy(1, ++historic); printf(RED "Error4: invalid turn for %s" RESET, piece);      return error;
     catch1: gotoxy(1, ++historic); printf(GREEN "%s captured %s" RESET, piece, catchPiece);     return normal;
 }
 
