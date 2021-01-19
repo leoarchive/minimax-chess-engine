@@ -31,14 +31,14 @@ act pawnRules(List *list, char *piece, char letter, int number) {
             outputAux = list->next;
             while (outputAux) {
                 if (outputAux->top->column == letter && outputAux->top->line == number
-                && outputAux->piece[2] == 'b') break;
+                    && outputAux->piece[2] == 'b') break;
                 outputAux = outputAux->next;
-			}
-           	if (!outputAux || number != output->top->line - 1) return error;
+            }
+            if (!outputAux || number != output->top->line - 1) return error;
             else { strcpy(catchPiece, outputAux->piece); return catch;}
         }
         else if (number != output->top->line - 1 && number != output->top->line - 2
-        || output->top->line != 7 && number != output->top->line - 1) return error;
+                 || output->top->line != 7 && number != output->top->line - 1) return error;
         else {
             output = list->next;
             while (output) {
@@ -54,14 +54,14 @@ act pawnRules(List *list, char *piece, char letter, int number) {
             outputAux = list->next;
             while (outputAux) {
                 if (outputAux->top->column == letter && outputAux->top->line == number
-                && outputAux->piece[2] == 'w') break;
+                    && outputAux->piece[2] == 'w') break;
                 outputAux = outputAux->next;
             }
             if (!outputAux || number != output->top->line + 1) return error;
             else { strcpy(catchPiece, outputAux->piece); return catch;}
         }
         else if (output->top->line != 2 && number != output->top->line + 1
-        || number != output->top->line + 1 && number != output->top->line + 2) return error;
+                 || number != output->top->line + 1 && number != output->top->line + 2) return error;
         else {
             output = list->next;
             while (output) {
@@ -77,29 +77,29 @@ act pawnRules(List *list, char *piece, char letter, int number) {
 }
 
 act knightRules(List *list, char *piece, char letter, int number) {
-	List *output    =   list->next;
+    List *output    =   list->next;
     List *outputAux =   NULL;
     while (strcmp(output->piece, piece) != 0) output = output->next;
 
-	if (piece[2] == 'w') {
+    if (piece[2] == 'w') {
         if (number > output->top->line + 2 || number < output->top->line - 2
-        || output->top->line > 8 || output->top->line < 1
-        || letter == output->top->column || number == output->top->line) return error;
+            || output->top->line > 8 || output->top->line < 1
+            || letter == output->top->column || number == output->top->line) return error;
         else {
             outputAux = list->next;
             while (outputAux) {
                 if (outputAux->top->column == letter && outputAux->top->line == number
-                && outputAux->piece[2] == 'b') break;
+                    && outputAux->piece[2] == 'b') break;
                 outputAux = outputAux->next;
             }
             if (!outputAux) return normal;
             else { strcpy(catchPiece, outputAux->piece); return catch;}
         }
-	}
-	else if (piece[2] == 'b') {
+    }
+    else if (piece[2] == 'b') {
         if (number > output->top->line + 2 || number < output->top->line - 2
-        || output->top->line > 8 || output->top->line < 1
-        || letter == output->top->column || number == output->top->line) return error;
+            || output->top->line > 8 || output->top->line < 1
+            || letter == output->top->column || number == output->top->line) return error;
         else {
             outputAux = list->next;
             while (outputAux) {
@@ -112,7 +112,7 @@ act knightRules(List *list, char *piece, char letter, int number) {
         }
     }
 
-	return normal;
+    return normal;
 }
 
 act rookRules(List *list, char *piece, char letter, int number) {
@@ -127,11 +127,11 @@ act rookRules(List *list, char *piece, char letter, int number) {
         for (size_t i = lowest; i < biggest; ++i) {
             outputAux = list->next;
             while (outputAux) {
-                if (outputAux->top->line == i) return error;
+                if (letter == outputAux->top->column && outputAux->top->line == i) return error;
                 outputAux = outputAux->next;
             }
         }
-        if (number != output->top->line || letter != output->top->column) return error;
+        if (number != output->top->line && letter != output->top->column) return error;
         else {
             outputAux = list->next;
             while (outputAux) {
@@ -143,18 +143,17 @@ act rookRules(List *list, char *piece, char letter, int number) {
             else { strcpy(catchPiece, outputAux->piece); return catch;}
         }
     }
-
     if (piece[2] == 'b') {
         lowest      =   output->top->line > number ? number : output->top->line;
         biggest     =   output->top->line > number ? output->top->line : number;
-        for (size_t i = lowest; i <= biggest; ++i) {
+        for (size_t i = lowest; i < biggest; ++i) {
             outputAux = list->next;
             while (outputAux) {
-                if (outputAux->top->line == i) return error;
+                if (letter == outputAux->top->column && outputAux->top->line == i) return error;
                 outputAux = outputAux->next;
             }
         }
-        if (number != output->top->line || letter != output->top->column) return error;
+        if (number != output->top->line && letter != output->top->column) return error;
         else {
             outputAux = list->next;
             while (outputAux) {
