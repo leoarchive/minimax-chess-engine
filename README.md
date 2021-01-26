@@ -16,7 +16,7 @@ b -- back last move
 r -- return to initial mode 
     
 P4w d5 -- for make a move you first type the name of the piece and the algebraic notation 
-Piece<space\>notation<enter\>
+Piece<space>notation<enter>
 
 R -- King 
 D -- Queen 
