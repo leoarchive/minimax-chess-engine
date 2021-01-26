@@ -3,9 +3,9 @@
 For Windows
 
 # Releases
-* v0.3 -- B command.
-* v0.2 -- C command. Rules. Header.
-* v0.1 -- Initial release
+* v0.3 -- 'b' command <Br>
+* v0.2 -- 'c' command. Rules. Header <Br>
+* v0.1 -- Initial release <Br>
 
 # How to play
 s -- start the pieces in their initial positions <Br>
@@ -32,6 +32,6 @@ P -- Pawns <Br>
 * r -- Moviment mode, return to normal mode <Br>
 * o -- Initial mode, print the movement stack list <Br>
 * c -- Initial mode, clear the historic <Br>
-## Modes
+
 * : -- Initial mode <Br>
 * mov: -- Moviment mode <Br>
