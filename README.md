@@ -2,12 +2,12 @@
 # Command line chess
 For Windows
 
-# Releases
+## Releases
 * v0.3 -- 'b' command <Br>
 * v0.2 -- 'c' command. Rules. Header <Br>
 * v0.1 -- Initial release <Br>
 
-# How to play
+## How to play
 s -- start the pieces in their initial positions <Br>
 
 m -- make a mov <Br>
