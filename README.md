@@ -9,32 +9,32 @@ For Windows
 
 ## How to play
 ```
-s -- start the pieces in their initial positions <Br>
+s -- start the pieces in their initial positions 
 
-m -- make a mov <Br>
-b -- back last move <Br>
-r -- return to initial mode <Br>
+m -- make a mov 
+b -- back last move 
+r -- return to initial mode 
     
-P4w d5 -- for make a move you first type the name of the piece and the algebraic notation <Br>
-Piece<space\>notation<enter\><Br>
+P4w d5 -- for make a move you first type the name of the piece and the algebraic notation 
+Piece<space\>notation<enter\>
 
-R -- King <Br>
-D -- Queen <Br> 
-T -- Rooks <Br> 
-B -- Bishops <Br> 
-C -- Knights <Br>
-P -- Pawns <Br>
+R -- King 
+D -- Queen 
+T -- Rooks 
+B -- Bishops
+C -- Knights
+P -- Pawns 
 ```
 ## Actions
 ```
-s -- Initial mode, start the game create pieces on the board <Br>
-e -- Initial mode, exit the program <Br>
-m -- Initial mode, moviment mode moving pieces <Br>
-b -- Moviment mode, back the last moviment <Br>
-r -- Moviment mode, return to normal mode <Br>
-o -- Initial mode, print the movement stack list <Br>
-c -- Initial mode, clear the historic <Br>
+s -- Initial mode, start the game create pieces on the board 
+e -- Initial mode, exit the program
+m -- Initial mode, moviment mode moving pieces
+b -- Moviment mode, back the last moviment 
+r -- Moviment mode, return to normal mode
+o -- Initial mode, print the movement stack list 
+c -- Initial mode, clear the historic 
 
-: -- Initial mode <Br>
-mov: -- Moviment mode <Br>
+: -- Initial mode 
+mov: -- Moviment mode 
 ```
