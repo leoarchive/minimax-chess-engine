@@ -19,15 +19,15 @@ int main(void) {
         gotoxy(1, 10);  printf(":");
         scanf(" %[^\n]s", input);
 
-        if (strcmp(input, "exit")           ==  0)      return 0;
-        else if (strcmp(input, "start")     ==  0)      list = start();
-        else if (strcmp(input, "mov")       ==  0) {
+        if (strcmp(input, "e")              ==  0)      return 0;
+        else if (strcmp(input, "s")         ==  0)      list = start();
+        else if (strcmp(input, "m")         ==  0) {
             while (1) {
                 gotoxy(1, 10); printf("mov:");
                 scanf(" %[^\n]s", inputMov);
 
-                if (strcmp(inputMov, "return")      ==  0)  break;
-                else if (strcmp(inputMov, "back")   ==  0)  backMov(list, lastMoviments);
+                if (strcmp(inputMov, "r")        ==  0)  break;
+                else if (strcmp(inputMov, "b")   ==  0)  backMov(list, lastMoviments);
                 else {
                     piece   =   strtok(inputMov, " ");
                     letter  =   inputMov[4];
@@ -37,9 +37,9 @@ int main(void) {
                 gotoxy(1, 10); printf("%30c", 32);
             }
         }
-        else if (strcmp(input, "output")    ==  0)      printList(list);
-        else if (strcmp(input, "last")      ==  0)      printStack(lastMoviments->top);
-        else if (strcmp(input, "cls")       ==  0) {
+        else if (strcmp(input, "o")       ==  0)      printList(list);
+        else if (strcmp(input, "l")       ==  0)      printStack(lastMoviments->top);
+        else if (strcmp(input, "c")       ==  0) {
             for (size_t i = 10; i < historic + 1; ++i)  printf("%30c\n", 32); historic = 10;
         }
         else {  gotoxy(1, ++historic); printf(RED "Error0: invalid command" RESET); }
