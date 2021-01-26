@@ -8,6 +8,7 @@ For Windows
 * v0.1 -- Initial release 
 
 ## How to play
+```
 s -- start the pieces in their initial positions <Br>
 
 m -- make a mov <Br>
@@ -23,8 +24,9 @@ T -- Rooks <Br>
 B -- Bishops <Br> 
 C -- Knights <Br>
 P -- Pawns <Br>
-
-## Commands
+```
+## Actions
+```
 s -- Initial mode, start the game create pieces on the board <Br>
 e -- Initial mode, exit the program <Br>
 m -- Initial mode, moviment mode moving pieces <Br>
@@ -35,3 +37,4 @@ c -- Initial mode, clear the historic <Br>
 
 : -- Initial mode <Br>
 mov: -- Moviment mode <Br>
+```
