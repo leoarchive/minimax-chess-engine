@@ -3,9 +3,9 @@
 For Windows
 
 ## Releases
-* v0.3 -- 'b' command <Br>
-* v0.2 -- 'c' command. Rules. Header <Br>
-* v0.1 -- Initial release <Br>
+* v0.3 -- 'b' command 
+* v0.2 -- 'c' command. Rules. Header 
+* v0.1 -- Initial release 
 
 ## How to play
 s -- start the pieces in their initial positions <Br>
@@ -25,13 +25,13 @@ C -- Knights <Br>
 P -- Pawns <Br>
 
 ## Commands
-* s -- Initial mode, start the game create pieces on the board <Br>
-* e -- Initial mode, exit the program <Br> 
-* m -- Initial mode, moviment mode moving pieces <Br>
-* b -- Moviment mode, back the last moviment <Br>
-* r -- Moviment mode, return to normal mode <Br>
-* o -- Initial mode, print the movement stack list <Br>
-* c -- Initial mode, clear the historic <Br>
+* s -- Initial mode, start the game create pieces on the board 
+* e -- Initial mode, exit the program
+* m -- Initial mode, moviment mode moving pieces 
+* b -- Moviment mode, back the last moviment 
+* r -- Moviment mode, return to normal mode 
+* o -- Initial mode, print the movement stack list 
+* c -- Initial mode, clear the historic 
 
-* : -- Initial mode <Br>
-* mov: -- Moviment mode <Br>
+* : -- Initial mode 
+* mov: -- Moviment mode 
