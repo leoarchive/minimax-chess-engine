@@ -25,13 +25,13 @@ C -- Knights <Br>
 P -- Pawns <Br>
 
 ## Commands
-s -- Initial mode, start the game create pieces on the board 
-e -- Initial mode, exit the program
-m -- Initial mode, moviment mode moving pieces 
-b -- Moviment mode, back the last moviment 
-r -- Moviment mode, return to normal mode 
-o -- Initial mode, print the movement stack list 
-c -- Initial mode, clear the historic 
+s -- Initial mode, start the game create pieces on the board <Br>
+e -- Initial mode, exit the program <Br>
+m -- Initial mode, moviment mode moving pieces <Br>
+b -- Moviment mode, back the last moviment <Br>
+r -- Moviment mode, return to normal mode <Br>
+o -- Initial mode, print the movement stack list <Br>
+c -- Initial mode, clear the historic <Br>
 
-: -- Initial mode 
-mov: -- Moviment mode 
+: -- Initial mode <Br>
+mov: -- Moviment mode <Br>
