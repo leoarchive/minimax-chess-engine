@@ -1,291 +1,313 @@
-#include "chess.h"
-#include "gotoxy.c"
-#include "rules.c"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <windows.h>
+
+#define WHITE "\e[0;97m"
+#define BLACK "\e[0;90m"
+#define RESET "\x1b[0m"
+
+typedef struct node{
+    char *piece;
+    char *notation;
+    char *color;
+    struct node *next;
+}Node;
+
+typedef struct stack{
+    Node *top;
+}Stack;
+
+int annot = 11;
+int plays = 0;
+
+void gotoxy(int x, int y) {
+  COORD coord;
+  coord.X = x;
+  coord.Y = y;
+  SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void consoleMode(void) {
+  DWORD mode;
+  GetConsoleMode(GetStdHandle(STD_OUTPUT_HANDLE), &mode);
+  SetConsoleMode(GetStdHandle(STD_OUTPUT_HANDLE), mode |= 0x0004);
+}
+
+Stack *create(void) {
+  Stack *s = (Stack *) malloc(sizeof(Stack));
+  s->top = NULL;
+  return s;
+}
+
+void insert(Stack *s, char *p, char *n, char *c) {
+  Node *new = (Node *) malloc(sizeof(Node));
+  new->piece = (char *) malloc(1 * sizeof(char));
+  new->notation = (char *) malloc(1 * sizeof(char));
+  new->color = (char *) malloc(7 * sizeof(char));
+  strcpy(new->piece, p);
+  strcpy(new->notation, n);
+  strcpy(new->color, c);
+  new->next = NULL;
+  if (s->top)
+    new->next = s->top;
+  s->top = new;
+}
+
+int board(int cnt, int result, int end) {
+  if (end == 8)
+    return 0;
+  if (cnt == 8) {
+    puts("");
+    cnt = 0;
+    result = result == 1 ? 0 : 1;
+    return board(cnt, result, ++end);
+  }
+  if (cnt % 2 == result)
+    printf("%c%c%c", 219, 219, 219);
+  else
+    printf("   ");
+  return board(++cnt, result, end);
+}
+
+void init(Stack *s) {
+  insert(s, "R", "a1", BLACK);
+  insert(s, "N", "b1", BLACK);
+  insert(s, "B", "c1", BLACK);
+  insert(s, "Q", "d1", BLACK);
+  insert(s, "K", "e1", BLACK);
+  insert(s, "b", "f1", BLACK);
+  insert(s, "n", "g1", BLACK);
+  insert(s, "r", "h1", BLACK);
+  insert(s, "P1", "a2", BLACK);
+  insert(s, "P2", "b2", BLACK);
+  insert(s, "P3", "c2", BLACK);
+  insert(s, "P4", "d2", BLACK);
+  insert(s, "P5", "e2", BLACK);
+  insert(s, "P6", "f2", BLACK);
+  insert(s, "P7", "g2", BLACK);
+  insert(s, "P8", "h2", BLACK);
+  insert(s, "R", "a8", WHITE);
+  insert(s, "N", "b8", WHITE);
+  insert(s, "B", "c8", WHITE);
+  insert(s, "Q", "d8", WHITE);
+  insert(s, "K", "e8", WHITE);
+  insert(s, "b", "f8", WHITE);
+  insert(s, "n", "g8", WHITE);
+  insert(s, "r", "h8", WHITE);
+  insert(s, "P1", "a7", WHITE);
+  insert(s, "P2", "b7", WHITE);
+  insert(s, "P3", "c7", WHITE);
+  insert(s, "P4", "d7", WHITE);
+  insert(s, "P5", "e7", WHITE);
+  insert(s, "P6", "f7", WHITE);
+  insert(s, "P7", "g7", WHITE);
+  insert(s, "P8", "h7", WHITE);
+}
+
+int convert(char l) {
+  switch(l) {
+    case 'a':
+      return 1;
+    case 'b':
+      return 4;
+    case 'c':
+      return 7;
+    case 'd':
+      return 10;
+    case 'e':
+      return 13;
+    case 'f':
+      return 16;
+    case 'g':
+      return 19;
+    case 'h':
+      return 22;
+    default:
+      return -0;
+  }
+}
+
+void printPieces(Stack *s) {
+  Node *w = s->top;
+  char l;
+  int n;
+  do {
+    l = w->notation[0];
+    n = w->notation[1] - '0';
+    gotoxy(convert(l), n - 1);
+    printf("%s%s" RESET, w->color, w->piece);
+    w = w->next;
+  } while (w);
+}
+
+void numberBoard(int n) {
+  if (n > 8)
+    return;
+  gotoxy(25, n - 1);
+  if (n)
+    printf("%d", n);
+  numberBoard(++n);
+}
+
+void letterBoard(char *l, size_t i) {
+  if (i == 8)
+    return;
+  printf(" %c ", *l++);
+  letterBoard(l, ++i);
+}
+
+Node *search(Stack *s, char *p, char *c) {
+  Node *w = s->top;
+  while (w) {
+    if (strcmp(w->piece, p) == 0 && strcmp(w->color, c) == 0)
+      return w;
+    w = w->next;
+  }
+  return NULL;
+}
+
+void clsMov(Stack *s, char *p, char *c) {
+  Node *result = search(s, p, c);
+  char l = result->notation[0];
+  int numb = result->notation[1] - '0';
+  int mod = (numb - 1) % 2;
+  gotoxy(convert(l) - 1, numb - 1);
+  if (mod == 0) {
+    if (l == 'a' || l == 'c' || l == 'e' || l == 'g')
+      printf("%c%c%c", 219, 219, 219);
+    else
+      printf("   ");
+  }
+  else {
+    if (l == 'b' || l == 'd' || l == 'f' || l == 'h')
+      printf("%c%c%c", 219, 219, 219);
+    else
+      printf("   ");
+  }
+}
+
+void clsAnnot(int i) {
+  gotoxy(0, i);
+  printf("%30c", 32);
+  if (i == annot) {
+    annot = 11;
+    return;
+  }
+  i++;
+  clsAnnot(i);
+}
+
+void annotation(char *p, char *n, char *c) {
+  gotoxy(0, annot);
+  printf("%s%s %c%c" RESET, c, p, n[0], n[1]);
+  annot++;
+}
+
+void pullStack(Stack *s, char *p) {
+  Node *n = s->top;
+  Node *a = NULL;
+
+  while (n) {
+    if (strcmp(n->piece, p) == 0)
+      break;
+    a = n;
+    n = n->next;
+  }
+
+  if (!a) {
+    s->top = n->next;
+  }
+  else {
+    a->next = n->next;
+  }
+}
+
+void backMov(Stack *s) {
+  if (plays == 0)
+    return;
+  clsMov(s, s->top->piece, s->top->color);
+  char *p = s->top->piece;
+  char *c = s->top->color;
+  pullStack(s, s->top->piece);
+  Node *n = search(s, p, c);
+  char l = n->notation[0];
+  int numb = n->notation[1] - '0';
+  gotoxy(convert(l), numb - 1);
+  printf("%s%s" RESET, n->color, n->piece);
+  plays--;
+}
+
+void makeMov(Stack *s, char *p, char *n, char *c) {
+  clsMov(s, p, c);
+  Node *result = search(s, p, c);
+  char l = n[0];
+  int numb = n[1] - '0';
+  gotoxy(convert(l), numb - 1);
+  printf("%s%s" RESET, result->color, p);
+  insert(s, p, n, c);
+  annotation(p, n, c);
+  plays++;
+}
+
+void movMode(Stack *s) {
+  char *input = (char *) malloc(4 * sizeof(char));
+  char *n = (char *) malloc(1 * sizeof(char));
+  char *p;
+  char *c = WHITE;
+
+  while(1) {
+    gotoxy(0, 10);
+    printf("%30c", 32);
+    gotoxy(0, 10);
+    if (strcmp(c, WHITE) == 0)
+      printf("w:");
+    else
+      printf("b:");
+    scanf(" %[^\n]s", input);
+
+    if (input[0] == 'r')
+      return;
+    else if (input[0] == 'b') {
+      backMov(s);
+      continue;
+    }
+    else {
+      p = strtok(input, " ");
+      n[0] = input[3];
+      n[1] = input[4];
+      makeMov(s, p, n, c);
+      c = strcmp(c, WHITE) == 0 ? BLACK : WHITE;
+    }
+  }
+}
 
 int main(void) {
-    system("cls");
+  system("cls");
+  consoleMode();
+  Stack *s = create();
+  char *input = (char *) malloc(1 * sizeof(char));
 
-    char letter;
-    int number;
-    char *piece;
-    char *input         =   (char *) malloc(5 * sizeof(char));
-    char *inputMov      =   (char *) malloc(6 * sizeof(char));
-    List *list          =   NULL;
-    List *lastMoviments =   create();
+  init(s);
+  board(0, 0, 0);
+  letterBoard("abcdefgh", 0);
+  numberBoard(0);
+  while(1) {
+    gotoxy(0, 10);
+    printf("%30c", 32);
+    gotoxy(0, 10);
+    printf(":");
+    scanf(" %[^\n]c", input);
 
-    board();
-    while (1) {
-        gotoxy(1, 10);  printf("%30c", 32);
-        gotoxy(1, 10);  printf(":");
-        scanf(" %[^\n]s", input);
-
-        if (strcmp(input, "e")              ==  0)      return 0;
-        else if (strcmp(input, "s")         ==  0)      list = start();
-        else if (strcmp(input, "m")         ==  0) {
-            while (1) {
-                gotoxy(1, 10); printf("mov:");
-                scanf(" %[^\n]s", inputMov);
-
-                if (strcmp(inputMov, "r")        ==  0)  break;
-                else if (strcmp(inputMov, "b")   ==  0)  backMov(list, lastMoviments);
-                else {
-                    piece   =   strtok(inputMov, " ");
-                    letter  =   inputMov[4];
-                    number  =   inputMov[5] - '0';
-                    move(list, lastMoviments, piece, letter, number);
-                }
-                gotoxy(1, 10); printf("%30c", 32);
-            }
-        }
-        else if (strcmp(input, "o")       ==  0)      printList(list);
-        else if (strcmp(input, "l")       ==  0)      printStack(lastMoviments->top);
-        else if (strcmp(input, "c")       ==  0) {
-            for (size_t i = 10; i < historic + 1; ++i)  printf("%30c\n", 32); historic = 10;
-        }
-        else {  gotoxy(1, ++historic); printf(RED "Error0: invalid command" RESET); }
-    }
-}
-
-List *create(void) {
-    List *list      =   (List *) malloc(sizeof(List));
-    list->top       =   NULL;
-    list->next      =   NULL;
-    return          list;
-}
-
-List *listInsert(List *list, char *piece) {
-    List *newNode   =   (List *) malloc(sizeof(List));
-    newNode->piece  =   piece;
-    newNode->next   =   list->next;
-    newNode->top    =   NULL;
-    list->next      =   newNode;
-    return          newNode;
-}
-
-void stackInsert(List *list, int column, int line, char *piece) {
-    Node *newNode       =   (Node *) malloc(sizeof(Node));
-    newNode->line       =   line;
-    newNode->column     =   column;
-    newNode->next       =   NULL;
-    if (list->top)
-        newNode->next   =   list->top;
-    if (piece) {
-        newNode->piece  =   (char *) malloc(3 * sizeof(char));
-        strcpy(newNode->piece, piece);
-    }
-    list->top           =   newNode;
-}
-
-void printList(List *list) {
-    List *output = list->next;
-    Node *outputNode;
-
-    gotoxy(1, ++historic);          printf(GREEN "Moviment List\n" RESET);
-    while(output != NULL) {
-        gotoxy(1, ++historic);      printf("Piece %s\n", output->piece);
-        outputNode = output->top;
-        while (outputNode != NULL) {
-            gotoxy(1, ++historic);  printf("%c%d ", outputNode->column, outputNode->line);
-            outputNode = outputNode->next;
-        }
-        output = output->next;         puts("");
-    }
-
-    printf(RED "End\n" RESET);
-}
-
-void printStack(Node *stack) {
-    Node *output = stack;
-
-    gotoxy(1, ++historic);          printf(GREEN "Last Moviments\n" RESET);
-    while(output != NULL) {
-        gotoxy(1, ++historic);      printf("Piece %s\n", output->piece);
-        gotoxy(1, ++historic);      printf("%c%d ", output->column, output->line);
-        output = output->next;         puts("");
-    }
-
-    printf(RED "End\n" RESET);
-}
-
-void stackInsertOrder(List *list, char *piece, char letter, int number) {
-    if (list) {
-        if (strcmp(list->piece, piece) == 0) {
-            stackInsert(list, letter, number, NULL);
-            gotoxy(1, ++historic); printf("%s %c%d", piece, letter, number);
-        }
-        else stackInsertOrder(list->next, piece, letter, number);
-    }
-}
-
-void backMov(List *list, List *stack) {
-    if (!stack->top)    return;
-    movimentTurn = movimentTurn == 1 ? 0 : 1;
-    List *output        =   list->next;
-    Node *outputStack   =   stack->top;
-    Node *outputNode    =   NULL;
-
-    while (output) {
-        outputNode = output->top;
-        while (outputNode) {
-            if (outputNode->column == outputStack->column && outputNode->line == outputStack->line && strcmp(output->piece, outputStack->piece) != 0) {
-                Convert xy = letterNumberforxy(outputNode->column, outputNode->line);
-                gotoxy(xy.column, xy.line); printf("%s", output->piece);
-                break;
-            }
-            outputNode = outputNode->next;
-        }
-        if (outputNode) break;
-        output = output->next;
-    }
-    if (!output) clearMov(list->next, outputStack->piece);
-
-    output  = list->next;
-    while   (strcmp(output->piece, outputStack->piece) != 0) output = output->next;
-    if      (output->top->next) output->top = output->top->next;
-    else    return;
-    Convert xy = letterNumberforxy(output->top->column, output->top->line);
-    gotoxy(xy.column, xy.line); printf("%s", outputStack->piece);
-    stack->top = outputStack->next;
-}
-
-void clearMov(List *list, char *piece) {
-    if (list) {
-        if (strcmp(list->piece, piece) == 0) {
-            Convert xy    =   letterNumberforxy(list->top->column, list->top->line);
-            int letter    =   list->top->column;
-
-            gotoxy(xy.column - 1, xy.line);
-            if (xy.line % 2 == 0) {
-                if (letter == 'a' || letter == 'c' || letter == 'e' || letter == 'g')
-                    printf("%c%c%c%c", 219, 219, 219, 219);
-                else printf("    ");
-            } else {
-                if (letter == 'b' || letter == 'd' || letter == 'f' || letter == 'h')
-                    printf("%c%c%c%c", 219, 219, 219, 219);
-                else printf("    ");
-            }
-        } else clearMov(list->next, piece);
-    }
-}
-
-void move(List *list, List *stack, char *piece, char letter, int number) {
-    int verify;
-    Convert xy = letterNumberforxy(letter, number);
-
-    verify = rules(list, piece, letter, number);
-    if (verify == normal || verify == catch) {
-        gotoxy(xy.column, xy.line);     printf("%s", piece);
-        clearMov(list->next, piece);
-        stackInsertOrder(list->next, piece, letter, number);
-        stackInsert(stack, letter, number, piece);
-    }
-
-//    gotoxy(xy.column, xy.line);     printf("%s", piece);
-//    clearMov(list->next, piece);
-//    stackInsertOrder(list->next, piece, letter, number);
-    gotoxy(1, 10);
-}
-
-void board(void) {
-    char *alphabet      =   "abcdefgh";
-    int numbers         =   0;
-    int result          =   0;
-    size_t width        =   0;
-    size_t height       =   0;
-
-    while (height++ < 8) {
-        printf("%d ", ++numbers);
-        while (width++ < 8) {
-            if (width % 2 == result)    printf("%c%c%c%c", 219, 219, 219, 219);
-            else                        printf("    ");
-        }
-        puts("");
-        width   =   0;
-        result  =   result ? 0 : 1;
-    }
-
-    for (size_t i = 1; i <= 8; ++i)     printf("  %c ", *alphabet++);
-    puts("");
-}
-
-Convert letterNumberforxy(int letter, int number) {
-    Convert xy;
-
-    switch(letter) {
-        case 'a':   xy.column   =   4;      break;
-        case 'b':   xy.column   =   8;      break;
-        case 'c':   xy.column   =   12;     break;
-        case 'd':   xy.column   =   16;     break;
-        case 'e':   xy.column   =   20;     break;
-        case 'f':   xy.column   =   24;     break;
-        case 'g':   xy.column   =   28;     break;
-        case 'h':   xy.column   =   32;     break;
-        default:    gotoxy(1, ++historic); printf(RED "Error1: invalid letter " RESET);
-    }
-    if      (number > 8 || number < 1) { gotoxy(1, ++historic); printf(RED "Error2: invalid number " RESET); }
-    else    xy.line = number;
-
-    return  xy;
-}
-
-Convert xyforletterNumber(int x, int y) {
-    Convert xy;
-
-    switch(x) {
-        case 4:     xy.column   =   'a';    break;
-        case 8:     xy.column   =   'b';    break;
-        case 12:    xy.column   =   'c';    break;
-        case 16:    xy.column   =   'd';    break;
-        case 20:    xy.column   =   'e';    break;
-        case 24:    xy.column   =   'f';    break;
-        case 28:    xy.column   =   'g';    break;
-        case 32:    xy.column   =   'h';    break;
-        default:    gotoxy(1, ++historic); printf(RED "Error2: invalid number " RESET);
-    }
-    xy.line = y;
-
-    return    xy;
-}
-
-void insertfxy(List *list, int x, int y, char *print) {
-    Convert xy = xyforletterNumber(x, y); stackInsert(list, xy.column ,xy.line, NULL); gotoxy(x, y); printf("%s", print);
-}
-
-List *start(void) {
-    List *list = create();
-
-    List *P1w = listInsert(list, "P1w");    insertfxy(P1w, 4, 7, "P1w");
-    List *P2w = listInsert(list, "P2w");    insertfxy(P2w, 8, 7, "P2w");
-    List *P3w = listInsert(list, "P3w");    insertfxy(P3w, 12, 7, "P3w");
-    List *P4w = listInsert(list, "P4w");    insertfxy(P4w, 16, 7, "P4w");
-    List *P5w = listInsert(list, "P5w");    insertfxy(P5w, 20, 7, "P5w");
-    List *P6w = listInsert(list, "P6w");    insertfxy(P6w, 24, 7, "P6w");
-    List *P7w = listInsert(list, "P7w");    insertfxy(P7w, 28, 7, "P7w");
-    List *P8w = listInsert(list, "P8w");    insertfxy(P8w, 32, 7, "P8w");
-    List *T1w = listInsert(list, "T1w");    insertfxy(T1w, 4, 8, "T1w");
-    List *C1w = listInsert(list, "C1w");    insertfxy(C1w, 8, 8, "C1w");
-    List *B1w = listInsert(list, "B1w");    insertfxy(B1w, 12, 8, "B1w");
-    List *D1w = listInsert(list, "D1w");    insertfxy(D1w, 16, 8, "D1w");
-    List *R1w = listInsert(list, "R1w");    insertfxy(R1w, 20, 8, "R1w");
-    List *B2w = listInsert(list, "B2w");    insertfxy(B2w, 24, 8, "B2w");
-    List *C2w = listInsert(list, "C2w");    insertfxy(C2w, 28, 8, "C2w");
-    List *T2w = listInsert(list, "T2w");    insertfxy(T2w, 32, 8, "T2w");
-    List *P1b = listInsert(list, "P1b");    insertfxy(P1b, 4, 2, "P1b");
-    List *P2b = listInsert(list, "P2b");    insertfxy(P2b, 8, 2, "P2b");
-    List *P3b = listInsert(list, "P3b");    insertfxy(P3b, 12, 2, "P3b");
-    List *P4b = listInsert(list, "P4b");    insertfxy(P4b, 16, 2, "P4b");
-    List *P5b = listInsert(list, "P5b");    insertfxy(P5b, 20, 2, "P5b");
-    List *P6b = listInsert(list, "P6b");    insertfxy(P6b, 24, 2, "P6b");
-    List *P7b = listInsert(list, "P7b");    insertfxy(P7b, 28, 2, "P7b");
-    List *P8b = listInsert(list, "P8b");    insertfxy(P8b, 32, 2, "P8b");
-    List *T1b = listInsert(list, "T1b");    insertfxy(T1b, 4, 1, "T1b");
-    List *C1b = listInsert(list, "C1b");    insertfxy(C1b, 8, 1, "C1b");
-    List *B1b = listInsert(list, "B1b");    insertfxy(B1b, 12, 1, "B1b");
-    List *D1b = listInsert(list, "D1b");    insertfxy(D1b, 16, 1, "D1b");
-    List *R1b = listInsert(list, "R1b");    insertfxy(R1b, 20, 1, "R1b");
-    List *B2b = listInsert(list, "B2b");    insertfxy(B2b, 24, 1, "B2b");
-    List *C2b = listInsert(list, "C2b");    insertfxy(C2b, 28, 1, "C2b");
-    List *T2b = listInsert(list, "T2b");    insertfxy(T2b, 32, 1, "T2b");
-
-    return list;
+    if (strcmp(input, "e") == 0)
+      return 0;
+    else if (strcmp(input, "s") == 0)
+      printPieces(s);
+    else if (strcmp(input, "m") == 0)
+      movMode(s);
+    else if (strcmp(input, "c") == 0)
+      clsAnnot(11);
+    else
+      continue;
+  }
 }
