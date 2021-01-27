@@ -215,12 +215,10 @@ void pullStack(Stack *s, char *p) {
     n = n->next;
   }
 
-  if (!a) {
+  if (!a)
     s->top = n->next;
-  }
-  else {
+  else
     a->next = n->next;
-  }
 }
 
 void backMov(Stack *s) {
