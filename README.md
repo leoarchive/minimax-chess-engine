@@ -26,7 +26,7 @@ P1-8 -- pawns
 s -- start pieces
 e -- exit
 m -- move mode
-b -- back last moviment
+b -- back movement
 r -- return to initial mode
 c -- clear annotations
 
