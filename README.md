@@ -3,36 +3,34 @@
 For Windows
 
 ## Releases
-* v0.1 -- Initial release 
+* v0.1 -- initial release 
 
 ## How to play
 ```
 s -- start the pieces
-
-m -- make a mov 
-b -- return last move 
+m -- move mode
 r -- return to initial mode 
     
-P4 d5 -- for make a move
+P4 d5 -- move piece
 Piece<space>notation<enter>
 
-K -- King 
-Q -- Queen 
-R/r -- Rooks 
-B/b -- Bishops
-N/n -- Knights
-P1-8 -- Pawns 
+K -- king 
+Q -- queen 
+R/r -- rooks 
+B/b -- bishops
+N/n -- knights
+P1-8 -- pawns 
 ```
 ## Actions
 ```
-s -- Initial mode, start pieces
-e -- Initial mode, exit
-m -- Initial mode, moviment mode
-b -- Moviment mode, return last moviment
-r -- Moviment mode, return to initial mode
-c -- Initial mode, clear annotations
+s -- start pieces
+e -- exit
+m -- move mode
+b -- back last moviment
+r -- return to initial mode
+c -- clear annotations
 
-: -- Initial mode 
-w: -- Moviment mode white turn
-b: -- Moviment mode black turn
+: -- initial mode 
+w: -- white turn
+b: -- black turn
 ```
