@@ -157,21 +157,24 @@ void letterBoard(char *l, size_t i) {
   letterBoard(l, ++i);
 }
 
-Node *search(Stack *s, char *p, char *c) {
-  Node *w = s->top;
-  while (w) {
-    if (strcmp(w->piece, p) == 0 && strcmp(w->color, c) == 0)
-      return w;
-    w = w->next;
-  }
-  return NULL;
+Node *search(Node *n, char *p, char *c) {
+  if (!n)
+    return NULL;
+  if (strcmp(n->piece, p) == 0 && strcmp(n->color, c) == 0)
+    return n;
+  else
+    return search(n->next, p, c);
 }
 
 void clsMov(Stack *s, char *p, char *c) {
-  Node *result = search(s, p, c);
-  char l = result->notation[0];
-  int numb = result->notation[1] - '0';
+  Node *n = search(s->top, p, c);
+  if (!n)
+    return;
+
+  char l = n->notation[0];
+  int numb = n->notation[1] - '0';
   int mod = (numb - 1) % 2;
+
   gotoxy(convert(l) - 1, numb - 1);
   if (mod == 0) {
     if (l == 'a' || l == 'c' || l == 'e' || l == 'g')
@@ -187,20 +190,18 @@ void clsMov(Stack *s, char *p, char *c) {
   }
 }
 
-void clsAnnot(int i) {
-  gotoxy(0, i);
+int clsAnnot(void) {
+  gotoxy(0, annot);
   printf("%30c", 32);
-  if (i == annot) {
-    annot = 11;
-    return;
-  }
-  i++;
-  clsAnnot(i);
+  if (annot == 11)
+    return 0;
+  annot--;
+  return clsAnnot();
 }
 
 void annotation(char *p, char *n, char *c) {
   gotoxy(0, annot);
-  printf("%s%s %c%c" RESET, c, p, n[0], n[1]);
+  printf("%s%s %.2s" RESET, c, p, n);
   annot++;
 }
 
@@ -224,25 +225,48 @@ void pullStack(Stack *s, char *p) {
 void backMov(Stack *s) {
   if (plays == 0)
     return;
-  clsMov(s, s->top->piece, s->top->color);
   char *p = s->top->piece;
   char *c = s->top->color;
-  pullStack(s, s->top->piece);
-  Node *n = search(s, p, c);
+
+  clsMov(s, p, c);
+  pullStack(s, p);
+
+  Node *n = search(s->top, p, c);
   char l = n->notation[0];
   int numb = n->notation[1] - '0';
   gotoxy(convert(l), numb - 1);
   printf("%s%s" RESET, n->color, n->piece);
+
+  gotoxy(0, --annot);
+  printf("%30c", 32);
   plays--;
 }
 
-void makeMov(Stack *s, char *p, char *n, char *c) {
+void makeMov(Stack *s, char *i) {
+  char *n = (char *) malloc(1 * sizeof(char));
+  char *p;
+  char *c;
+  char *v = "KQRrBbNn";
+  n[0] = i[3];
+  n[1] = i[4];
+  for (size_t j = 0; j <= 10; ++j)
+    if (i[0] == v[j]) {
+      n[0] = i[2];
+      n[1] = i[3];
+    }
+  p = strtok(i, " ");
+  c = plays % 2 == 0 ? WHITE : BLACK;
+
   clsMov(s, p, c);
-  Node *result = search(s, p, c);
+  Node *nd = search(s->top, p, c);
+  if (!nd)
+    return;
+
   char l = n[0];
   int numb = n[1] - '0';
   gotoxy(convert(l), numb - 1);
-  printf("%s%s" RESET, result->color, p);
+  printf("%s%s" RESET, nd->color, p);
+
   insert(s, p, n, c);
   annotation(p, n, c);
   plays++;
@@ -250,33 +274,20 @@ void makeMov(Stack *s, char *p, char *n, char *c) {
 
 void movMode(Stack *s) {
   char *input = (char *) malloc(4 * sizeof(char));
-  char *n = (char *) malloc(1 * sizeof(char));
-  char *p;
-  char *c = WHITE;
 
   while(1) {
     gotoxy(0, 10);
     printf("%30c", 32);
     gotoxy(0, 10);
-    if (strcmp(c, WHITE) == 0)
-      printf("w:");
-    else
-      printf("b:");
+    printf("%c:", plays % 2 == 0 ? 'w' : 'b');
     scanf(" %[^\n]s", input);
 
     if (input[0] == 'r')
       return;
-    else if (input[0] == 'b') {
+    else if (input[0] == 'b')
       backMov(s);
-      continue;
-    }
-    else {
-      p = strtok(input, " ");
-      n[0] = input[3];
-      n[1] = input[4];
-      makeMov(s, p, n, c);
-      c = strcmp(c, WHITE) == 0 ? BLACK : WHITE;
-    }
+    else
+      makeMov(s, input);
   }
 }
 
@@ -304,7 +315,7 @@ int main(void) {
     else if (strcmp(input, "m") == 0)
       movMode(s);
     else if (strcmp(input, "c") == 0)
-      clsAnnot(11);
+      clsAnnot();
     else
       continue;
   }
