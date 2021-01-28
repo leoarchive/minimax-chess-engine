@@ -1,5 +1,5 @@
 
-# Command line chess
+# ASCII Chess
 For Windows
 
 ## Releases
