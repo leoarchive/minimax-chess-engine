@@ -1,5 +1,5 @@
 
-# ASCII Chess
+# Chess
 For Windows
 
 ## Releases
