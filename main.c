@@ -18,7 +18,7 @@ typedef struct stack{
     Node *top;
 }Stack;
 
-int annotationsCoordinates = 11;
+int notesCoordinates = 11;
 int executedPlays = 0;
 
 void printChessboard();
@@ -90,18 +90,18 @@ void printChessboard() {
 }
 
 int clearMovementNote(void) {
-  gotoxy(0, annotationsCoordinates);
+  gotoxy(0, notesCoordinates);
   printf("%30c", 32);
-  if (annotationsCoordinates == 11)
+  if (notesCoordinates == 11)
     return 0;
-  annotationsCoordinates--;
+  notesCoordinates--;
   return clearMovementNote();
 }
 
 void printMovementNotes(char *p, char *n, char *c) {
-  gotoxy(0, annotationsCoordinates);
+  gotoxy(0, notesCoordinates);
   printf("%s%s %.2s" RESET, c, p, n);
-  annotationsCoordinates++;
+  notesCoordinates++;
 }
 
 void printPiecesInChessboard(Stack *s) {
@@ -203,7 +203,7 @@ void backLastMovement(Stack *s) {
   gotoxy(convertAlgebraicNotationToCoordinates(l), numb - 1);
   printf("%s%s" RESET, n->color, n->piece);
 
-  gotoxy(0, --annotationsCoordinates);
+  gotoxy(0, --notesCoordinates);
   printf("%30c", 32);
   executedPlays--;
 }
