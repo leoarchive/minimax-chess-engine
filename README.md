@@ -7,9 +7,8 @@ For Windows
 
 ## How to play
 ```
-s -- start
 m -- move mode
-r -- return to init mode 
+t -- return to init mode 
     
 P4 d5 -- execute move
 Piece<space>notation<enter>
@@ -23,11 +22,10 @@ P1-8 -- pawns
 ```
 ## Actions
 ```
-s -- start
 e -- exit
 m -- move mode
-b -- back move
-r -- return to init mode
+a -- back move
+t -- return to init mode
 c -- clear notes
 
 : -- init mode 
