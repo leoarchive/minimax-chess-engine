@@ -141,9 +141,9 @@ void print_chessboard(void) {
       if (j % 2 == r)
         printf("%c%c%c", 219, 219, 219);
       else
-        printf("   ");
+        printf("%3c", 32);
     }
-    printf(" %d\n", ++n);
+    printf("%2d\n", ++n);
     r = r == 0 ? 1 : 0;
   }
   print_letters_chessboard();
