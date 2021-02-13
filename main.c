@@ -18,29 +18,231 @@ typedef struct stack{
     Node *top;
 }Stack;
 
-int annot = 11;
-int plays = 0;
+int annotationsCoordinates = 11;
+int executedPlays = 0;
 
-void gotoxy(int x, int y) {
-  COORD coord;
-  coord.X = x;
-  coord.Y = y;
-  SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+void printChessboard();
+void printLettersOnChessboard();
+void enableASCIIColorsInWindowsTerminal(void);
+int clearMovementNote(void);
+Stack *createStack(void);
+void gotoxy(int x, int y);
+int convertAlgebraicNotationToCoordinates(char l);
+void printMovementNotes(char *p, char *n, char *c);
+Node *searchNodeOnStack(Node *n, char *p, char *c);
+void initiMovementsInStack(Stack *s);
+void backLastMovement(Stack *s);
+void printPiecesInChessboard(Stack *s);
+void movementMode(Stack *s);
+void executeMovement(Stack *s, char *i);
+void clearLastMovement(Stack *s, char *p, char *c);
+void pullStack(Stack *s, char *p);
+void insertStack(Stack *s, char *p, char *n, char *c);
+
+int main(void) {
+  system("cls");
+  enableASCIIColorsInWindowsTerminal();
+  Stack *s = createStack();
+  char *input = (char *) malloc(1 * sizeof(char));
+
+  initiMovementsInStack(s);
+  printChessboard();
+  while(1) {
+    gotoxy(0, 10);
+    printf("%30c", 32);
+    gotoxy(0, 10);
+    printf(":");
+    scanf(" %[^\n]c", input);
+
+    if (strcmp(input, "e") == 0)
+      return 0;
+    else if (strcmp(input, "s") == 0)
+      printPiecesInChessboard(s);
+    else if (strcmp(input, "m") == 0)
+      movementMode(s);
+    else if (strcmp(input, "c") == 0)
+      clearMovementNote();
+    else
+      continue;
+  }
 }
 
-void consoleMode(void) {
-  DWORD mode;
-  GetConsoleMode(GetStdHandle(STD_OUTPUT_HANDLE), &mode);
-  SetConsoleMode(GetStdHandle(STD_OUTPUT_HANDLE), mode |= 0x0004);
+void printLettersOnChessboard() {
+  char l = 'a';
+  while (l != 'i')
+    printf(" %c ", l++);
 }
 
-Stack *create(void) {
+void printChessboard() {
+  int r = 0, n = r;
+  for (size_t i = 0; i < 8; ++i) {
+    for (size_t j = 0; j < 8; ++j) {
+      if (j % 2 == r)
+        printf("%c%c%c", 219, 219, 219);
+      else
+        printf("   ");
+    }
+    printf(" %d", ++n);
+    puts("");
+    r = r == 0 ? 1 : 0;
+  }
+  printLettersOnChessboard();
+}
+
+int clearMovementNote(void) {
+  gotoxy(0, annotationsCoordinates);
+  printf("%30c", 32);
+  if (annotationsCoordinates == 11)
+    return 0;
+  annotationsCoordinates--;
+  return clearMovementNote();
+}
+
+void printMovementNotes(char *p, char *n, char *c) {
+  gotoxy(0, annotationsCoordinates);
+  printf("%s%s %.2s" RESET, c, p, n);
+  annotationsCoordinates++;
+}
+
+void printPiecesInChessboard(Stack *s) {
+  Node *w = s->top;
+  char l;
+  int n;
+  do {
+    l = w->notation[0];
+    n = w->notation[1] - '0';
+    gotoxy(convertAlgebraicNotationToCoordinates(l), n - 1);
+    printf("%s%s" RESET, w->color, w->piece);
+    w = w->next;
+  } while (w);
+}
+
+void pullStack(Stack *s, char *p) {
+  Node *n = s->top;
+  Node *a = NULL;
+
+  while (n) {
+    if (strcmp(n->piece, p) == 0)
+      break;
+    a = n;
+    n = n->next;
+  }
+
+  if (!a)
+    s->top = n->next;
+  else
+    a->next = n->next;
+}
+
+void clearLastMovement(Stack *s, char *p, char *c) {
+  Node *n = searchNodeOnStack(s->top, p, c);
+  if (!n)
+    return;
+
+  char l = n->notation[0];
+  int numb = n->notation[1] - '0';
+  int mod = (numb - 1) % 2;
+
+  gotoxy(convertAlgebraicNotationToCoordinates(l) - 1, numb - 1);
+  if (mod == 0) {
+    if (l == 'a' || l == 'c' || l == 'e' || l == 'g')
+      printf("%c%c%c", 219, 219, 219);
+    else
+      printf("   ");
+  }
+  else {
+    if (l == 'b' || l == 'd' || l == 'f' || l == 'h')
+      printf("%c%c%c", 219, 219, 219);
+    else
+      printf("   ");
+  }
+}
+
+void executeMovement(Stack *s, char *i) {
+  char *n = (char *) malloc(1 * sizeof(char));
+  char *p;
+  char *c;
+  char *v = "KQRrBbNn";
+  n[0] = i[3];
+  n[1] = i[4];
+  for (size_t j = 0; j <= 10; ++j)
+    if (i[0] == v[j]) {
+      n[0] = i[2];
+      n[1] = i[3];
+    }
+  p = strtok(i, " ");
+  c = executedPlays % 2 == 0 ? WHITE : BLACK;
+
+  clearLastMovement(s, p, c);
+  Node *nd = searchNodeOnStack(s->top, p, c);
+  if (!nd)
+    return;
+
+  char l = n[0];
+  int numb = n[1] - '0';
+  gotoxy(convertAlgebraicNotationToCoordinates(l), numb - 1);
+  printf("%s%s" RESET, nd->color, p);
+
+  insertStack(s, p, n, c);
+  printMovementNotes(p, n, c);
+  executedPlays++;
+}
+
+void backLastMovement(Stack *s) {
+  if (executedPlays == 0)
+    return;
+  char *p = s->top->piece;
+  char *c = s->top->color;
+
+  clearLastMovement(s, p, c);
+  pullStack(s, p);
+
+  Node *n = searchNodeOnStack(s->top, p, c);
+  char l = n->notation[0];
+  int numb = n->notation[1] - '0';
+  gotoxy(convertAlgebraicNotationToCoordinates(l), numb - 1);
+  printf("%s%s" RESET, n->color, n->piece);
+
+  gotoxy(0, --annotationsCoordinates);
+  printf("%30c", 32);
+  executedPlays--;
+}
+
+void movementMode(Stack *s) {
+  char *input = (char *) malloc(4 * sizeof(char));
+
+  while(1) {
+    gotoxy(0, 10);
+    printf("%30c", 32);
+    gotoxy(0, 10);
+    printf("%c:", executedPlays % 2 == 0 ? 'w' : 'b');
+    scanf(" %[^\n]s", input);
+
+    if (input[0] == 'r')
+      return;
+    else if (input[0] == 'b')
+      backLastMovement(s);
+    else
+      executeMovement(s, input);
+  }
+}
+
+Node *searchNodeOnStack(Node *n, char *p, char *c) {
+  if (!n)
+    return NULL;
+  if (strcmp(n->piece, p) == 0 && strcmp(n->color, c) == 0)
+    return n;
+  else
+    return searchNodeOnStack(n->next, p, c);
+}
+
+Stack *createStack(void) {
   Stack *s = (Stack *) malloc(sizeof(Stack));
   s->top = NULL;
   return s;
 }
 
-void insert(Stack *s, char *p, char *n, char *c) {
+void insertStack(Stack *s, char *p, char *n, char *c) {
   Node *new = (Node *) malloc(sizeof(Node));
   new->piece = (char *) malloc(1 * sizeof(char));
   new->notation = (char *) malloc(1 * sizeof(char));
@@ -54,58 +256,7 @@ void insert(Stack *s, char *p, char *n, char *c) {
   s->top = new;
 }
 
-int board(int cnt, int result, int end) {
-  if (end == 8)
-    return 0;
-  if (cnt == 8) {
-    puts("");
-    cnt = 0;
-    result = result == 1 ? 0 : 1;
-    return board(cnt, result, ++end);
-  }
-  if (cnt % 2 == result)
-    printf("%c%c%c", 219, 219, 219);
-  else
-    printf("   ");
-  return board(++cnt, result, end);
-}
-
-void init(Stack *s) {
-  insert(s, "R", "a1", BLACK);
-  insert(s, "N", "b1", BLACK);
-  insert(s, "B", "c1", BLACK);
-  insert(s, "Q", "d1", BLACK);
-  insert(s, "K", "e1", BLACK);
-  insert(s, "b", "f1", BLACK);
-  insert(s, "n", "g1", BLACK);
-  insert(s, "r", "h1", BLACK);
-  insert(s, "P1", "a2", BLACK);
-  insert(s, "P2", "b2", BLACK);
-  insert(s, "P3", "c2", BLACK);
-  insert(s, "P4", "d2", BLACK);
-  insert(s, "P5", "e2", BLACK);
-  insert(s, "P6", "f2", BLACK);
-  insert(s, "P7", "g2", BLACK);
-  insert(s, "P8", "h2", BLACK);
-  insert(s, "R", "a8", WHITE);
-  insert(s, "N", "b8", WHITE);
-  insert(s, "B", "c8", WHITE);
-  insert(s, "Q", "d8", WHITE);
-  insert(s, "K", "e8", WHITE);
-  insert(s, "b", "f8", WHITE);
-  insert(s, "n", "g8", WHITE);
-  insert(s, "r", "h8", WHITE);
-  insert(s, "P1", "a7", WHITE);
-  insert(s, "P2", "b7", WHITE);
-  insert(s, "P3", "c7", WHITE);
-  insert(s, "P4", "d7", WHITE);
-  insert(s, "P5", "e7", WHITE);
-  insert(s, "P6", "f7", WHITE);
-  insert(s, "P7", "g7", WHITE);
-  insert(s, "P8", "h7", WHITE);
-}
-
-int convert(char l) {
+int convertAlgebraicNotationToCoordinates(char l) {
   switch(l) {
     case 'a':
       return 1;
@@ -128,195 +279,50 @@ int convert(char l) {
   }
 }
 
-void printPieces(Stack *s) {
-  Node *w = s->top;
-  char l;
-  int n;
-  do {
-    l = w->notation[0];
-    n = w->notation[1] - '0';
-    gotoxy(convert(l), n - 1);
-    printf("%s%s" RESET, w->color, w->piece);
-    w = w->next;
-  } while (w);
+void initiMovementsInStack(Stack *s) {
+  insertStack(s, "R", "a1", BLACK);
+  insertStack(s, "N", "b1", BLACK);
+  insertStack(s, "B", "c1", BLACK);
+  insertStack(s, "Q", "d1", BLACK);
+  insertStack(s, "K", "e1", BLACK);
+  insertStack(s, "b", "f1", BLACK);
+  insertStack(s, "n", "g1", BLACK);
+  insertStack(s, "r", "h1", BLACK);
+  insertStack(s, "P1", "a2", BLACK);
+  insertStack(s, "P2", "b2", BLACK);
+  insertStack(s, "P3", "c2", BLACK);
+  insertStack(s, "P4", "d2", BLACK);
+  insertStack(s, "P5", "e2", BLACK);
+  insertStack(s, "P6", "f2", BLACK);
+  insertStack(s, "P7", "g2", BLACK);
+  insertStack(s, "P8", "h2", BLACK);
+  insertStack(s, "R", "a8", WHITE);
+  insertStack(s, "N", "b8", WHITE);
+  insertStack(s, "B", "c8", WHITE);
+  insertStack(s, "Q", "d8", WHITE);
+  insertStack(s, "K", "e8", WHITE);
+  insertStack(s, "b", "f8", WHITE);
+  insertStack(s, "n", "g8", WHITE);
+  insertStack(s, "r", "h8", WHITE);
+  insertStack(s, "P1", "a7", WHITE);
+  insertStack(s, "P2", "b7", WHITE);
+  insertStack(s, "P3", "c7", WHITE);
+  insertStack(s, "P4", "d7", WHITE);
+  insertStack(s, "P5", "e7", WHITE);
+  insertStack(s, "P6", "f7", WHITE);
+  insertStack(s, "P7", "g7", WHITE);
+  insertStack(s, "P8", "h7", WHITE);
 }
 
-void numberBoard(int n) {
-  if (n > 8)
-    return;
-  gotoxy(25, n - 1);
-  if (n)
-    printf("%d", n);
-  numberBoard(++n);
+void gotoxy(int x, int y) {
+  COORD coord;
+  coord.X = x;
+  coord.Y = y;
+  SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
-void letterBoard(char *l, size_t i) {
-  if (i == 8)
-    return;
-  printf(" %c ", *l++);
-  letterBoard(l, ++i);
-}
-
-Node *search(Node *n, char *p, char *c) {
-  if (!n)
-    return NULL;
-  if (strcmp(n->piece, p) == 0 && strcmp(n->color, c) == 0)
-    return n;
-  else
-    return search(n->next, p, c);
-}
-
-void clsMov(Stack *s, char *p, char *c) {
-  Node *n = search(s->top, p, c);
-  if (!n)
-    return;
-
-  char l = n->notation[0];
-  int numb = n->notation[1] - '0';
-  int mod = (numb - 1) % 2;
-
-  gotoxy(convert(l) - 1, numb - 1);
-  if (mod == 0) {
-    if (l == 'a' || l == 'c' || l == 'e' || l == 'g')
-      printf("%c%c%c", 219, 219, 219);
-    else
-      printf("   ");
-  }
-  else {
-    if (l == 'b' || l == 'd' || l == 'f' || l == 'h')
-      printf("%c%c%c", 219, 219, 219);
-    else
-      printf("   ");
-  }
-}
-
-int clsAnnot(void) {
-  gotoxy(0, annot);
-  printf("%30c", 32);
-  if (annot == 11)
-    return 0;
-  annot--;
-  return clsAnnot();
-}
-
-void annotation(char *p, char *n, char *c) {
-  gotoxy(0, annot);
-  printf("%s%s %.2s" RESET, c, p, n);
-  annot++;
-}
-
-void pullStack(Stack *s, char *p) {
-  Node *n = s->top;
-  Node *a = NULL;
-
-  while (n) {
-    if (strcmp(n->piece, p) == 0)
-      break;
-    a = n;
-    n = n->next;
-  }
-
-  if (!a)
-    s->top = n->next;
-  else
-    a->next = n->next;
-}
-
-void backMov(Stack *s) {
-  if (plays == 0)
-    return;
-  char *p = s->top->piece;
-  char *c = s->top->color;
-
-  clsMov(s, p, c);
-  pullStack(s, p);
-
-  Node *n = search(s->top, p, c);
-  char l = n->notation[0];
-  int numb = n->notation[1] - '0';
-  gotoxy(convert(l), numb - 1);
-  printf("%s%s" RESET, n->color, n->piece);
-
-  gotoxy(0, --annot);
-  printf("%30c", 32);
-  plays--;
-}
-
-void makeMov(Stack *s, char *i) {
-  char *n = (char *) malloc(1 * sizeof(char));
-  char *p;
-  char *c;
-  char *v = "KQRrBbNn";
-  n[0] = i[3];
-  n[1] = i[4];
-  for (size_t j = 0; j <= 10; ++j)
-    if (i[0] == v[j]) {
-      n[0] = i[2];
-      n[1] = i[3];
-    }
-  p = strtok(i, " ");
-  c = plays % 2 == 0 ? WHITE : BLACK;
-
-  clsMov(s, p, c);
-  Node *nd = search(s->top, p, c);
-  if (!nd)
-    return;
-
-  char l = n[0];
-  int numb = n[1] - '0';
-  gotoxy(convert(l), numb - 1);
-  printf("%s%s" RESET, nd->color, p);
-
-  insert(s, p, n, c);
-  annotation(p, n, c);
-  plays++;
-}
-
-void movMode(Stack *s) {
-  char *input = (char *) malloc(4 * sizeof(char));
-
-  while(1) {
-    gotoxy(0, 10);
-    printf("%30c", 32);
-    gotoxy(0, 10);
-    printf("%c:", plays % 2 == 0 ? 'w' : 'b');
-    scanf(" %[^\n]s", input);
-
-    if (input[0] == 'r')
-      return;
-    else if (input[0] == 'b')
-      backMov(s);
-    else
-      makeMov(s, input);
-  }
-}
-
-int main(void) {
-  system("cls");
-  consoleMode();
-  Stack *s = create();
-  char *input = (char *) malloc(1 * sizeof(char));
-
-  init(s);
-  board(0, 0, 0);
-  letterBoard("abcdefgh", 0);
-  numberBoard(0);
-  while(1) {
-    gotoxy(0, 10);
-    printf("%30c", 32);
-    gotoxy(0, 10);
-    printf(":");
-    scanf(" %[^\n]c", input);
-
-    if (strcmp(input, "e") == 0)
-      return 0;
-    else if (strcmp(input, "s") == 0)
-      printPieces(s);
-    else if (strcmp(input, "m") == 0)
-      movMode(s);
-    else if (strcmp(input, "c") == 0)
-      clsAnnot();
-    else
-      continue;
-  }
+void enableASCIIColorsInWindowsTerminal(void) {
+  DWORD mode;
+  GetConsoleMode(GetStdHandle(STD_OUTPUT_HANDLE), &mode);
+  SetConsoleMode(GetStdHandle(STD_OUTPUT_HANDLE), mode |= 0x0004);
 }
