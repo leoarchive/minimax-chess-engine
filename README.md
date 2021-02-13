@@ -7,11 +7,11 @@ For Windows
 
 ## How to play
 ```
-s -- start the pieces
+s -- start
 m -- move mode
-r -- return to initial mode 
+r -- return to init mode 
     
-P4 d5 -- move piece
+P4 d5 -- execute move
 Piece<space>notation<enter>
 
 K -- king 
@@ -23,14 +23,14 @@ P1-8 -- pawns
 ```
 ## Actions
 ```
-s -- start pieces
+s -- start
 e -- exit
 m -- move mode
-b -- back movement
-r -- return to initial mode
-c -- clear annotations
+b -- back move
+r -- return to init mode
+c -- clear notes
 
-: -- initial mode 
+: -- init mode 
 w: -- white turn
 b: -- black turn
 ```
