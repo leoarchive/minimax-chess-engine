@@ -34,22 +34,23 @@ void print_chessboard(void)
 {
 	unsigned int j = 0, n = 8, c = 0;
 	char l = 'a';
-	for (size_t i = 0; i < 64; ++i, ++j) {
-		if (j == 8) {
+	for (size_t i = 0; i < 64; ++i, ++j) {					
+				if (j == 8) {
 			j = 0;
-			printf(" %d\n", n--);
+			puts("");
 		}
 		else
 			c = c == 0 ? 1 : 0;
+		if (!j)
+			printf("%d ", n--);
 		printf("%s", c == 1 ? "\x1B[43m" : "\x1B[42m");
-		printf("%s", pieces[chessboard[i]]);
+		printf("%s ", pieces[chessboard[i]]);
 		printf("\033[0m");	
 	}
-	printf(" 1");
-
-	puts("");
-		while (l != 'i') {
-		printf("%c", l++);
+	
+	printf("\n  ");
+	while (l != 'i') {
+		printf("%c ", l++);
 	}
 }
 
