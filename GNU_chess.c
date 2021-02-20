@@ -30,18 +30,10 @@ const char *pieces[] = { " ",
 	"♖","♘","♗","♕","♔","♗","♘","♖"
 };
 
-void print_letter_cb(void) 
-{
-	puts("");
-	char l = 'a';
-	while (l != 'i') {
-		printf("%c", l++);
-	}
-}
-
 void print_chessboard(void)
 {
 	unsigned int j = 0, n = 8, c = 0;
+	char l = 'a';
 	for (size_t i = 0; i < 64; ++i, ++j) {
 		if (j == 8) {
 			j = 0;
@@ -54,7 +46,11 @@ void print_chessboard(void)
 		printf("\033[0m");	
 	}
 	printf(" 1");
-	print_letter_cb();
+
+	puts("");
+		while (l != 'i') {
+		printf("%c", l++);
+	}
 }
 
 void move_piece(int t) 
