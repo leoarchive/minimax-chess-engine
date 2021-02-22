@@ -56,24 +56,26 @@ void print_chessboard(void)
 
 void move_piece(int t) 
 {
-	int inpt, p;
-	char an[2];
+	char in[4];
+	char p[2], an[2];
 	size_t i = 0, j = 0;
 	printf("\npiece %s\n", t == 1 ? "(1-16)" : "(17-32)");
-	scanf("%d", &inpt);
-	p = inpt;
-	printf("an\n");
-	scanf(" %[^\n]2s", an);
+	scanf(" %[^\n]s", in);
+	p = strtok(i, " ");
+	an[0] = i[3];
+	an[1] = i[4];
 
 	for (; i < 64; ++i)
-		if (chessboard[i] == p)
+		if (strcmp(AN[i], p) == 0)
 			break;
+	printf("piece number: %d\n", chessboard[i]);
+	p = chessboard[i];
 	chessboard[i] = 0;
-
 	for (; j < 64; ++j) 
 		if (strcmp(AN[j], an) == 0)
 			break;
-	chessboard[j] = p;
+
+	//chessboard[j] = p;
 }
 
 int main(void)
