@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 unsigned int chessboard[] = {
@@ -56,26 +57,24 @@ void print_chessboard(void)
 
 void move_piece(int t) 
 {
-	char in[4];
-	char p[2], an[2];
-	size_t i = 0, j = 0;
-	printf("\npiece %s\n", t == 1 ? "(1-16)" : "(17-32)");
-	scanf(" %[^\n]s", in);
-	p = strtok(i, " ");
-	an[0] = i[3];
-	an[1] = i[4];
+	char *i = (char *) malloc(2 * sizeof(char));
+	char *an = (char *) malloc(2 * sizeof(char));
 
-	for (; i < 64; ++i)
-		if (strcmp(AN[i], p) == 0)
-			break;
-	printf("piece number: %d\n", chessboard[i]);
-	p = chessboard[i];
-	chessboard[i] = 0;
-	for (; j < 64; ++j) 
-		if (strcmp(AN[j], an) == 0)
+	printf("\ngoto: ");
+	scanf(" %s %s", i, an);
+	
+	int iPos;
+	for (iPos = 0; iPos < 64; ++iPos)
+		if (strcmp(AN[iPos], i) == 0)
 			break;
 
-	//chessboard[j] = p;
+	int anPos;
+	for (anPos = 0; anPos < 64; ++anPos)
+		if (strcmp(AN[anPos], an) == 0)
+			break;
+
+	chessboard[anPos] = chessboard[iPos];
+	chessboard[iPos] = 0;
 }
 
 int main(void)
