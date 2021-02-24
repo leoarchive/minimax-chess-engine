@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "stack.c"
 
 unsigned int chessboard[] = {
 	1,2,3,4,5,6,7,8,
@@ -55,14 +56,14 @@ void print_chessboard(void)
 	}
 }
 
-void move_piece(int t) 
+void move_piece(void) 
 {
 	char *i = (char *) malloc(2 * sizeof(char));
 	char *an = (char *) malloc(2 * sizeof(char));
 
-	printf("\ngoto: ");
+	printf("goto: ");
 	scanf(" %s %s", i, an);
-	
+
 	int iPos;
 	for (iPos = 0; iPos < 64; ++iPos)
 		if (strcmp(AN[iPos], i) == 0)
@@ -77,15 +78,40 @@ void move_piece(int t)
 	chessboard[iPos] = 0;
 }
 
+void back(Stack *s) 
+{
+	pull(s);
+	Node *w = s->top;
+	for (size_t i = 0; i < 64; ++i)
+		chessboard[i] = w->cb[i];
+}
+
 int main(void)
 {
-	int t = 0;
+	char i;
+	Stack *s = create();
+	push(s, chessboard);
 	print_chessboard();
 	while (1) {
-		move_piece(t);
+		puts("");
+		printf("'m' for make move: ");
+		scanf(" %[^\n]c", &i);
+		switch (i) {
+			case 'b':
+				back(s);
+				break;
+			case 'm':
+				move_piece();
+				break;
+			case 'o':
+				output(s);
+				break;
+			case 'e':
+				return 0;
+		}
+		push(s, chessboard);
 		print_chessboard();
-		t = t == 0 ? 1 : 0;
 	}
-	puts("");
+
 	return 0;
 }
