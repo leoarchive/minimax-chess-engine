@@ -1,4 +1,4 @@
-# GNU chess
+# chess
 ```
 v0.1 -- initial release 
 
