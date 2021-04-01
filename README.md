@@ -1,4 +1,4 @@
-# chess
+# chess-engine
 ```
 v0.1 -- initial release 
 
