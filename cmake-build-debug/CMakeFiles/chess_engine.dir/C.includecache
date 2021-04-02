@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Leonardo/Documents/GitHub/chess-engine/rules/black_pawn.c
+rules.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/rules/rules.h
+
+C:/Users/Leonardo/Documents/GitHub/chess-engine/rules/rules.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+stdbool.h
+-
+
+C:/Users/Leonardo/Documents/GitHub/chess-engine/rules/white_pawn.c
+rules.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/rules/rules.h
+
