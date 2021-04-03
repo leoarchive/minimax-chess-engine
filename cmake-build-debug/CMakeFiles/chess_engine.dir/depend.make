@@ -3,18 +3,6 @@
 
 CMakeFiles/chess_engine.dir/chess.c.obj: ../chess.c
 CMakeFiles/chess_engine.dir/chess.c.obj: ../chess.h
-CMakeFiles/chess_engine.dir/chess.c.obj: ../rules/rules.h
-CMakeFiles/chess_engine.dir/chess.c.obj: ../stack.h
-
-CMakeFiles/chess_engine.dir/rules/black_pawn.c.obj: ../rules/black_pawn.c
-CMakeFiles/chess_engine.dir/rules/black_pawn.c.obj: ../rules/rules.h
-
-CMakeFiles/chess_engine.dir/rules/rules.c.obj: ../rules/rules.c
-CMakeFiles/chess_engine.dir/rules/rules.c.obj: ../rules/rules.h
-
-CMakeFiles/chess_engine.dir/rules/white_pawn.c.obj: ../rules/rules.h
-CMakeFiles/chess_engine.dir/rules/white_pawn.c.obj: ../rules/white_pawn.c
-
-CMakeFiles/chess_engine.dir/stack.c.obj: ../stack.c
-CMakeFiles/chess_engine.dir/stack.c.obj: ../stack.h
+CMakeFiles/chess_engine.dir/chess.c.obj: ../rules.c
+CMakeFiles/chess_engine.dir/chess.c.obj: ../stack.c
 

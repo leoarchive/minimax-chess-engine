@@ -3,13 +3,15 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "stack.h"
-#include "rules.h"
+#include "stack.c"
+#include "rules.c"
 
 #define WHT "\x1B[43m"
 #define BLK "\x1B[42m"
 
 bool turn = true;
+
+unsigned int bitBoard[64];
 
 unsigned int chessboard[] = {
         1,2,3,4,5,6,7,8,
@@ -48,6 +50,7 @@ const char *pieces[] = { " ",
 };
 
 void print_chessboard(void);
+void print_bitboard(void);
 int move_piece(void);
 void back(Stack *s);
 int command_line(void);

@@ -169,114 +169,6 @@ chess.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/chess.c.s
 .PHONY : chess.c.s
 
-rules/black_pawn.obj: rules/black_pawn.c.obj
-
-.PHONY : rules/black_pawn.obj
-
-# target to build an object file
-rules/black_pawn.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/rules/black_pawn.c.obj
-.PHONY : rules/black_pawn.c.obj
-
-rules/black_pawn.i: rules/black_pawn.c.i
-
-.PHONY : rules/black_pawn.i
-
-# target to preprocess a source file
-rules/black_pawn.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/rules/black_pawn.c.i
-.PHONY : rules/black_pawn.c.i
-
-rules/black_pawn.s: rules/black_pawn.c.s
-
-.PHONY : rules/black_pawn.s
-
-# target to generate assembly for a file
-rules/black_pawn.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/rules/black_pawn.c.s
-.PHONY : rules/black_pawn.c.s
-
-rules/rules.obj: rules/rules.c.obj
-
-.PHONY : rules/rules.obj
-
-# target to build an object file
-rules/rules.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/rules/rules.c.obj
-.PHONY : rules/rules.c.obj
-
-rules/rules.i: rules/rules.c.i
-
-.PHONY : rules/rules.i
-
-# target to preprocess a source file
-rules/rules.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/rules/rules.c.i
-.PHONY : rules/rules.c.i
-
-rules/rules.s: rules/rules.c.s
-
-.PHONY : rules/rules.s
-
-# target to generate assembly for a file
-rules/rules.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/rules/rules.c.s
-.PHONY : rules/rules.c.s
-
-rules/white_pawn.obj: rules/white_pawn.c.obj
-
-.PHONY : rules/white_pawn.obj
-
-# target to build an object file
-rules/white_pawn.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/rules/white_pawn.c.obj
-.PHONY : rules/white_pawn.c.obj
-
-rules/white_pawn.i: rules/white_pawn.c.i
-
-.PHONY : rules/white_pawn.i
-
-# target to preprocess a source file
-rules/white_pawn.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/rules/white_pawn.c.i
-.PHONY : rules/white_pawn.c.i
-
-rules/white_pawn.s: rules/white_pawn.c.s
-
-.PHONY : rules/white_pawn.s
-
-# target to generate assembly for a file
-rules/white_pawn.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/rules/white_pawn.c.s
-.PHONY : rules/white_pawn.c.s
-
-stack.obj: stack.c.obj
-
-.PHONY : stack.obj
-
-# target to build an object file
-stack.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/stack.c.obj
-.PHONY : stack.c.obj
-
-stack.i: stack.c.i
-
-.PHONY : stack.i
-
-# target to preprocess a source file
-stack.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/stack.c.i
-.PHONY : stack.c.i
-
-stack.s: stack.c.s
-
-.PHONY : stack.s
-
-# target to generate assembly for a file
-stack.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/stack.c.s
-.PHONY : stack.c.s
-
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -289,18 +181,6 @@ help:
 	@echo ... chess.obj
 	@echo ... chess.i
 	@echo ... chess.s
-	@echo ... rules/black_pawn.obj
-	@echo ... rules/black_pawn.i
-	@echo ... rules/black_pawn.s
-	@echo ... rules/rules.obj
-	@echo ... rules/rules.i
-	@echo ... rules/rules.s
-	@echo ... rules/white_pawn.obj
-	@echo ... rules/white_pawn.i
-	@echo ... rules/white_pawn.s
-	@echo ... stack.obj
-	@echo ... stack.i
-	@echo ... stack.s
 .PHONY : help
 
 

@@ -82,24 +82,6 @@
 		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.h">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/rules/black_pawn.c">
-			<Option target="chess_engine"/>
-		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/rules/rules.c">
-			<Option target="chess_engine"/>
-		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/rules/rules.h">
-			<Option target="chess_engine"/>
-		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/rules/white_pawn.c">
-			<Option target="chess_engine"/>
-		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/stack.c">
-			<Option target="chess_engine"/>
-		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/stack.h">
-			<Option target="chess_engine"/>
-		</Unit>
 		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

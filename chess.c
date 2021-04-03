@@ -22,34 +22,51 @@ void print_chessboard(void)
     char l = 'a';
     while (l != 'i')
         printf("%c ", l++);
+    puts("");
+}
+
+void print_bitboard(void) {
+    size_t j = 0;
+    for (size_t i = 0; i < 64; ++i, ++j) {
+        if (j == 8) {
+            j = 0;
+            puts("");
+        }
+        printf("%d ", bitBoard[i]);
+    }
+    puts("");
 }
 
 int move_piece(void)
 {
-    char *i = (char *) malloc(2 * sizeof(char));
-    char *an = (char *) malloc(2 * sizeof(char));
+    char *current = (char *) malloc(2 * sizeof(char));
+    char *new = (char *) malloc(2 * sizeof(char));
 
     printf("%s: ", turn ? "white" : "black");
     turn = !turn;
-    scanf(" %s %s", i, an);
+    scanf(" %s %s", current, new);
 
-    int iPos;
-    for (iPos = 0; iPos < 64; ++iPos)
-        if (strcmp(AN[iPos], i) == 0)
+    int currentPos;
+    for (currentPos = 0; currentPos < 64; ++currentPos)
+        if (strcmp(AN[currentPos], current) == 0)
             break;
 
-    int anPos;
-    for (anPos = 0; anPos < 64; ++anPos)
-        if (strcmp(AN[anPos], an) == 0)
+    int newPos;
+    for (newPos = 0; newPos < 64; ++newPos)
+        if (strcmp(AN[newPos], new) == 0)
             break;
 
     for (size_t j = 0; j < 64; ++j)
         Cboard[j] = chessboard[j];
-    if (rules(iPos, anPos) == 1)
-        return 1;
 
-    chessboard[anPos] = chessboard[iPos];
-    chessboard[iPos] = 0;
+    for (size_t j = 0; j < 64; ++j)
+        bitBoard[j] = rules(current, AN[j]);
+
+    if (!bitBoard[newPos])
+        return 0;
+
+    chessboard[newPos] = chessboard[currentPos];
+    chessboard[currentPos] = 0;
     return 0;
 }
 
@@ -86,9 +103,15 @@ int command_line(void) {
             case 'h':
                 puts("https://github.com/leozamboni/chess-engine");
                 continue;
-            default:
+            case 'i':
+                print_bitboard();
+                continue;
+            case 'e':
                 return 0;
+            default:
+                continue;
         }
+        //system("cls");
         print_chessboard();
     }
 }

@@ -1,4 +1,14 @@
-#include "stack.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node {
+    unsigned int *cb;
+    struct node *next;
+}Node;
+
+typedef struct stack {
+    Node *top;
+}Stack;
 
 Stack *create(void)
 {
@@ -13,7 +23,6 @@ void push(Stack *s, const unsigned int cb[])
     n->cb = (unsigned int *) malloc(64 * sizeof(unsigned int));
     for (size_t i = 0; i < 64; ++i)
         n->cb[i] = cb[i];
-    puts("");
     n->next = s->top;
     s->top = n;
 }

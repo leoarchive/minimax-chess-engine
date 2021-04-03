@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Leonardo/Documents/GitHub/chess-engine/rules/black_pawn.c
-rules.h
-C:/Users/Leonardo/Documents/GitHub/chess-engine/rules/rules.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.c
+chess.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.h
 
-C:/Users/Leonardo/Documents/GitHub/chess-engine/rules/rules.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.h
 stdio.h
 -
 stdlib.h
@@ -19,8 +19,20 @@ string.h
 -
 stdbool.h
 -
+stack.c
+C:/Users/Leonardo/Documents/GitHub/chess-engine/stack.c
+rules.c
+C:/Users/Leonardo/Documents/GitHub/chess-engine/rules.c
 
-C:/Users/Leonardo/Documents/GitHub/chess-engine/rules/white_pawn.c
-rules.h
-C:/Users/Leonardo/Documents/GitHub/chess-engine/rules/rules.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/rules.c
+string.h
+-
+stdbool.h
+-
+
+C:/Users/Leonardo/Documents/GitHub/chess-engine/stack.c
+stdio.h
+-
+stdlib.h
+-
 

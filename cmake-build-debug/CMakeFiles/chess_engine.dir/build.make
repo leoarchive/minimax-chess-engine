@@ -89,79 +89,19 @@ CMakeFiles/chess_engine.dir/chess.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chess_engine.dir/chess.c.s"
 	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Leonardo\Documents\GitHub\chess-engine\chess.c -o CMakeFiles\chess_engine.dir\chess.c.s
 
-CMakeFiles/chess_engine.dir/stack.c.obj: CMakeFiles/chess_engine.dir/flags.make
-CMakeFiles/chess_engine.dir/stack.c.obj: ../stack.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/chess_engine.dir/stack.c.obj"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\chess_engine.dir\stack.c.obj   -c C:\Users\Leonardo\Documents\GitHub\chess-engine\stack.c
-
-CMakeFiles/chess_engine.dir/stack.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chess_engine.dir/stack.c.i"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Leonardo\Documents\GitHub\chess-engine\stack.c > CMakeFiles\chess_engine.dir\stack.c.i
-
-CMakeFiles/chess_engine.dir/stack.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chess_engine.dir/stack.c.s"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Leonardo\Documents\GitHub\chess-engine\stack.c -o CMakeFiles\chess_engine.dir\stack.c.s
-
-CMakeFiles/chess_engine.dir/rules/rules.c.obj: CMakeFiles/chess_engine.dir/flags.make
-CMakeFiles/chess_engine.dir/rules/rules.c.obj: ../rules/rules.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/chess_engine.dir/rules/rules.c.obj"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\chess_engine.dir\rules\rules.c.obj   -c C:\Users\Leonardo\Documents\GitHub\chess-engine\rules\rules.c
-
-CMakeFiles/chess_engine.dir/rules/rules.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chess_engine.dir/rules/rules.c.i"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Leonardo\Documents\GitHub\chess-engine\rules\rules.c > CMakeFiles\chess_engine.dir\rules\rules.c.i
-
-CMakeFiles/chess_engine.dir/rules/rules.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chess_engine.dir/rules/rules.c.s"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Leonardo\Documents\GitHub\chess-engine\rules\rules.c -o CMakeFiles\chess_engine.dir\rules\rules.c.s
-
-CMakeFiles/chess_engine.dir/rules/white_pawn.c.obj: CMakeFiles/chess_engine.dir/flags.make
-CMakeFiles/chess_engine.dir/rules/white_pawn.c.obj: ../rules/white_pawn.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/chess_engine.dir/rules/white_pawn.c.obj"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\chess_engine.dir\rules\white_pawn.c.obj   -c C:\Users\Leonardo\Documents\GitHub\chess-engine\rules\white_pawn.c
-
-CMakeFiles/chess_engine.dir/rules/white_pawn.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chess_engine.dir/rules/white_pawn.c.i"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Leonardo\Documents\GitHub\chess-engine\rules\white_pawn.c > CMakeFiles\chess_engine.dir\rules\white_pawn.c.i
-
-CMakeFiles/chess_engine.dir/rules/white_pawn.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chess_engine.dir/rules/white_pawn.c.s"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Leonardo\Documents\GitHub\chess-engine\rules\white_pawn.c -o CMakeFiles\chess_engine.dir\rules\white_pawn.c.s
-
-CMakeFiles/chess_engine.dir/rules/black_pawn.c.obj: CMakeFiles/chess_engine.dir/flags.make
-CMakeFiles/chess_engine.dir/rules/black_pawn.c.obj: ../rules/black_pawn.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/chess_engine.dir/rules/black_pawn.c.obj"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\chess_engine.dir\rules\black_pawn.c.obj   -c C:\Users\Leonardo\Documents\GitHub\chess-engine\rules\black_pawn.c
-
-CMakeFiles/chess_engine.dir/rules/black_pawn.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chess_engine.dir/rules/black_pawn.c.i"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Leonardo\Documents\GitHub\chess-engine\rules\black_pawn.c > CMakeFiles\chess_engine.dir\rules\black_pawn.c.i
-
-CMakeFiles/chess_engine.dir/rules/black_pawn.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chess_engine.dir/rules/black_pawn.c.s"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Leonardo\Documents\GitHub\chess-engine\rules\black_pawn.c -o CMakeFiles\chess_engine.dir\rules\black_pawn.c.s
-
 # Object files for target chess_engine
 chess_engine_OBJECTS = \
-"CMakeFiles/chess_engine.dir/chess.c.obj" \
-"CMakeFiles/chess_engine.dir/stack.c.obj" \
-"CMakeFiles/chess_engine.dir/rules/rules.c.obj" \
-"CMakeFiles/chess_engine.dir/rules/white_pawn.c.obj" \
-"CMakeFiles/chess_engine.dir/rules/black_pawn.c.obj"
+"CMakeFiles/chess_engine.dir/chess.c.obj"
 
 # External object files for target chess_engine
 chess_engine_EXTERNAL_OBJECTS =
 
 chess_engine.exe: CMakeFiles/chess_engine.dir/chess.c.obj
-chess_engine.exe: CMakeFiles/chess_engine.dir/stack.c.obj
-chess_engine.exe: CMakeFiles/chess_engine.dir/rules/rules.c.obj
-chess_engine.exe: CMakeFiles/chess_engine.dir/rules/white_pawn.c.obj
-chess_engine.exe: CMakeFiles/chess_engine.dir/rules/black_pawn.c.obj
 chess_engine.exe: CMakeFiles/chess_engine.dir/build.make
 chess_engine.exe: CMakeFiles/chess_engine.dir/linklibs.rsp
 chess_engine.exe: CMakeFiles/chess_engine.dir/objects1.rsp
 chess_engine.exe: CMakeFiles/chess_engine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable chess_engine.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable chess_engine.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\chess_engine.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
