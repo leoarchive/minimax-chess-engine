@@ -62,6 +62,8 @@ int move_piece(void)
     for (size_t j = 0; j < 64; ++j)
         bitBoard[j] = rules(current, AN[j]);
 
+    print_bitboard();
+
     if (!bitBoard[newPos])
         return 0;
 

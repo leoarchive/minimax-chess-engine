@@ -11,7 +11,7 @@
 
 bool turn = true;
 
-unsigned int bitBoard[64];
+
 
 unsigned int chessboard[] = {
         1,2,3,4,5,6,7,8,
