@@ -2,14 +2,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-bool top_left = false;
-bool bottom_left = false;
-bool top_right = false;
-bool bottom_right = false;
-
 unsigned int bitBoard[64];
-
-unsigned int auxBitBoard[64];
 
 const char *ANotation[] = {
         "a8","b8","c8","d8","e8","f8","g8","h8",
@@ -66,6 +59,7 @@ int genericRule(const char *currentAN, const char *newAN) {
     return 1;
 }
 
+
 int white_pawn(const char *currentAN, const char *newAN) {
     bool walkTwoHouses = false;
     if (currentAN[1] == '2')
@@ -101,27 +95,6 @@ int white_pawn(const char *currentAN, const char *newAN) {
 }
 
 int white_bishop(const char *currentAN, const char *newAN) {
-    int currentPosInt = currentAN[1] - '0';
-    int newPosInt = newAN[1] - '0';
-
-    if (top_right)
-        if (newAN[0] > currentAN[0] && newPosInt > currentPosInt)
-            return -1;
-
-    if (bottom_right)
-        if (newAN[0] > currentAN[0] && newPosInt < currentPosInt)
-            return -1;
-
-    if (bottom_left)
-        if (newAN[0] < currentAN[0] && newPosInt < currentPosInt)
-            return -1;
-
-    if (top_left)
-        if (newAN[0] < currentAN[0] && newPosInt > currentPosInt)
-            return -1;
-
-    int directionX, directionY;
-
     if (newAN[0] == currentAN[0])
         return 0;
 
@@ -131,48 +104,22 @@ int white_bishop(const char *currentAN, const char *newAN) {
     int cont = 0;
     char letter;
     if (newAN[0] > currentAN[0]) {
-        directionX = 1;
         letter = currentAN[0];
         while (letter++ != newAN[0])
             cont++;
     }
     else {
-        directionX = -1;
         letter = currentAN[0];
         while (letter-- != newAN[0])
             cont++;
     }
 
-    if (newPosInt > currentPosInt)
-        directionY = 1;
-    else
-        directionY = -1;
-
     int currentChessBPosition = getCBPosition(newAN);
-    if (Cboard[currentChessBPosition] > 16) {
-        if (directionX > 0 && directionY > 0)
-            top_right = true;
-        else if (directionX > 0 && directionY < 0)
-            bottom_right = true;
-        else if (directionX < 0 && directionY < 0)
-            bottom_left = true;
-        else
-            top_left = true;
-
-        for (size_t j = 0; j < 64; ++j)
-            if (rules(currentAN, ANotation[j]) < 0)
-                bitBoard[j] = 3;
-//        for (size_t j = 0; j < 64; ++j)
-//            if (auxBitBoard[j])
-//                bitBoard[j] = 0;
-
-        //top_left = false;
-        top_right = false;
-        //bottom_left = false;
-        //bottom_right = false;
-
+    if (Cboard[currentChessBPosition] > 16)
         return 0;
-    }
+
+    int currentPosInt = currentAN[1] - '0';
+    int newPosInt = newAN[1] - '0';
 
     if (newPosInt == (currentPosInt + cont))
         return 1;
