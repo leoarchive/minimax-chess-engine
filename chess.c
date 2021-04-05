@@ -105,6 +105,9 @@ int command_line(void) {
             case 'i':
                 print_bitboard();
                 continue;
+            case 'w':
+                search(turn);
+                break;
             case 'e':
                 return 0;
             default:

@@ -25,6 +25,81 @@ unsigned int chessboard[] = {
 
 unsigned int bitBoard[64];
 
+int rules(const char *currentAN, const char *newAN);
+
+unsigned int bb[64];
+
+int bpp = 0;
+
+const char *search(bool turn) {
+    unsigned int abb[64];
+    int bp[] = {29,28,25,32,26,31,27,30,17,18,19,20,21,22,23,24};
+    int bpb[] = {5,4,1,8,2,7,3,6,9,10,11,12,13,14,15,16};
+    bool no = true;
+    int j;
+    if (turn) {
+        for (j = 0; j < 64; ++j) {
+            if (chessboard[j] == bp[bpp])
+                break;
+        }
+        for (int i = 0; i < 64; ++i) {
+            bb[i] = rules(AN[j], AN[i]);
+            if (bb[i] == 1)
+                no = false;
+        }
+        if (!no) {
+            for (int i = 0; i < 64; ++i) {
+                if (chessboard[i] < 17 && chessboard[i] > 0) {
+                    for (int k = 0; k < 64; ++k) {
+                        abb[k] = rules(AN[i], AN[k]);
+                        if (abb[k] == 1 && bb[k] == 1) {
+                            printf("piece %s goto %s killed by %s\n", AN[j], AN[k], AN[i]);
+                            return AN[k];
+                        }
+                    }
+                }
+            }
+            bpp++;
+            search(turn);
+        }
+        else {
+            bpp++;
+            return search(turn);
+        }
+    }
+    else {
+        for (j = 0; j < 64; ++j) {
+            if (chessboard[j] == bpb[bpp])
+                break;
+        }
+        for (int i = 0; i < 64; ++i) {
+            bb[i] = rules(AN[j], AN[i]);
+            if (bb[i] == 1)
+                no = false;
+        }
+        if (!no) {
+            for (int i = 0; i < 64; ++i) {
+                if (chessboard[i] > 16) {
+                    for (int k = 0; k < 64; ++k) {
+                        abb[k] = rules(AN[i], AN[k]);
+                        if (abb[k] == 1 && bb[k] == 1) {
+                            printf("piece %s goto %s killed by %s\n", AN[j], AN[k], AN[i]);
+                            return AN[k];
+                        }
+                    }
+                }
+            }
+            bpp++;
+            search(turn);
+        }
+        else {
+            bpp++;
+            return search(turn);
+        }
+    }
+    return NULL;
+}
+
 int getCBPosition(const char *pieceAN);
 int genericRule(const char *currentAN, const char *newAN);
 
