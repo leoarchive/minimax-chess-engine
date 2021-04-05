@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/chess.c.obj"
+  "C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/src/chess.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

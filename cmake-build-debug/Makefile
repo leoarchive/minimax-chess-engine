@@ -142,32 +142,32 @@ chess_engine/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/build
 .PHONY : chess_engine/fast
 
-chess.obj: chess.c.obj
+src/chess.obj: src/chess.c.obj
 
-.PHONY : chess.obj
+.PHONY : src/chess.obj
 
 # target to build an object file
-chess.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/chess.c.obj
-.PHONY : chess.c.obj
+src/chess.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/chess.c.obj
+.PHONY : src/chess.c.obj
 
-chess.i: chess.c.i
+src/chess.i: src/chess.c.i
 
-.PHONY : chess.i
+.PHONY : src/chess.i
 
 # target to preprocess a source file
-chess.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/chess.c.i
-.PHONY : chess.c.i
+src/chess.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/chess.c.i
+.PHONY : src/chess.c.i
 
-chess.s: chess.c.s
+src/chess.s: src/chess.c.s
 
-.PHONY : chess.s
+.PHONY : src/chess.s
 
 # target to generate assembly for a file
-chess.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/chess.c.s
-.PHONY : chess.c.s
+src/chess.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/chess.c.s
+.PHONY : src/chess.c.s
 
 # Help Target
 help:
@@ -178,9 +178,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... chess_engine
-	@echo ... chess.obj
-	@echo ... chess.i
-	@echo ... chess.s
+	@echo ... src/chess.obj
+	@echo ... src/chess.i
+	@echo ... src/chess.s
 .PHONY : help
 
 

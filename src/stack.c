@@ -17,8 +17,7 @@ Stack *createStack(void)
     return s;
 }
 
-void pushStack(Stack *s, const unsigned int cb[])
-{
+void pushStack(Stack *s, const unsigned int cb[]) {
     Node *n = (Node *) malloc(sizeof(Node));
     n->cb = (unsigned int *) malloc(64 * sizeof(unsigned int));
     for (size_t i = 0; i < 64; ++i)
@@ -27,14 +26,12 @@ void pushStack(Stack *s, const unsigned int cb[])
     s->top = n;
 }
 
-void pullStack(Stack *s)
-{
+void pullStack(Stack *s) {
     if (s->top->next)
         s->top = s->top->next;
 }
 
-void outputStack(Stack *s)
-{
+void outputStack(Stack *s) {
     Node *w = s->top;
     int j = 0;
     while (w) {

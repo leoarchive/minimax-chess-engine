@@ -1,7 +1,6 @@
 #include "search.c"
 
-int main(void)
-{
+int main(void) {
     system(CLEAR);
     commandLine();
     return 0;
@@ -48,8 +47,7 @@ int commandLine(void) {
     }
 }
 
-void printChessboard(void)
-{
+void printChessboard(void) {
     int j = 0, c = 0, n = 8;
     for (size_t i = 0; i < 64; ++i, ++j) {
         if (j == 8) {
@@ -85,8 +83,7 @@ void printBitboard(void) {
     puts("");
 }
 
-int movePiece(void)
-{
+int movePiece(void) {
     char *current = (char *) malloc(2 * sizeof(char));
     char *new = (char *) malloc(2 * sizeof(char));
 
@@ -117,8 +114,7 @@ int movePiece(void)
     return 0;
 }
 
-void backStack(Stack *s)
-{
+void backStack(Stack *s) {
     pullStack(s);
     Node *w = s->top;
     for (size_t i = 0; i < 64; ++i)
