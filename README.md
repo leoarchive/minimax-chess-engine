@@ -1,6 +1,6 @@
 # Dumb
 
-![](logo.png) Dumb is a chess engine who takes the worst possible move taking into account the most important 
+![Dumb Engine Logo](img/logo.png) Dumb is a chess engine who takes the worst possible move taking into account the most important 
 pieces and can lose a game in a few moves.
 
 ```
