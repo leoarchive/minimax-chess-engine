@@ -9,12 +9,13 @@ v0.1 -- initial release
 make move:
 d2<space>d4<enter>
 
-b -- back move
-m -- move piece
-o -- output chess representation
 h -- help
-i -- output bitboard
-w -- Dumb Chess Engine move
+
+d -- Dumb Chess Engine move
+u -- output bitboard
+m -- move piece
+b -- back move
+c -- output chess representation
 e -- exit
 ```
 

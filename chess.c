@@ -7,6 +7,47 @@ int main(void)
     return 0;
 }
 
+int commandLine(void) {
+    Stack *s = createStack();
+    printChessboard();
+    pushStack(s, chessboard);
+
+    char *i = (char *) malloc(sizeof(char));
+    while (1) {
+        printf("\n'h' for help: ");
+        scanf(" %c", i);
+        switch (i[0]) {
+            case 'b':
+                backStack(s);
+                break;
+            case 'm':
+                if (movePiece())
+                    continue;
+                pushStack(s, chessboard);
+                break;
+            case 'c':
+                outputStack(s);
+                continue;
+            case 'h':
+                puts("https://github.com/leozamboni/dumb-chess-engine");
+                continue;
+            case 'u':
+                printBitboard();
+                continue;
+            case 'd':
+                bpp = 0;
+                search();
+                continue;
+            case 'e':
+                return 0;
+            default:
+                continue;
+        }
+        system(CLEAR);
+        printChessboard();
+    }
+}
+
 void printChessboard(void)
 {
     int j = 0, c = 0, n = 8;
@@ -85,47 +126,6 @@ void backStack(Stack *s)
     turn = !turn;
 }
 
-int commandLine(void) {
-    Stack *s = createStack();
-    printChessboard();
-    pushStack(s, chessboard);
-
-    char *i = (char *) malloc(sizeof(char));
-    while (1) {
-        printf("\n'h' for help: ");
-        scanf(" %c", i);
-        switch (i[0]) {
-            case 'b':
-                backStack(s);
-                break;
-            case 'm':
-                if (movePiece())
-                    continue;
-                pushStack(s, chessboard);
-                break;
-            case 'o':
-                outputStack(s);
-                continue;
-            case 'h':
-                puts("https://github.com/leozamboni/dumb-chess-engine");
-                continue;
-            case 'i':
-                printBitboard();
-                continue;
-            case 'w':
-                bpp = 0;
-                search();
-                continue;
-            case 'e':
-                return 0;
-            default:
-                continue;
-        }
-        system(CLEAR);
-        printChessboard();
-    }
-}
-
 int rules(const char *currentAN, const char *newAN) {
     if (!genericRule(currentAN, newAN))
         return 0;
@@ -197,7 +197,6 @@ int genericRule(const char *currentAN, const char *newAN) {
         return 0;
     return 1;
 }
-
 
 int wPawnRule(const char *currentAN, const char *newAN) {
     bool walkTwoHouses = false;
