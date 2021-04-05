@@ -3,6 +3,6 @@
 
 CMakeFiles/chess_engine.dir/chess.c.obj: ../chess.c
 CMakeFiles/chess_engine.dir/chess.c.obj: ../chess.h
-CMakeFiles/chess_engine.dir/chess.c.obj: ../rules.c
+CMakeFiles/chess_engine.dir/chess.c.obj: ../search.c
 CMakeFiles/chess_engine.dir/chess.c.obj: ../stack.c
 
