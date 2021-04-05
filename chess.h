@@ -6,11 +6,6 @@
 #include "stack.c"
 #include "rules.c"
 
-#define WHT "\x1B[43m"
-#define BLK "\x1B[42m"
-
-bool turn = true;
-
 #ifdef LINUX
 const char *pieces[] = {
         " ",
@@ -30,6 +25,11 @@ const char *pieces[] = {
 };
 #define CLEAR "cls"
 #endif
+
+#define WHT "\x1B[43m"
+#define BLK "\x1B[42m"
+
+bool turn = true;
 
 void print_chessboard(void);
 void print_bitboard(void);
