@@ -57,9 +57,6 @@ int move_piece(void)
             break;
 
     for (size_t j = 0; j < 64; ++j)
-        Cboard[j] = chessboard[j];
-
-    for (size_t j = 0; j < 64; ++j)
         bitBoard[j] = rules(current, AN[j]);
 
     print_bitboard();
@@ -120,7 +117,7 @@ int command_line(void) {
 
 int main(void)
 {
-    system("cls");
+    system(CLEAR);
     command_line();
     return 0;
 }
