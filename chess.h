@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 #include "stack.c"
-#include "rules.c"
+#include "rulesAndDumbSearch.c"
 
 #ifdef LINUX
 const char *pieces[] = {

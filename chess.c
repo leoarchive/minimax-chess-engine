@@ -100,14 +100,15 @@ int command_line(void) {
                 output(s);
                 continue;
             case 'h':
-                puts("https://github.com/leozamboni/chess-engine");
+                puts("https://github.com/leozamboni/dumb-chess-engine");
                 continue;
             case 'i':
                 print_bitboard();
                 continue;
             case 'w':
+                bpp = 0;
                 search(turn);
-                break;
+                continue;
             case 'e':
                 return 0;
             default:
