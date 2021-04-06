@@ -39,20 +39,20 @@ const char *AN[] = {
         "a1","b1","c1","d1","e1","f1","g1","h1"
 };
 
-enum pieces {empty,bRook,bKnight,bBishop,bQueen,bKing,bBishopR,bKnightR,bRookR,
-        bPawn1,bPawn2,bPawn3,bPawn4,bPawn5,bPawn6,bPawn7,bPawn8,
-        wPawn1,wPawn2,wPawn3,wPawn4,wPawn5,wPawn6,wPawn7,wPawn8,
-        wRook,wKnight,wBishop,wQueen,wKing,wBishopR,wKnightR,wRookR,};
+enum pieces {empty,black_rook,black_knight,black_bishop,black_queen,black_king,black_bishop2,black_knight2,black_rook2,
+        black_pawn1,black_pawn2,black_pawn3,black_pawn4,black_pawn5,black_pawn6,black_pawn7,black_pawn8,
+        white_pawn1,white_pawn2,white_pawn3,white_pawn4,white_pawn5,white_pawn6,white_pawn7,white_pawn8,
+        white_rook,white_knight,white_bishop,white_queen,white_king,white_bishop2,white_knight2,white_rook2,};
 
 unsigned int chessboard[] = {
-        bRook,bKnight,bBishop,bQueen,bKing,bBishopR,bKnightR,bRookR,
-        bPawn1,bPawn2,bPawn3,bPawn4,bPawn5,bPawn6,bPawn7,bPawn8,
+        black_rook,black_knight,black_bishop,black_queen,black_king,black_bishop2,black_knight2,black_rook2,
+        black_pawn1,black_pawn2,black_pawn3,black_pawn4,black_pawn5,black_pawn6,black_pawn7,black_pawn8,
         empty,empty,empty,empty,empty,empty,empty,empty,
         empty,empty,empty,empty,empty,empty,empty,empty,
         empty,empty,empty,empty,empty,empty,empty,empty,
         empty,empty,empty,empty,empty,empty,empty,empty,
-        wPawn1,wPawn2,wPawn3,wPawn4,wPawn5,wPawn6,wPawn7,wPawn8,
-        wRook,wKnight,wBishop,wQueen,wKing,wBishopR,wKnightR,wRookR,
+        white_pawn1,white_pawn2,white_pawn3,white_pawn4,white_pawn5,white_pawn6,white_pawn7,white_pawn8,
+        white_rook,white_knight,white_bishop,white_queen,white_king,white_bishop2,white_knight2,white_rook2,
 };
 
 unsigned int bitboard[64];
@@ -65,10 +65,10 @@ void back_stack(Stack *s);
 int move_piece(void);
 int command_line(void);
 int move_rules(const char *current_algebraic_notation, const char *new_algebraic_notation);
-int get_chessboard_position(const char *pieceAN);
+int get_chessboard_position(const char *piece_algebraic_notation);
 int generic_rule_verify(const char *current_algebraic_notation, const char *new_algebraic_notation);
 int bishop_validation(const char *current_algebraic_notation, const char *new_algebraic_notation);
-int bishop_validation_verify(char *anlist[], int curr, int new);
+int bishop_validation_verify(char *diagonal_algebraic_notation[], int current, int new);
 int white_pawn_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
 int white_bishop_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
 int white_knight_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);

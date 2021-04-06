@@ -10,14 +10,13 @@ typedef struct stack {
     Node *top;
 }Stack;
 
-Stack *createStack(void)
-{
+Stack *create_stack(void) {
     Stack *s = (Stack *) malloc(sizeof(Stack));
     s->top = NULL;
     return s;
 }
 
-void pushStack(Stack *s, const unsigned int cb[]) {
+void push_stack(Stack *s, const unsigned int cb[]) {
     Node *n = (Node *) malloc(sizeof(Node));
     n->cb = (unsigned int *) malloc(64 * sizeof(unsigned int));
     for (size_t i = 0; i < 64; ++i)
@@ -26,12 +25,12 @@ void pushStack(Stack *s, const unsigned int cb[]) {
     s->top = n;
 }
 
-void pullStack(Stack *s) {
+void pull_stack(Stack *s) {
     if (s->top->next)
         s->top = s->top->next;
 }
 
-void outputStack(Stack *s) {
+void output_stack(Stack *s) {
     Node *w = s->top;
     int j = 0;
     while (w) {

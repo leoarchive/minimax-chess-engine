@@ -6,10 +6,10 @@ int bpp = 0;
 
 const char *search(void) {
     unsigned int abb[64];
-    int bp[] = {wKing,wQueen,wRook,wRookR,wKnight,wKnightR,wBishop,wBishopR,
-                wPawn1,wPawn2,wPawn3,wPawn4,wPawn5,wPawn6,wPawn7,wPawn8};
-    int bpb[] = {bKing,bQueen,bRook,bRookR,bKnight,bKnightR,bBishop,bBishopR,
-                 bPawn1,bPawn2,bPawn3,bPawn4,bPawn5,bPawn6,bPawn7,bPawn8};
+    int bp[] = {white_king,white_queen,white_rook,white_rook2,white_knight,white_knight2,white_bishop,white_bishop2,
+                white_pawn1,white_pawn2,white_pawn3,white_pawn4,white_pawn5,white_pawn6,white_pawn7,white_pawn8};
+    int bpb[] = {black_king,black_queen,black_rook,black_rook2,black_knight,black_knight2,black_bishop,black_bishop2,
+                 black_pawn1,black_pawn2,black_pawn3,black_pawn4,black_pawn5,black_pawn6,black_pawn7,black_pawn8};
     bool no = true;
     int j;
     if (turn) {
