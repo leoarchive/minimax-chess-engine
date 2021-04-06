@@ -68,6 +68,7 @@ int move_rules(const char *current_algebraic_notation, const char *new_algebraic
 int get_chessboard_position(const char *piece_algebraic_notation);
 int generic_rule_verify(const char *current_algebraic_notation, const char *new_algebraic_notation);
 int bishop_validation(const char *current_algebraic_notation, const char *new_algebraic_notation);
+int rook_validation(const char *current_algebraic_notation, const char *new_algebraic_notation);
 int bishop_validation_verify(char *diagonal_algebraic_notation[], int current, int new);
 int white_pawn_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
 int white_bishop_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);

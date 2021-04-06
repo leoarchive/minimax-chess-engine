@@ -109,6 +109,9 @@ int move_piece(void) {
     if (bishop_validation(current, new))
         return 0;
 
+    if (rook_validation(current, new))
+        return 0;
+
     if (!bitboard[new_position])
         return 0;
 
@@ -143,9 +146,15 @@ int move_rules(const char *current_algebraic_notation, const char *new_algebraic
     if (chessboard[currentchessboard_position_value] == 25 || chessboard[currentchessboard_position_value] == 32)
         return white_rook_rule(current_algebraic_notation, new_algebraic_notation);
 
-    if (chessboard[currentchessboard_position_value] == 28)
-        if (!white_rook_rule(current_algebraic_notation, new_algebraic_notation) && !white_bishop_rule(current_algebraic_notation, new_algebraic_notation))
+    if (chessboard[currentchessboard_position_value] == 28) {
+        if (!white_rook_rule(current_algebraic_notation, new_algebraic_notation) &&
+            !white_bishop_rule(current_algebraic_notation, new_algebraic_notation)) {
             return 0;
+        } else if (white_rook_rule(current_algebraic_notation, new_algebraic_notation) == 2 ||
+                   white_bishop_rule(current_algebraic_notation, new_algebraic_notation) == 2) {
+            return 2;
+        }
+    }
 
     if (chessboard[currentchessboard_position_value] == 29)
         return white_king_rule(current_algebraic_notation, new_algebraic_notation);
@@ -164,9 +173,15 @@ int move_rules(const char *current_algebraic_notation, const char *new_algebraic
     if (chessboard[currentchessboard_position_value] == 1 || chessboard[currentchessboard_position_value] == 8)
         return black_rook_rule(current_algebraic_notation, new_algebraic_notation);
 
-    if (chessboard[currentchessboard_position_value] == 4)
-       if (!black_rook_rule(current_algebraic_notation, new_algebraic_notation) && !black_bishop_rule(current_algebraic_notation, new_algebraic_notation))
-           return 0;
+    if (chessboard[currentchessboard_position_value] == 4) {
+        if (!black_rook_rule(current_algebraic_notation, new_algebraic_notation) &&
+            !black_bishop_rule(current_algebraic_notation, new_algebraic_notation)) {
+            return 0;
+        } else if (black_rook_rule(current_algebraic_notation, new_algebraic_notation) == 2 ||
+                   black_bishop_rule(current_algebraic_notation, new_algebraic_notation) == 2) {
+            return 2;
+        }
+    }
 
     if (chessboard[currentchessboard_position_value] == 5)
         return black_king_rule(current_algebraic_notation, new_algebraic_notation);
@@ -192,10 +207,12 @@ int bishop_validation_verify(char *diagonal_algebraic_notation[], int current, i
     if (current > new) {
         for (int j = current; j > new; --j) {
             for (k = 0; k < 64; ++k)
-                if (strcmp(AN[k], diagonal_algebraic_notation[j]) == 0)
+                if (strcmp(AN[k], diagonal_algebraic_notation[j]) == 0) {
                     break;
-            if (bitboard[k] == 2)
+                }
+            if (bitboard[k] == 2) {
                 return 1;
+            }
         }
     }
     else {
@@ -213,26 +230,27 @@ int bishop_validation_verify(char *diagonal_algebraic_notation[], int current, i
 int bishop_validation(const char *current_algebraic_notation, const char *new_algebraic_notation) {
     int current_chessboard_position = get_chessboard_position(current_algebraic_notation);
     if (chessboard[current_chessboard_position] != 27 && chessboard[current_chessboard_position] != 30
-    && chessboard[current_chessboard_position] != 3 && chessboard[current_chessboard_position] != 6)
+    && chessboard[current_chessboard_position] != 3 && chessboard[current_chessboard_position] != 6
+    && chessboard[current_chessboard_position] != 4 && chessboard[current_chessboard_position] != 28)
         return 0;
 
     char *diagonal_algebraic_notation[] = {
             "a8","b8","a7","c8","b7","a6","d8","c7",
-             "b6","a5","e8","d7","c6","b5","a4","f8",
-             "e7","d6","c5","b4","a3","g8","f7","e6",
-             "d5","c4","b3","a2","h8","g7","f6","e5",
-             "d4","c3","b2","a1","h7","g6","f5","e4",
-             "d3","c2","b1","h6","g5","f4","e3","d2",
-             "c1","h5","g4","f3","e2","d1","h4","g3",
-             "f2","e1","h3","g2","f1","h2","g1","h1",
-             "h8","g8","h7","f8","g7","h6","e8","f7",
-             "g6","h5","d8","e7","f6","g5","h4","c8",
-             "d7","e6","f5","g4","h3","b8","c7","d6",
-             "e5","f4","g3","h2","a8","b7","c6","d5",
-             "e4","f3","g2","h1","a7","b6","c5","d4",
-             "e3","f2","g1","a6","b5","c4","d3","e2",
-             "f1","a5","b4","c3","d2","e1","a4","b3",
-             "c2","d1","a3","b2","c1","a2","b1","a1"
+            "b6","a5","e8","d7","c6","b5","a4","f8",
+            "e7","d6","c5","b4","a3","g8","f7","e6",
+            "d5","c4","b3","a2","h8","g7","f6","e5",
+            "d4","c3","b2","a1","h7","g6","f5","e4",
+            "d3","c2","b1","h6","g5","f4","e3","d2",
+            "c1","h5","g4","f3","e2","d1","h4","g3",
+            "f2","e1","h3","g2","f1","h2","g1","h1",
+            "h8","g8","h7","f8","g7","h6","e8","f7",
+            "g6","h5","d8","e7","f6","g5","h4","c8",
+            "d7","e6","f5","g4","h3","b8","c7","d6",
+            "e5","f4","g3","h2","a8","b7","c6","d5",
+            "e4","f3","g2","h1","a7","b6","c5","d4",
+            "e3","f2","g1","a6","b5","c4","d3","e2",
+            "f1","a5","b4","c3","d2","e1","a4","b3",
+            "c2","d1","a3","b2","c1","a2","b1","a1"
     };
 
     for (int i = 0; i < 128; ++i) {
@@ -243,6 +261,47 @@ int bishop_validation(const char *current_algebraic_notation, const char *new_al
                         continue;
                     else
                         return bishop_validation_verify(diagonal_algebraic_notation, i, j);
+                }
+            }
+        }
+    }
+    return 0;
+}
+
+int rook_validation(const char *current_algebraic_notation, const char *new_algebraic_notation) {
+    int current_chessboard_position = get_chessboard_position(current_algebraic_notation);
+    if (chessboard[current_chessboard_position] != 25 && chessboard[current_chessboard_position] != 32
+        && chessboard[current_chessboard_position] != 1 && chessboard[current_chessboard_position] != 8
+        && chessboard[current_chessboard_position] != 4 && chessboard[current_chessboard_position] != 28)
+        return 0;
+
+    char *vertical_and_horizontal_a_n[] = {
+            "a8","b8","c8","d8","e8","f8","g8","h8",
+            "a7","b7","c7","d7","e7","f7","g7","h7",
+            "a6","b6","c6","d6","e6","f6","g6","h6",
+            "a5","b5","c5","d5","e5","f5","g5","h5",
+            "a4","b4","c4","d4","e4","f4","g4","h4",
+            "a3","b3","c3","d3","e3","f3","g3","h3",
+            "a2","b2","c2","d2","e2","f2","g2","h2",
+            "a1","b1","c1","d1","e1","f1","g1","h1",
+            "a8","a7","a6","a5","a4","a3","a2","a1",
+            "b8","b7","b6","b5","b4","b3","b2","b1",
+            "c8","c7","c6","c5","c4","c3","c2","c1",
+            "d8","d7","d6","d5","d4","d3","d2","d1",
+            "e8","e7","e6","e5","e4","e3","e2","e1",
+            "f8","f7","f6","f5","f4","f3","f2","f1",
+            "g8","g7","g6","g5","g4","g3","g2","g1",
+            "h8","h7","h6","h5","h4","h3","h2","h1",
+    };
+
+    for (int i = 0; i < 128; ++i) {
+        if (strcmp(vertical_and_horizontal_a_n[i], current_algebraic_notation) == 0) {
+            for (int j = 0; j < 128; ++j) {
+                if (strcmp(vertical_and_horizontal_a_n[j], new_algebraic_notation) == 0) {
+                    if ((j - i) < -8 || (j - i) > 8)
+                        continue;
+                    else
+                        return bishop_validation_verify(vertical_and_horizontal_a_n, i, j);
                 }
             }
         }
@@ -357,7 +416,7 @@ int white_knight_rule(const char *current_algebraic_notation, const char *new_al
 int white_rook_rule(const char *current_algebraic_notation, const char *new_algebraic_notation) {
     int chessboard_position_value = get_chessboard_position(new_algebraic_notation);
     if (chessboard[chessboard_position_value] > 16)
-        return 0;
+        return 2;
 
     int current_position_value = current_algebraic_notation[1] - '0';
     int new_position_value = new_algebraic_notation[1] - '0';
@@ -456,7 +515,7 @@ int black_bishop_rule(const char *current_algebraic_notation, const char *new_al
     }
 
     int chessboard_position_value = get_chessboard_position(new_algebraic_notation);
-    if (chessboard[chessboard_position_value] < 16 && chessboard[chessboard_position_value] > 0)
+    if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0)
         return 2;
 
     int current_position_value = current_algebraic_notation[1] - '0';
@@ -473,7 +532,7 @@ int black_bishop_rule(const char *current_algebraic_notation, const char *new_al
 
 int black_knight_rule(const char *current_algebraic_notation, const char *new_algebraic_notation) {
     int chessboard_position_value = get_chessboard_position(new_algebraic_notation);
-    if (chessboard[chessboard_position_value] < 16 && chessboard[chessboard_position_value] > 0)
+    if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0)
         return 0;
 
     int current_position_value = current_algebraic_notation[1] - '0';
@@ -508,8 +567,8 @@ int black_knight_rule(const char *current_algebraic_notation, const char *new_al
 
 int black_rook_rule(const char *current_algebraic_notation, const char *new_algebraic_notation) {
     int chessboard_position_value = get_chessboard_position(new_algebraic_notation);
-    if (chessboard[chessboard_position_value] < 16 && chessboard[chessboard_position_value] > 0)
-        return 0;
+    if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0)
+        return 2;
 
     int current_position_value = current_algebraic_notation[1] - '0';
     int new_position_value = new_algebraic_notation[1] - '0';
@@ -522,7 +581,7 @@ int black_rook_rule(const char *current_algebraic_notation, const char *new_alge
 
 int black_king_rule(const char *current_algebraic_notation, const char *new_algebraic_notation) {
     int chessboard_position_value = get_chessboard_position(new_algebraic_notation);
-    if (chessboard[chessboard_position_value] < 16 && chessboard[chessboard_position_value] > 0)
+    if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0)
         return 0;
 
     int current_position_value = current_algebraic_notation[1] - '0';

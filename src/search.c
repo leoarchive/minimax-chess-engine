@@ -5,6 +5,8 @@ unsigned int bb[64];
 int bpp = 0;
 
 const char *search(void) {
+    if (bpp > 15)
+        return NULL;
     unsigned int abb[64];
     int bp[] = {white_king,white_queen,white_rook,white_rook2,white_knight,white_knight2,white_bishop,white_bishop2,
                 white_pawn1,white_pawn2,white_pawn3,white_pawn4,white_pawn5,white_pawn6,white_pawn7,white_pawn8};
@@ -28,6 +30,14 @@ const char *search(void) {
                     for (int k = 0; k < 64; ++k) {
                         abb[k] = move_rules(AN[i], AN[k]);
                         if (abb[k] == 1 && bb[k] == 1) {
+                            for (size_t l = 0; l < 64; ++l)
+                                bitboard[l] = move_rules(AN[j], AN[l]);
+                            if (bishop_validation(AN[j], AN[k]) || rook_validation(AN[j], AN[k]))
+                                continue;
+                            for (size_t l = 0; l < 64; ++l)
+                                bitboard[l] = move_rules(AN[i], AN[l]);
+                            if (bishop_validation(AN[i], AN[k]) || rook_validation(AN[i], AN[k]))
+                                continue;
                             printf("piece %s goto %s killed by %s\n", AN[j], AN[k], AN[i]);
                             return AN[k];
                         }
@@ -58,6 +68,14 @@ const char *search(void) {
                     for (int k = 0; k < 64; ++k) {
                         abb[k] = move_rules(AN[i], AN[k]);
                         if (abb[k] == 1 && bb[k] == 1) {
+                            for (size_t l = 0; l < 64; ++l)
+                                bitboard[l] = move_rules(AN[j], AN[l]);
+                            if (bishop_validation(AN[j], AN[k]) || rook_validation(AN[j], AN[k]))
+                                continue;
+                            for (size_t l = 0; l < 64; ++l)
+                                bitboard[l] = move_rules(AN[i], AN[l]);
+                            if (bishop_validation(AN[i], AN[k]) || rook_validation(AN[i], AN[k]))
+                                continue;
                             printf("piece %s goto %s killed by %s\n", AN[j], AN[k], AN[i]);
                             return AN[k];
                         }
