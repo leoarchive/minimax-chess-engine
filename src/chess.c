@@ -42,7 +42,7 @@ int commandLine(void) {
             default:
                 continue;
         }
-        system(CLEAR);
+        //system(CLEAR);
         printChessboard();
     }
 }
@@ -104,7 +104,7 @@ int movePiece(void) {
     for (size_t j = 0; j < 64; ++j)
         bitBoard[j] = rules(current, AN[j]);
 
-    //printBitboard();
+    printBitboard();
 
     if (!bitBoard[newPos])
         return 0;
@@ -129,54 +129,44 @@ int rules(const char *currentAN, const char *newAN) {
     int currentChessBPosition = getCBPosition(currentAN);
 
     if (chessboard[currentChessBPosition] > 16 && chessboard[currentChessBPosition] < 25)
-        if (!wPawnRule(currentAN, newAN))
-            return 0;
+        return wPawnRule(currentAN, newAN);
 
     if (chessboard[currentChessBPosition] == 27 || chessboard[currentChessBPosition] == 30)
-        if (!wBishopRule(currentAN, newAN))
-            return 0;
+        return wBishopRule(currentAN, newAN);
 
     if (chessboard[currentChessBPosition] == 26 || chessboard[currentChessBPosition] == 31)
-        if (!wKnightRule(currentAN, newAN))
-            return 0;
+        return wKnightRule(currentAN, newAN);
 
     if (chessboard[currentChessBPosition] == 25 || chessboard[currentChessBPosition] == 32)
-        if (!wRookRule(currentAN, newAN))
-            return 0;
+        return wRookRule(currentAN, newAN);
 
     if (chessboard[currentChessBPosition] == 28)
         if (!wRookRule(currentAN, newAN) && !wBishopRule(currentAN, newAN))
             return 0;
 
     if (chessboard[currentChessBPosition] == 29)
-        if (!wKingRule(currentAN, newAN))
-            return 0;
+        return wKingRule(currentAN, newAN);
 
     /* ----------------------------------------------------------------------------- */
 
     if (chessboard[currentChessBPosition] > 8 && chessboard[currentChessBPosition] < 17)
-        if (!bPawnRule(currentAN, newAN))
-            return 0;
+        return bPawnRule(currentAN, newAN);
 
     if (chessboard[currentChessBPosition] == 3 || chessboard[currentChessBPosition] == 6)
-        if (!bBishopRule(currentAN, newAN))
-            return 0;
+        return bBishopRule(currentAN, newAN);
 
     if (chessboard[currentChessBPosition] == 2 || chessboard[currentChessBPosition] == 7)
-        if (!bKnightRule(currentAN, newAN))
-            return 0;
+        return bKnightRule(currentAN, newAN);
 
     if (chessboard[currentChessBPosition] == 1 || chessboard[currentChessBPosition] == 8)
-        if (!bRookRule(currentAN, newAN))
-            return 0;
+        return bRookRule(currentAN, newAN);
 
     if (chessboard[currentChessBPosition] == 4)
-        if (!bRookRule(currentAN, newAN) && !bBishopRule(currentAN, newAN))
-            return 0;
+       if (!bRookRule(currentAN, newAN) && !bBishopRule(currentAN, newAN))
+           return 0;
 
     if (chessboard[currentChessBPosition] == 5)
-        if (!bKingRule(currentAN, newAN))
-            return 0;
+        return bKingRule(currentAN, newAN);
 
     return 1;
 }
@@ -301,7 +291,7 @@ int wKnightRule(const char *currentAN, const char *newAN) {
 int wRookRule(const char *currentAN, const char *newAN) {
     int chessBPosition = getCBPosition(newAN);
     if (chessboard[chessBPosition] > 16)
-        return 0;
+        return 2;
 
     int currentPosInt = currentAN[1] - '0';
     int newPosInt = newAN[1] - '0';

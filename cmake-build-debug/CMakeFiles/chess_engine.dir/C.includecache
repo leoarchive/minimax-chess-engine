@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.c
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.c
 search.c
-C:/Users/Leonardo/Documents/GitHub/chess-engine/search.c
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/search.c
 
-C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
 stdio.h
 -
 stdlib.h
@@ -20,13 +20,13 @@ string.h
 stdbool.h
 -
 stack.c
-C:/Users/Leonardo/Documents/GitHub/chess-engine/stack.c
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.c
 
-C:/Users/Leonardo/Documents/GitHub/chess-engine/search.c
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/search.c
 chess.h
-C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
 
-C:/Users/Leonardo/Documents/GitHub/chess-engine/stack.c
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.c
 stdio.h
 -
 stdlib.h
