@@ -55,27 +55,27 @@ unsigned int chessboard[] = {
         wRook,wKnight,wBishop,wQueen,wKing,wBishopR,wKnightR,wRookR,
 };
 
-unsigned int bitBoard[64];
+unsigned int bitboard[64];
 
 bool turn = true;
 
-int bishopValidation(const char *currentAN, const char *newAN);
-
-void printChessboard(void);
-void printBitboard(void);
-void backStack(Stack *s);
-int movePiece(void);
-int commandLine(void);
-int rules(const char *currentAN, const char *newAN);
-int getCBPosition(const char *pieceAN);
-int genericRule(const char *currentAN, const char *newAN);
-int wPawnRule(const char *currentAN, const char *newAN);
-int wBishopRule(const char *currentAN, const char *newAN);
-int wKnightRule(const char *currentAN, const char *newAN);
-int wRookRule(const char *currentAN, const char *newAN);
-int wKingRule(const char *currentAN, const char *newAN);
-int bPawnRule(const char *currentAN, const char *newAN);
-int bBishopRule(const char *currentAN, const char *newAN);
-int bKnightRule(const char *currentAN, const char *newAN);
-int bRookRule(const char *currentAN, const char *newAN);
-int bKingRule(const char *currentAN, const char *newAN);
+void print_chessboard(void);
+void print_bitboard(void);
+void back_stack(Stack *s);
+int move_piece(void);
+int command_line(void);
+int move_rules(const char *current_algebraic_notation, const char *new_algebraic_notation);
+int get_chessboard_position(const char *pieceAN);
+int generic_rule_verify(const char *current_algebraic_notation, const char *new_algebraic_notation);
+int bishop_validation(const char *current_algebraic_notation, const char *new_algebraic_notation);
+int bishop_validation_verify(char *anlist[], int curr, int new);
+int white_pawn_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
+int white_bishop_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
+int white_knight_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
+int white_rook_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
+int white_king_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
+int black_pawn_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
+int black_bishop_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
+int black_knight_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
+int black_rook_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
+int black_king_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);

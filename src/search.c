@@ -18,7 +18,7 @@ const char *search(void) {
                 break;
         }
         for (int i = 0; i < 64; ++i) {
-            bb[i] = rules(AN[j], AN[i]);
+            bb[i] = move_rules(AN[j], AN[i]);
             if (bb[i] == 1)
                 no = false;
         }
@@ -26,7 +26,7 @@ const char *search(void) {
             for (int i = 0; i < 64; ++i) {
                 if (chessboard[i] < 17 && chessboard[i] > 0) {
                     for (int k = 0; k < 64; ++k) {
-                        abb[k] = rules(AN[i], AN[k]);
+                        abb[k] = move_rules(AN[i], AN[k]);
                         if (abb[k] == 1 && bb[k] == 1) {
                             printf("piece %s goto %s killed by %s\n", AN[j], AN[k], AN[i]);
                             return AN[k];
@@ -48,7 +48,7 @@ const char *search(void) {
                 break;
         }
         for (int i = 0; i < 64; ++i) {
-            bb[i] = rules(AN[j], AN[i]);
+            bb[i] = move_rules(AN[j], AN[i]);
             if (bb[i] == 1)
                 no = false;
         }
@@ -56,7 +56,7 @@ const char *search(void) {
             for (int i = 0; i < 64; ++i) {
                 if (chessboard[i] > 16) {
                     for (int k = 0; k < 64; ++k) {
-                        abb[k] = rules(AN[i], AN[k]);
+                        abb[k] = move_rules(AN[i], AN[k]);
                         if (abb[k] == 1 && bb[k] == 1) {
                             printf("piece %s goto %s killed by %s\n", AN[j], AN[k], AN[i]);
                             return AN[k];
