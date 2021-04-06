@@ -41,8 +41,8 @@ const char *AN[] = {
 
 enum pieces {empty,bRook,bKnight,bBishop,bQueen,bKing,bBishopR,bKnightR,bRookR,
         bPawn1,bPawn2,bPawn3,bPawn4,bPawn5,bPawn6,bPawn7,bPawn8,
-        wRook,wKnight,wBishop,wQueen,wKing,wBishopR,wKnightR,wRookR,
-        wPawn1,wPawn2,wPawn3,wPawn4,wPawn5,wPawn6,wPawn7,wPawn8};
+        wPawn1,wPawn2,wPawn3,wPawn4,wPawn5,wPawn6,wPawn7,wPawn8,
+        wRook,wKnight,wBishop,wQueen,wKing,wBishopR,wKnightR,wRookR,};
 
 unsigned int chessboard[] = {
         bRook,bKnight,bBishop,bQueen,bKing,bBishopR,bKnightR,bRookR,
@@ -51,13 +51,15 @@ unsigned int chessboard[] = {
         empty,empty,empty,empty,empty,empty,empty,empty,
         empty,empty,empty,empty,empty,empty,empty,empty,
         empty,empty,empty,empty,empty,empty,empty,empty,
+        wPawn1,wPawn2,wPawn3,wPawn4,wPawn5,wPawn6,wPawn7,wPawn8,
         wRook,wKnight,wBishop,wQueen,wKing,wBishopR,wKnightR,wRookR,
-        wPawn1,wPawn2,wPawn3,wPawn4,wPawn5,wPawn6,wPawn7,wPawn8
 };
 
 unsigned int bitBoard[64];
 
 bool turn = true;
+
+int bishopValidation(const char *currentAN, const char *newAN);
 
 void printChessboard(void);
 void printBitboard(void);

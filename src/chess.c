@@ -106,6 +106,9 @@ int movePiece(void) {
 
     printBitboard();
 
+    if (bishopValidation(current, new))
+        return 0;
+
     if (!bitBoard[newPos])
         return 0;
 
@@ -184,6 +187,242 @@ int genericRule(const char *currentAN, const char *newAN) {
     return 1;
 }
 
+int bishopValidationFor(const char *currentAN, const char *newAN, char *anlist[], int cont) {
+    int new = 0;
+    int curr = 0;
+    int i, k;
+    for (i = 0; i < cont; ++i)
+        if (strcmp(anlist[i], newAN) == 0)
+            new = i;
+    for (i = 0; i < cont; ++i)
+        if (strcmp(anlist[i], currentAN) == 0)
+            curr = i;
+    if (curr > new) {
+        for (int j = curr; j > new; --j) {
+            for (k = 0; k < 64; ++k)
+                if (strcmp(AN[k], anlist[j]) == 0)
+                    break;
+            if (bitBoard[k] == 2) {
+//                for (i = j; i >= 0; --i) {
+//                    for (k = 0; k < 64; ++k)
+//                        if (strcmp(AN[k], anlist[i]) == 0)
+//                            break;
+//                    bitBoard[k] = 0;
+//                }
+                return 1;
+            }
+        }
+    }
+    else {
+        for (int j = new; j < curr; ++j) {
+            for (k = 0; k < 64; ++k)
+                if (strcmp(AN[k], anlist[j]) == 0)
+                    break;
+            if (bitBoard[k] == 2) {
+//                for (i = 0; i <= j; ++i) {
+//                    for (k = 0; k < 64; ++k)
+//                        if (strcmp(AN[k], anlist[i]) == 0)
+//                            break;
+//                    bitBoard[k] = 0;
+//                }
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+int bishopValidation(const char *currentAN, const char *newAN) {
+    int currentChessBPosition = getCBPosition(currentAN);
+    if (chessboard[currentChessBPosition] != 27)
+        if (chessboard[currentChessBPosition] != 30)
+            return 0;
+
+    char *dan[] = {"b8","a7"};
+    for (int i = 0; i < 2; ++i)
+        if (strcmp(dan[i], currentAN) == 0)
+            for (int j = 0; j < 2; ++j)
+                if (strcmp(dan[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, dan, 2);
+
+    char *dan2[] = {"c8","b7","a6"};
+    for (int i = 0; i < 3; ++i)
+        if (strcmp(dan2[i], currentAN) == 0)
+            for (int j = 0; j < 3; ++j)
+                if (strcmp(dan2[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, dan2, 3);
+
+    char *dan3[] = {"d8","c7","b6","a5"};
+    for (int i = 0; i < 4; ++i)
+        if (strcmp(dan3[i], currentAN) == 0)
+            for (int j = 0; j < 4; ++j)
+                if (strcmp(dan3[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, dan3, 4);
+
+    char *dan4[] = {"e8","d7","c6","b5","a4"};
+    for (int i = 0; i < 5; ++i)
+        if (strcmp(dan4[i], currentAN) == 0)
+            for (int j = 0; j < 5; ++j)
+                if (strcmp(dan4[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, dan4, 5);
+
+    char *dan5[] = {"f8","e7","d6","c5","b4","a3"};
+    for (int i = 0; i < 6; ++i)
+        if (strcmp(dan5[i], currentAN) == 0)
+            for (int j = 0; j < 6; ++j)
+                if (strcmp(dan5[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, dan5, 6);
+
+    char *dan6[] = {"g8","f7","e6","d5","c4","b3","a2"};
+    for (int i = 0; i < 7; ++i)
+        if (strcmp(dan6[i], currentAN) == 0)
+            for (int j = 0; j < 7; ++j)
+                if (strcmp(dan6[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, dan6, 7);
+
+    char *dan7[] = {"h8","g7","f6","e5","d4","c3","b2","a1"};
+    for (int i = 0; i < 8; ++i)
+        if (strcmp(dan7[i], currentAN) == 0)
+            for (int j = 0; j < 8; ++j)
+                if (strcmp(dan7[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, dan7, 8);
+
+    char *dan8[] = {"h7","g6","f5","e4","d3","c2","b1"};
+    for (int i = 0; i < 7; ++i)
+        if (strcmp(dan8[i], currentAN) == 0)
+            for (int j = 0; j < 7; ++j)
+                if (strcmp(dan8[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, dan8, 7);
+
+    char *dan9[] = {"h6","g5","f4","e3","d2","c1"};
+    for (int i = 0; i < 6; ++i)
+        if (strcmp(dan9[i], currentAN) == 0)
+            for (int j = 0; j < 6; ++j)
+                if (strcmp(dan9[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, dan9, 6);
+
+    char *dan10[] = {"h5","g4","f3","e2","d1"};
+    for (int i = 0; i < 5; ++i)
+        if (strcmp(dan10[i], currentAN) == 0)
+            for (int j = 0; j < 5; ++j)
+                if (strcmp(dan10[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, dan10, 5);
+
+    char *dan11[] = {"h4","g3","f2","e1"};
+    for (int i = 0; i < 4; ++i)
+        if (strcmp(dan11[i], currentAN) == 0)
+            for (int j = 0; j < 4; ++j)
+                if (strcmp(dan11[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, dan11, 4);
+
+    char *dan12[] = {"h3","g2","f1"};
+    for (int i = 0; i < 3; ++i)
+        if (strcmp(dan12[i], currentAN) == 0)
+            for (int j = 0; j < 3; ++j)
+                if (strcmp(dan12[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, dan12, 3);
+
+    char *dan13[] = {"h2","g1"};
+    for (int i = 0; i < 2; ++i)
+        if (strcmp(dan13[i], currentAN) == 0)
+            for (int j = 0; j < 2; ++j)
+                if (strcmp(dan13[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, dan13, 2);
+
+    char *danR[] = {"g8","h7"};
+    for (int i = 0; i < 2; ++i)
+        if (strcmp(danR[i], currentAN) == 0)
+            for (int j = 0; j < 2; ++j)
+                if (strcmp(danR[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, danR, 2);
+
+    char *danR2[] = {"f8","g7","h6"};
+    for (int i = 0; i < 3; ++i)
+        if (strcmp(danR2[i], currentAN) == 0)
+            for (int j = 0; j < 3; ++j)
+                if (strcmp(danR2[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, danR2, 3);
+
+    char *danR3[] = {"e8","f7","g6","h5"};
+    for (int i = 0; i < 4; ++i)
+        if (strcmp(danR3[i], currentAN) == 0)
+            for (int j = 0; j < 4; ++j)
+                if (strcmp(danR3[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, danR3, 4);
+
+    char *danR4[] = {"d8","e7","f6","g5","h4"};
+    for (int i = 0; i < 5; ++i)
+        if (strcmp(danR4[i], currentAN) == 0)
+            for (int j = 0; j < 5; ++j)
+                if (strcmp(danR4[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, danR4, 5);
+
+    char *danR5[] = {"c8","d7","e6","f5","g4","h3"};
+    for (int i = 0; i < 6; ++i)
+        if (strcmp(danR5[i], currentAN) == 0)
+            for (int j = 0; j < 6; ++j)
+                if (strcmp(danR5[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, danR5, 6);
+
+    char *danR6[] = {"b8","c7","d6","e5","f4","g3","h2"};
+    for (int i = 0; i < 7; ++i)
+        if (strcmp(danR6[i], currentAN) == 0)
+            for (int j = 0; j < 7; ++j)
+                if (strcmp(danR6[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, danR6, 7);
+
+    char *danR7[] = {"a8","b7","c6","d5","e4","f3","g2","h1"};
+    for (int i = 0; i < 8; ++i)
+        if (strcmp(danR7[i], currentAN) == 0)
+            for (int j = 0; j < 8; ++j)
+                if (strcmp(danR7[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, danR7, 8);
+
+    char *danR8[] = {"a7","b6","c5","d4","e3","f2","g1"};
+    for (int i = 0; i < 7; ++i)
+        if (strcmp(danR8[i], currentAN) == 0)
+            for (int j = 0; j < 7; ++j)
+                if (strcmp(danR8[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, danR8, 7);
+
+    char *danR9[] = {"a6","b5","c4","d3","e2","f1"};
+    for (int i = 0; i < 6; ++i)
+        if (strcmp(danR9[i], currentAN) == 0)
+            for (int j = 0; j < 6; ++j)
+                if (strcmp(danR9[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, danR9, 6);
+
+    char *danR10[] = {"a5","b4","c3","d2","e1"};
+    for (int i = 0; i < 5; ++i)
+        if (strcmp(danR10[i], currentAN) == 0)
+            for (int j = 0; j < 5; ++j)
+                if (strcmp(danR10[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, danR10, 5);
+
+    char *danR11[] = {"a4","b3","c2","d1"};
+    for (int i = 0; i < 4; ++i)
+        if (strcmp(danR11[i], currentAN) == 0)
+            for (int j = 0; j < 4; ++j)
+                if (strcmp(danR11[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, danR11, 4);
+
+    char *danR12[] = {"a3","b2","c1"};
+    for (int i = 0; i < 3; ++i)
+        if (strcmp(danR12[i], currentAN) == 0)
+            for (int j = 0; j < 3; ++j)
+                if (strcmp(danR12[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, danR12, 3);
+
+    char *danR13[] = {"a2","b1"};
+    for (int i = 0; i < 2; ++i)
+        if (strcmp(danR13[i], currentAN) == 0)
+            for (int j = 0; j < 2; ++j)
+                if (strcmp(danR13[j], newAN) == 0)
+                    return bishopValidationFor(currentAN, newAN, danR13, 2);
+
+    return 0;
+}
+
 int wPawnRule(const char *currentAN, const char *newAN) {
     bool walkTwoHouses = false;
     if (currentAN[1] == '2')
@@ -239,7 +478,7 @@ int wBishopRule(const char *currentAN, const char *newAN) {
 
     int chessBPosition = getCBPosition(newAN);
     if (chessboard[chessBPosition] > 16)
-        return 0;
+        return 2;
 
     int currentPosInt = currentAN[1] - '0';
     int newPosInt = newAN[1] - '0';
@@ -291,7 +530,7 @@ int wKnightRule(const char *currentAN, const char *newAN) {
 int wRookRule(const char *currentAN, const char *newAN) {
     int chessBPosition = getCBPosition(newAN);
     if (chessboard[chessBPosition] > 16)
-        return 2;
+        return 0;
 
     int currentPosInt = currentAN[1] - '0';
     int newPosInt = newAN[1] - '0';
@@ -391,7 +630,7 @@ int bBishopRule(const char *currentAN, const char *newAN) {
 
     int chessBPosition = getCBPosition(newAN);
     if (chessboard[chessBPosition] < 16 && chessboard[chessBPosition] > 0)
-        return 0;
+        return 2;
 
     int currentPosInt = currentAN[1] - '0';
     int newPosInt = newAN[1] - '0';

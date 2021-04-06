@@ -4,7 +4,7 @@ unsigned int bb[64];
 
 int bpp = 0;
 
-const char *search() {
+const char *search(void) {
     unsigned int abb[64];
     int bp[] = {wKing,wQueen,wRook,wRookR,wKnight,wKnightR,wBishop,wBishopR,
                 wPawn1,wPawn2,wPawn3,wPawn4,wPawn5,wPawn6,wPawn7,wPawn8};
@@ -35,11 +35,11 @@ const char *search() {
                 }
             }
             bpp++;
-            return search(turn);
+            return search();
         }
         else {
             bpp++;
-            return search(turn);
+            return search();
         }
     }
     else {
@@ -65,11 +65,11 @@ const char *search() {
                 }
             }
             bpp++;
-            return search(turn);
+            return search();
         }
         else {
             bpp++;
-            return search(turn);
+            return search();
         }
     }
 }
