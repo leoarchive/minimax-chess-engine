@@ -4,5 +4,13 @@
 CMakeFiles/chess_engine.dir/src/chess.c.obj
  C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.c
  C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
+ C:/Users/Leonardo/Documents/GitHub/chess-engine/src/search.h
+ C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.h
+CMakeFiles/chess_engine.dir/src/search.c.obj
+ C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
  C:/Users/Leonardo/Documents/GitHub/chess-engine/src/search.c
+ C:/Users/Leonardo/Documents/GitHub/chess-engine/src/search.h
+ C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.h
+CMakeFiles/chess_engine.dir/src/stack.c.obj
  C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.c
+ C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.h

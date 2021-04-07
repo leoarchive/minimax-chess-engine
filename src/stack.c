@@ -1,14 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct node {
-    unsigned int *cb;
-    struct node *next;
-}Node;
-
-typedef struct stack {
-    Node *top;
-}Stack;
+#include "stack.h"
 
 Stack *create_stack(void) {
     Stack *s = (Stack *) malloc(sizeof(Stack));

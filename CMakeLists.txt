@@ -3,4 +3,4 @@ project(chess_engine C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(chess_engine src/chess.c)
+add_executable(chess_engine src/chess.c src/stack.c src/search.c)

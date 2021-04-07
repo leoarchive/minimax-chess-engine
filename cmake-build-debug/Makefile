@@ -169,6 +169,60 @@ src/chess.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/chess.c.s
 .PHONY : src/chess.c.s
 
+src/search.obj: src/search.c.obj
+
+.PHONY : src/search.obj
+
+# target to build an object file
+src/search.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/search.c.obj
+.PHONY : src/search.c.obj
+
+src/search.i: src/search.c.i
+
+.PHONY : src/search.i
+
+# target to preprocess a source file
+src/search.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/search.c.i
+.PHONY : src/search.c.i
+
+src/search.s: src/search.c.s
+
+.PHONY : src/search.s
+
+# target to generate assembly for a file
+src/search.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/search.c.s
+.PHONY : src/search.c.s
+
+src/stack.obj: src/stack.c.obj
+
+.PHONY : src/stack.obj
+
+# target to build an object file
+src/stack.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/stack.c.obj
+.PHONY : src/stack.c.obj
+
+src/stack.i: src/stack.c.i
+
+.PHONY : src/stack.i
+
+# target to preprocess a source file
+src/stack.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/stack.c.i
+.PHONY : src/stack.c.i
+
+src/stack.s: src/stack.c.s
+
+.PHONY : src/stack.s
+
+# target to generate assembly for a file
+src/stack.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/stack.c.s
+.PHONY : src/stack.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -181,6 +235,12 @@ help:
 	@echo ... src/chess.obj
 	@echo ... src/chess.i
 	@echo ... src/chess.s
+	@echo ... src/search.obj
+	@echo ... src/search.i
+	@echo ... src/search.s
+	@echo ... src/stack.obj
+	@echo ... src/stack.i
+	@echo ... src/stack.s
 .PHONY : help
 
 

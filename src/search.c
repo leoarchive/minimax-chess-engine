@@ -1,6 +1,7 @@
-#include "chess.h"
+#include <stdio.h>
 
-unsigned int bb[64];
+#include "chess.h"
+#include "search.h"
 
 int bpp = 0;
 
@@ -91,4 +92,3 @@ const char *search(void) {
         }
     }
 }
-
