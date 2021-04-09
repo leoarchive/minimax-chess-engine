@@ -82,6 +82,9 @@
 		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h">
 			<Option target="chess_engine"/>
 		</Unit>
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/main.c">
+			<Option target="chess_engine"/>
+		</Unit>
 		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/search.c">
 			<Option target="chess_engine"/>
 		</Unit>
