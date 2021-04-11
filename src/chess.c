@@ -1,26 +1,8 @@
-/*
-    Dumb, a chess engine
-    Copyright (C) 2021 Leonardo Zamboni
-
-    Dumb is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Dumb is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "chess.h"
-#include "search.h"
 
 #ifdef LINUX
 const char *pieces[] = {
@@ -63,53 +45,6 @@ unsigned int chessboard[] = {
 };
 
 bool turn = true;
-
-int init_chess(void) {
-    system(CLEAR);
-    command_line();
-    return 0;
-}
-
-int command_line(void) {
-    Stack *s = create_stack();
-    print_chessboard();
-    push_stack(s, chessboard);
-
-    char *i = (char *) malloc(sizeof(char));
-    while (1) {
-        printf("\n'h' for help: ");
-        scanf(" %c", i);
-        switch (i[0]) {
-            case 'b':
-                back_stack(s);
-                break;
-            case 'm':
-                if (move_piece())
-                    continue;
-                push_stack(s, chessboard);
-                break;
-            case 'c':
-                output_stack(s);
-                continue;
-            case 'h':
-                puts("https://github.com/leozamboni/dumb-chess-engine");
-                continue;
-            case 'u':
-                print_bitboard();
-                continue;
-            case 'd':
-                bpp = 0;
-                search();
-                continue;
-            case 'e':
-                return 0;
-            default:
-                continue;
-        }
-        //system(CLEAR);
-        print_chessboard();
-    }
-}
 
 void print_chessboard(void) {
     int j = 0, c = 0, n = 8;
@@ -590,12 +525,15 @@ int black_pawn_rule(const char *current_algebraic_notation, const char *new_alge
             return 0;
     }
     else {
-        if (new_position_value > (current_position_value - 1))
+        if (new_position_value < (current_position_value - 1))
             return 0;
     }
 
     if (new_algebraic_notation[0] != current_algebraic_notation[0]) {
         if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0)
+            return 0;
+
+        if (chessboard[chessboard_position_value] == 0)
             return 0;
     }
 

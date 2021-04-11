@@ -1,20 +1,3 @@
-/*
-    Dumb, a chess engine
-    Copyright (C) 2021 Leonardo Zamboni
-
-    Dumb is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Dumb is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
 #ifndef CHESS_H
 #define CHESS_H
 
@@ -43,12 +26,10 @@ unsigned int bitboard[64];
 
 bool turn;
 
-int init_chess(void);
 void print_chessboard(void);
 void print_bitboard(void);
 void back_stack(Stack *s);
 int move_piece(void);
-int command_line(void);
 int move_rules(const char *current_algebraic_notation, const char *new_algebraic_notation);
 int get_chessboard_position(const char *piece_algebraic_notation);
 int generic_rule_verify(const char *current_algebraic_notation, const char *new_algebraic_notation);

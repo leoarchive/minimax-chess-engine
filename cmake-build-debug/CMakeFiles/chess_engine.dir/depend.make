@@ -3,8 +3,12 @@
 
 CMakeFiles/chess_engine.dir/src/chess.c.obj: ../src/chess.c
 CMakeFiles/chess_engine.dir/src/chess.c.obj: ../src/chess.h
-CMakeFiles/chess_engine.dir/src/chess.c.obj: ../src/search.h
 CMakeFiles/chess_engine.dir/src/chess.c.obj: ../src/stack.h
+
+CMakeFiles/chess_engine.dir/src/main.c.obj: ../src/chess.h
+CMakeFiles/chess_engine.dir/src/main.c.obj: ../src/main.c
+CMakeFiles/chess_engine.dir/src/main.c.obj: ../src/search.h
+CMakeFiles/chess_engine.dir/src/main.c.obj: ../src/stack.h
 
 CMakeFiles/chess_engine.dir/src/search.c.obj: ../src/chess.h
 CMakeFiles/chess_engine.dir/src/search.c.obj: ../src/search.c
