@@ -82,13 +82,14 @@ void print_bitboard(void) {
     puts("");
 }
 
-int move_piece(void) {
-    char *current = (char *) malloc(2 * sizeof(char));
-    char *new = (char *) malloc(2 * sizeof(char));
+int move_piece(const char *current, const char *new) {
+    if (!current) {
+        current = (const char *) malloc(2 * sizeof(const char));
+        new = (const char *) malloc(2 * sizeof(const char));
+        printf("%s: ", turn ? "white" : "black");
+        scanf(" %s %s", current, new);
+    }
 
-    printf("%s: ", turn ? "white" : "black");
-    scanf(" %s %s", current, new);
-    
     int current_position;
     for (current_position = 0; current_position < 64; ++current_position)
         if (strcmp(AN[current_position], current) == 0)

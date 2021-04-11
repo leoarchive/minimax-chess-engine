@@ -1,11 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
 
 #include "chess.h"
 #include "search.h"
 
 int bpp = 0;
 
-const char *search(void) {
+const char *search(Stack *s) {
     if (bpp > 15)
         return NULL;
     unsigned int abb[64];
@@ -31,14 +34,25 @@ const char *search(void) {
                     for (int k = 0; k < 64; ++k) {
                         abb[k] = move_rules(AN[i], AN[k]);
                         if (abb[k] == 1 && bb[k] == 1) {
-                            for (size_t l = 0; l < 64; ++l)
-                                bitboard[l] = move_rules(AN[j], AN[l]);
-                            if (bishop_validation(AN[j], AN[k]) || rook_validation(AN[j], AN[k]))
+//                            for (size_t l = 0; l < 64; ++l)
+//                                bitboard[l] = move_rules(AN[j], AN[l]);
+//                            if (bishop_validation(AN[j], AN[k]) || rook_validation(AN[j], AN[k]))
+//                                continue;
+//                            for (size_t l = 0; l < 64; ++l)
+//                                bitboard[l] = move_rules(AN[i], AN[l]);
+//                            if (bishop_validation(AN[i], AN[k]) || rook_validation(AN[i], AN[k]))
+//                                continue;
+                            int val = move_piece_verify(AN[j], AN[k]);
+                            if (val)
                                 continue;
-                            for (size_t l = 0; l < 64; ++l)
-                                bitboard[l] = move_rules(AN[i], AN[l]);
-                            if (bishop_validation(AN[i], AN[k]) || rook_validation(AN[i], AN[k]))
+                            else {
+                                move_piece(AN[j], AN[k]);
+                            }
+                            int valK = move_piece_verify(AN[i], AN[k]);
+                            if (valK)
                                 continue;
+                            else
+                                move_piece(AN[i], AN[k]);
                             printf("piece %s goto %s killed by %s\n", AN[j], AN[k], AN[i]);
                             return AN[k];
                         }
@@ -46,11 +60,11 @@ const char *search(void) {
                 }
             }
             bpp++;
-            return search();
+            return search(s);
         }
         else {
             bpp++;
-            return search();
+            return search(s);
         }
     }
     else {
@@ -69,14 +83,26 @@ const char *search(void) {
                     for (int k = 0; k < 64; ++k) {
                         abb[k] = move_rules(AN[i], AN[k]);
                         if (abb[k] == 1 && bb[k] == 1) {
-                            for (size_t l = 0; l < 64; ++l)
-                                bitboard[l] = move_rules(AN[j], AN[l]);
-                            if (bishop_validation(AN[j], AN[k]) || rook_validation(AN[j], AN[k]))
+//                            for (size_t l = 0; l < 64; ++l)
+//                                bitboard[l] = move_rules(AN[j], AN[l]);
+//                            if (bishop_validation(AN[j], AN[k]) || rook_validation(AN[j], AN[k]))
+//                                continue;
+//                            for (size_t l = 0; l < 64; ++l)
+//                                bitboard[l] = move_rules(AN[i], AN[l]);
+//                            if (bishop_validation(AN[i], AN[k]) || rook_validation(AN[i], AN[k]))
+//                                continue;
+                            int val = move_piece_verify(AN[j], AN[k]);
+                            if (val)
                                 continue;
-                            for (size_t l = 0; l < 64; ++l)
-                                bitboard[l] = move_rules(AN[i], AN[l]);
-                            if (bishop_validation(AN[i], AN[k]) || rook_validation(AN[i], AN[k]))
+                            else {
+                                move_piece(AN[j], AN[k]);
+                            }
+                            int valK = move_piece_verify(AN[i], AN[k]);
+                            if (valK) {
                                 continue;
+                            }
+                            else
+                                move_piece(AN[i], AN[k]);
                             printf("piece %s goto %s killed by %s\n", AN[j], AN[k], AN[i]);
                             return AN[k];
                         }
@@ -84,11 +110,52 @@ const char *search(void) {
                 }
             }
             bpp++;
-            return search();
+            return search(s);
         }
         else {
             bpp++;
-            return search();
+            return search(s);
         }
     }
+}
+
+int move_piece_verify(const char *current, const char *new) {
+    int current_position;
+    for (current_position = 0; current_position < 64; ++current_position)
+        if (strcmp(AN[current_position], current) == 0)
+            break;
+
+    if (!chessboard[current_position])
+        return 1;
+
+    int new_position;
+    for (new_position = 0; new_position < 64; ++new_position)
+        if (strcmp(AN[new_position], new) == 0)
+            break;
+
+    for (size_t j = 0; j < 64; ++j)
+        bitboard[j] = move_rules(current, AN[j]);
+
+    int validation = bishop_validation(current, new);
+
+    if (validation == 1)
+        return 1;
+
+    if (validation != new_position && validation != 0)
+        return 1;
+
+    validation = rook_validation(current, new);
+
+    if (validation == 1)
+        return 1;
+
+    if (validation != new_position && validation != 0)
+        return 1;
+
+    if (!bitboard[new_position])
+        return 1;
+
+    if (chessboard[new_position] != 0)
+        printf("%s (%s) killed %s (%s)\n", pieces[chessboard[current_position]], AN[current_position], pieces[chessboard[new_position]], AN[new_position]);
+    return 0;
 }

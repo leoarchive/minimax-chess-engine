@@ -19,7 +19,7 @@ int main(void) {
                 back_stack(s);
                 break;
             case 'm':
-                if (move_piece())
+                if (move_piece(NULL, NULL))
                     continue;
                 push_stack(s, chessboard);
                 break;
@@ -34,8 +34,8 @@ int main(void) {
                 continue;
             case 'd':
                 bpp = 0;
-                search();
-                continue;
+                search(s);
+                break;
             case 'e':
                 return 0;
             default:
