@@ -145,7 +145,7 @@ int move_piece(void) {
         return 1;
     }
     else if (validation == 2) {
-        printf("%s (%s) killed %s (%s)\n", pieces[chessboard[current_position]], AN[current_position], pieces[chessboard[new_position]], AN[new_position]);
+        printf("white %s (%s) killed black %s (%s)\n", pieces[chessboard[current_position]], AN[current_position], pieces[chessboard[new_position]], AN[new_position]);
     }
 
     chessboard[new_position] = chessboard[current_position];
@@ -370,7 +370,7 @@ int white_pawn_rule(const char *current_algebraic_notation, const char *new_alge
 
     if (new_algebraic_notation[0] != current_algebraic_notation[0]) {
         if (new_algebraic_notation[0] != (current_algebraic_notation[0] + 1)
-            || new_algebraic_notation[0] != (current_algebraic_notation[0] - 1))
+            && new_algebraic_notation[0] != (current_algebraic_notation[0] - 1))
             return 0;
 
         if (current_position_value == new_position_value)
@@ -538,7 +538,7 @@ int black_pawn_rule(const char *current_algebraic_notation, const char *new_alge
 
     if (new_algebraic_notation[0] != current_algebraic_notation[0]) {
         if (new_algebraic_notation[0] != (current_algebraic_notation[0] + 1)
-        || new_algebraic_notation[0] != (current_algebraic_notation[0] - 1))
+        && new_algebraic_notation[0] != (current_algebraic_notation[0] - 1))
             return 0;
 
         if (current_position_value == new_position_value)

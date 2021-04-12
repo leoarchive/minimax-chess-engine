@@ -18,6 +18,11 @@ int move_generation(void) {
 //    fixed_bitboard((char *) AN[piece_position]);
 //    print_fixed_bitboard();
 
+    int validation = move_piece_validation((char *) AN[piece_position], (char *) AN[best_position]);
+    if (validation == 2) {
+        printf("black %s (%s) killed white %s (%s)\n", pieces[best_piece],  AN[piece_position], pieces[chessboard[best_position]], AN[best_position]);
+    }
+
     chessboard[best_position] = chessboard[piece_position];
     chessboard[piece_position] = 0;
     best_piece = (-1);
