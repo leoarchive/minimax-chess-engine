@@ -82,13 +82,11 @@ void print_bitboard(void) {
     puts("");
 }
 
-int move_piece(const char *current, const char *new) {
-    if (!current) {
-        current = (const char *) malloc(2 * sizeof(const char));
-        new = (const char *) malloc(2 * sizeof(const char));
-        printf("%s: ", turn ? "white" : "black");
-        scanf(" %s %s", current, new);
-    }
+int move_piece(void) {
+    char *current = (char *) malloc(2 * sizeof(char));
+    char *new = (char *) malloc(2 * sizeof(char));
+    printf("%s: ", turn ? "white" : "black");
+    scanf(" %s %s", current, new);
 
     int current_position;
     for (current_position = 0; current_position < 64; ++current_position)
@@ -263,7 +261,6 @@ int verify_validation(char *diagonal_algebraic_notation[], int current, int new)
                     break;
             if (!turn) {
                 if (chessboard[k] > 16) {
-                    printf("1 AN %s n %d current %d new %d\n", AN[k], k, current, new);
                     return 1;
                 }
                 else if (chessboard[k] < 17 && chessboard[k] > 0) {

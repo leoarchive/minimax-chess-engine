@@ -10,31 +10,26 @@ int main(void) {
     print_chessboard();
     push_stack(s, chessboard);
 
-    char *i = (char *) malloc(sizeof(char));
+    char i;
     while (1) {
         printf("\n'h' for help: ");
-        scanf(" %c", i);
-        switch (i[0]) {
+        scanf(" %c", &i);
+        switch (i) {
             case 'b':
                 back_stack(s);
                 break;
             case 'm':
-                if (move_piece(NULL, NULL))
+                if (move_piece())
                     continue;
                 push_stack(s, chessboard);
                 break;
-            case 'c':
-                output_stack(s);
-                continue;
             case 'h':
                 puts("https://github.com/leozamboni/dumb-chess-engine");
                 continue;
-            case 'u':
+            case 'i':
                 print_bitboard();
                 continue;
-            case 'd':
-                bpp = 0;
-                search(s);
+            case 'g':
                 break;
             case 'e':
                 return 0;

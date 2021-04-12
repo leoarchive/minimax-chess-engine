@@ -6,12 +6,10 @@ make move:
 d2<space>d4<enter>
 
 h -- help
-
-d -- engine move
-u -- output bitboard
+g -- engine move
+i -- output bitboard
 m -- move piece
 b -- back move
-c -- output chess representation
 e -- exit
 ```
 

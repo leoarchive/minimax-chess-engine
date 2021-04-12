@@ -29,7 +29,7 @@ bool turn;
 void print_chessboard(void);
 void print_bitboard(void);
 void back_stack(Stack *s);
-int move_piece(const char *current, const char *new);
+int move_piece(void);
 int move_rules(const char *current_algebraic_notation, const char *new_algebraic_notation);
 int get_chessboard_position(const char *piece_algebraic_notation);
 int generic_rule_verify(const char *current_algebraic_notation, const char *new_algebraic_notation);
