@@ -85,10 +85,10 @@
 		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/main.c">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/search.c">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.c">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/search.h">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h">
 			<Option target="chess_engine"/>
 		</Unit>
 		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.c">

@@ -195,32 +195,32 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/main.c.s
 .PHONY : src/main.c.s
 
-src/search.obj: src/search.c.obj
+src/move.obj: src/move.c.obj
 
-.PHONY : src/search.obj
+.PHONY : src/move.obj
 
 # target to build an object file
-src/search.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/search.c.obj
-.PHONY : src/search.c.obj
+src/move.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/move.c.obj
+.PHONY : src/move.c.obj
 
-src/search.i: src/search.c.i
+src/move.i: src/move.c.i
 
-.PHONY : src/search.i
+.PHONY : src/move.i
 
 # target to preprocess a source file
-src/search.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/search.c.i
-.PHONY : src/search.c.i
+src/move.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/move.c.i
+.PHONY : src/move.c.i
 
-src/search.s: src/search.c.s
+src/move.s: src/move.c.s
 
-.PHONY : src/search.s
+.PHONY : src/move.s
 
 # target to generate assembly for a file
-src/search.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/search.c.s
-.PHONY : src/search.c.s
+src/move.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/move.c.s
+.PHONY : src/move.c.s
 
 src/stack.obj: src/stack.c.obj
 
@@ -264,9 +264,9 @@ help:
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
-	@echo ... src/search.obj
-	@echo ... src/search.i
-	@echo ... src/search.s
+	@echo ... src/move.obj
+	@echo ... src/move.i
+	@echo ... src/move.s
 	@echo ... src/stack.obj
 	@echo ... src/stack.i
 	@echo ... src/stack.s

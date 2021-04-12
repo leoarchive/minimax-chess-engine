@@ -114,25 +114,25 @@ CMakeFiles/chess_engine.dir/src/stack.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chess_engine.dir/src/stack.c.s"
 	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Leonardo\Documents\GitHub\chess-engine\src\stack.c -o CMakeFiles\chess_engine.dir\src\stack.c.s
 
-CMakeFiles/chess_engine.dir/src/search.c.obj: CMakeFiles/chess_engine.dir/flags.make
-CMakeFiles/chess_engine.dir/src/search.c.obj: ../src/search.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/chess_engine.dir/src/search.c.obj"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\chess_engine.dir\src\search.c.obj -c C:\Users\Leonardo\Documents\GitHub\chess-engine\src\search.c
+CMakeFiles/chess_engine.dir/src/move.c.obj: CMakeFiles/chess_engine.dir/flags.make
+CMakeFiles/chess_engine.dir/src/move.c.obj: ../src/move.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/chess_engine.dir/src/move.c.obj"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\chess_engine.dir\src\move.c.obj -c C:\Users\Leonardo\Documents\GitHub\chess-engine\src\move.c
 
-CMakeFiles/chess_engine.dir/src/search.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chess_engine.dir/src/search.c.i"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Leonardo\Documents\GitHub\chess-engine\src\search.c > CMakeFiles\chess_engine.dir\src\search.c.i
+CMakeFiles/chess_engine.dir/src/move.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chess_engine.dir/src/move.c.i"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Leonardo\Documents\GitHub\chess-engine\src\move.c > CMakeFiles\chess_engine.dir\src\move.c.i
 
-CMakeFiles/chess_engine.dir/src/search.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chess_engine.dir/src/search.c.s"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Leonardo\Documents\GitHub\chess-engine\src\search.c -o CMakeFiles\chess_engine.dir\src\search.c.s
+CMakeFiles/chess_engine.dir/src/move.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chess_engine.dir/src/move.c.s"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Leonardo\Documents\GitHub\chess-engine\src\move.c -o CMakeFiles\chess_engine.dir\src\move.c.s
 
 # Object files for target chess_engine
 chess_engine_OBJECTS = \
 "CMakeFiles/chess_engine.dir/src/main.c.obj" \
 "CMakeFiles/chess_engine.dir/src/chess.c.obj" \
 "CMakeFiles/chess_engine.dir/src/stack.c.obj" \
-"CMakeFiles/chess_engine.dir/src/search.c.obj"
+"CMakeFiles/chess_engine.dir/src/move.c.obj"
 
 # External object files for target chess_engine
 chess_engine_EXTERNAL_OBJECTS =
@@ -140,7 +140,7 @@ chess_engine_EXTERNAL_OBJECTS =
 chess_engine.exe: CMakeFiles/chess_engine.dir/src/main.c.obj
 chess_engine.exe: CMakeFiles/chess_engine.dir/src/chess.c.obj
 chess_engine.exe: CMakeFiles/chess_engine.dir/src/stack.c.obj
-chess_engine.exe: CMakeFiles/chess_engine.dir/src/search.c.obj
+chess_engine.exe: CMakeFiles/chess_engine.dir/src/move.c.obj
 chess_engine.exe: CMakeFiles/chess_engine.dir/build.make
 chess_engine.exe: CMakeFiles/chess_engine.dir/linklibs.rsp
 chess_engine.exe: CMakeFiles/chess_engine.dir/objects1.rsp

@@ -82,72 +82,64 @@ void print_bitboard(void) {
     puts("");
 }
 
-int move_piece(void) {
-    char *current = (char *) malloc(2 * sizeof(char));
-    char *new = (char *) malloc(2 * sizeof(char));
-    printf("%s: ", turn ? "white" : "black");
-    scanf(" %s %s", current, new);
-
-    int current_position;
-    for (current_position = 0; current_position < 64; ++current_position)
-        if (strcmp(AN[current_position], current) == 0)
-            break;
+int move_piece_validation(char *current, char *new) {
+    int current_position = get_chessboard_position(current);
 
     if (!chessboard[current_position])
         return 1;
 
-    int new_position;
-    for (new_position = 0; new_position < 64; ++new_position)
-        if (strcmp(AN[new_position], new) == 0)
-            break;
+    int new_position = get_chessboard_position(new);
 
     for (size_t j = 0; j < 64; ++j)
         bitboard[j] = move_rules(current, AN[j]);
 
     int validation = bishop_validation(current, new);
 
-    if (validation == 1) {
-        printf("invalid move");
+    if (validation == 1)
         return 1;
-    }
 
-    if (validation != new_position && validation != 0) {
-        printf("invalid move");
+    if (validation != new_position && validation != 0)
         return 1;
-    }
 
     validation = rook_validation(current, new);
 
-    if (validation == 1) {
-        printf("invalid move");
+    if (validation == 1)
         return 1;
-    }
 
-    if (validation != new_position && validation != 0) {
-        printf("invalid move");
+    if (validation != new_position && validation != 0)
         return 1;
-    }
 
-    if (!bitboard[new_position]) {
-        printf("invalid move");
+    if (!bitboard[new_position])
         return 1;
-    }
 
     if (turn) {
-        if (chessboard[current_position] < 17) {
-            printf("invalid move");
+        if (chessboard[current_position] < 17)
             return 1;
-        }
     }
     else {
-        if (chessboard[current_position] > 16) {
-            printf("invalid move");
+        if (chessboard[current_position] > 16)
             return 1;
-        }
     }
 
     if (chessboard[new_position] != 0)
         printf("%s (%s) killed %s (%s)\n", pieces[chessboard[current_position]], AN[current_position], pieces[chessboard[new_position]], AN[new_position]);
+
+    return 0;
+}
+
+int move_piece(void) {
+    char *current = (char *) malloc(2 * sizeof(char));
+    char *new = (char *) malloc(2 * sizeof(char));
+    printf("%s: ", turn ? "white" : "black");
+    scanf(" %s %s", current, new);
+
+    if (move_piece_validation(current, new)) {
+        printf("invalid move");
+        return 1;
+    }
+
+    int current_position = get_chessboard_position(current);
+    int new_position = get_chessboard_position(new);
 
     chessboard[new_position] = chessboard[current_position];
     chessboard[current_position] = 0;

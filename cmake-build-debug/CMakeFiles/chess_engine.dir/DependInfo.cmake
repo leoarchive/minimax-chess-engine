@@ -6,7 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/src/chess.c.obj"
   "C:/Users/Leonardo/Documents/GitHub/chess-engine/src/main.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/src/main.c.obj"
-  "C:/Users/Leonardo/Documents/GitHub/chess-engine/src/search.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/src/search.c.obj"
+  "C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/src/move.c.obj"
   "C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/src/stack.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")

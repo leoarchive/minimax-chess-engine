@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "chess.h"
-#include "search.h"
+#include "move.h"
 
 int main(void) {
     system(CLEAR);
+    srand(time(NULL));
     Stack *s = create_stack();
     print_chessboard();
     push_stack(s, chessboard);
@@ -30,12 +32,15 @@ int main(void) {
                 print_bitboard();
                 continue;
             case 'g':
+                move_generation();
                 break;
             case 'e':
                 return 0;
             default:
                 continue;
         }
+        if (!turn)
+            move_generation();
         //system(CLEAR);
         print_chessboard();
     }

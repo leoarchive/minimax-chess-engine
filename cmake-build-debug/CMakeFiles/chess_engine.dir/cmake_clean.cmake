@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/chess_engine.dir/src/chess.c.obj"
   "CMakeFiles/chess_engine.dir/src/main.c.obj"
-  "CMakeFiles/chess_engine.dir/src/search.c.obj"
+  "CMakeFiles/chess_engine.dir/src/move.c.obj"
   "CMakeFiles/chess_engine.dir/src/stack.c.obj"
   "chess_engine.exe"
   "chess_engine.exe.manifest"
