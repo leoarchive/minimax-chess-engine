@@ -28,12 +28,6 @@ int main(void) {
             case 'h':
                 puts("https://github.com/leozamboni/dumb-chess-engine");
                 continue;
-            case 'i':
-                print_bitboard();
-                continue;
-            case 'g':
-                move_generation();
-                break;
             case 'e':
                 return 0;
             default:

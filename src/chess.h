@@ -13,6 +13,7 @@
 
 #define WHT "\e[30;48;5;215m"
 #define BLK "\e[30;48;5;208m"
+#define WHT_PIECE "\e[1;37m"
 
 enum pieces {empty,black_rook,black_knight,black_bishop,black_queen,black_king,black_bishop2,black_knight2,black_rook2,
         black_pawn1,black_pawn2,black_pawn3,black_pawn4,black_pawn5,black_pawn6,black_pawn7,black_pawn8,

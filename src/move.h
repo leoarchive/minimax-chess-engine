@@ -17,8 +17,12 @@
 #define BLACK_STRENGTH_QUEEN (-90)
 #define BLACK_STRENGTH_KING (-900)
 
+int bitboard_fixed[64];
+
+void print_fixed_bitboard(void);
 int move_generation(void);
+void best_position_and_piece(void);
 int get_piece_strength(int piece);
-int get_best_position(int piece);
+void fixed_bitboard(char *current);
 
 #endif

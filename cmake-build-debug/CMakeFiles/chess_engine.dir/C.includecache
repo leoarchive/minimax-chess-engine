@@ -6,16 +6,40 @@
 
 #IncludeRegexTransform: 
 
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+chess.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
+
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
 stdbool.h
 -
 stack.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.h
 
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/main.c
+stdio.h
+-
+stdlib.h
+-
+time.h
+-
+chess.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
+move.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h
+
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.c
 stdio.h
 -
 stdlib.h
+-
+string.h
 -
 move.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h

@@ -1,69 +1,99 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "move.h"
 
+int best_piece = (-1);
+int best_position = (-1);
+
 int move_generation(void) {
-    int piece;
-    int best_piece = 0;
-    int best_position = 0;
-
-    for (piece = 0; piece <= 16; ++piece) {
-        int piece_position = get_best_position(piece);
-        if (piece_position > best_position) {
-            best_position = piece_position;
-            best_piece = piece;
-        }
-    }
-
-    if (!best_piece)
-        best_piece = piece - 1;
-
+    best_position_and_piece();
 
     int piece_position;
     for (piece_position = 0; piece_position < 64; ++piece_position)
         if (chessboard[piece_position] == best_piece)
             break;
 
-    if (!best_position) {
-        do {
-            best_position = rand() % 64;
-            if (move_piece_validation((char *) AN[piece_position], (char *) AN[best_position]))
-                continue;
-        } while (best_position == 0);
-    }
+//    fixed_bitboard((char *) AN[piece_position]);
+//    print_fixed_bitboard();
 
-    printf("piece %d new position %d\n", best_piece, best_position);
     chessboard[best_position] = chessboard[piece_position];
     chessboard[piece_position] = 0;
+    best_piece = (-1);
+    best_position = (-1);
     turn = !turn;
     return 0;
 }
 
-int get_best_position(int piece) {
-    int piece_position;
-    for (piece_position = 0; piece_position < 64; ++piece_position)
-        if (chessboard[piece_position] == piece)
-            break;
+void print_fixed_bitboard(void) {
+    size_t j = 0;
+    for (size_t i = 0; i < 64; ++i, ++j) {
+        if (j == 8) {
+            j = 0;
+            puts("");
+        }
+        printf("%d ", bitboard_fixed[i]);
+    }
+    puts("");
+}
 
-    for (size_t j = 0; j < 64; ++j)
-        bitboard[j] = move_rules(AN[piece_position], AN[j]);
+void best_position_and_piece(void) {
+    int max_strength_count = 0;
+    for (int piece = 0; piece <= 16; ++piece) {
+        int piece_position;
+        for (piece_position = 0; piece_position < 64; ++piece_position)
+            if (chessboard[piece_position] == piece)
+                break;
 
-    int position = 0;
-    int max_strength = 0;
-    for (int j = 0; j < 64; ++j) {
-        if (bitboard[j] == 1) {
-            if (move_piece_validation((char *) AN[piece_position], (char *) AN[j]))
-                continue;
-            if (get_piece_strength((int) chessboard[j]) > max_strength) {
-                //printf("max_strength %d\n", max_strength);
-                max_strength = get_piece_strength((int) chessboard[j]);
-                position = j;
+        fixed_bitboard((char *) AN[piece_position]);
+
+        int max_strength = 0;
+        int position = 0;
+        int strength_count = 0;
+        for (int i = 0; i < 64; ++i) {
+            if (bitboard_fixed[i] == 1) {
+                int position_strength = get_piece_strength((int) chessboard[i]);
+                strength_count += position_strength;
+                if (position_strength > max_strength) {
+                    max_strength = position_strength;
+                    position = i;
+                }
             }
+        }
+
+        if (strength_count > max_strength_count) {
+            max_strength_count = strength_count;
+            best_piece = piece;
+            best_position = position;
         }
     }
 
-    return position;
+    if (best_piece < 0) {
+        do {
+            best_piece = rand() % 16;
+            if (!best_piece)
+                continue;
+            int piece_position;
+            for (piece_position = 0; piece_position < 64; ++piece_position)
+                if (chessboard[piece_position] == best_piece)
+                    break;
+            fixed_bitboard((char *) AN[piece_position]);
+            best_position = rand() % 64;
+            if (bitboard_fixed[best_position] == 1)
+                break;
+        } while (1);
+    }
+//    printf("best_piece %s best_position %s\n", pieces[best_piece], AN[best_position]);
+}
+
+void fixed_bitboard(char *current) {
+    for (size_t i = 0; i < 64; ++i) {
+        if (move_piece_validation(current, (char *) AN[i]) == 1)
+            bitboard_fixed[i] = 0;
+        else
+            bitboard_fixed[i] = 1;
+    }
 }
 
 int get_piece_strength(int piece) {
