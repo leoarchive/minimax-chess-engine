@@ -1,6 +1,9 @@
 #ifndef STACK_H
 #define STACK_H
 
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef struct node {
     unsigned int *cb;
     struct node *next;

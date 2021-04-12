@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "move.h"
 
 int best_piece = (-1);
@@ -14,9 +10,6 @@ int move_generation(void) {
     for (piece_position = 0; piece_position < 64; ++piece_position)
         if (chessboard[piece_position] == best_piece)
             break;
-
-//    fixed_bitboard((char *) AN[piece_position]);
-//    print_fixed_bitboard();
 
     int validation = move_piece_validation((char *) AN[piece_position], (char *) AN[best_position]);
     if (validation == 2) {
@@ -31,18 +24,6 @@ int move_generation(void) {
     return 0;
 }
 
-void print_fixed_bitboard(void) {
-    size_t j = 0;
-    for (size_t i = 0; i < 64; ++i, ++j) {
-        if (j == 8) {
-            j = 0;
-            puts("");
-        }
-        printf("%d ", bitboard_fixed[i]);
-    }
-    puts("");
-}
-
 void best_position_and_piece(void) {
     int max_strength_count = 0;
     for (int piece = 0; piece <= 16; ++piece) {
@@ -51,13 +32,13 @@ void best_position_and_piece(void) {
             if (chessboard[piece_position] == piece)
                 break;
 
-        fixed_bitboard((char *) AN[piece_position]);
+        create_bitboard((char *) AN[piece_position]);
 
         int max_strength = 0;
         int position = 0;
         int strength_count = 0;
         for (int i = 0; i < 64; ++i) {
-            if (bitboard_fixed[i] == 1) {
+            if (bitboard[i] == 1) {
                 int position_strength = get_piece_strength((int) chessboard[i]);
                 strength_count += position_strength;
                 if (position_strength > max_strength) {
@@ -83,21 +64,11 @@ void best_position_and_piece(void) {
             for (piece_position = 0; piece_position < 64; ++piece_position)
                 if (chessboard[piece_position] == best_piece)
                     break;
-            fixed_bitboard((char *) AN[piece_position]);
+            create_bitboard((char *) AN[piece_position]);
             best_position = rand() % 64;
-            if (bitboard_fixed[best_position] == 1)
+            if (bitboard[best_position] == 1)
                 break;
         } while (1);
-    }
-//    printf("best_piece %s best_position %s\n", pieces[best_piece], AN[best_position]);
-}
-
-void fixed_bitboard(char *current) {
-    for (size_t i = 0; i < 64; ++i) {
-        if (move_piece_validation(current, (char *) AN[i]) == 1)
-            bitboard_fixed[i] = 0;
-        else
-            bitboard_fixed[i] = 1;
     }
 }
 

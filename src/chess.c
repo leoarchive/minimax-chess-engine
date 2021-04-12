@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "chess.h"
 
 #ifdef LINUX
@@ -34,14 +30,14 @@ const char *AN[] = {
 };
 
 unsigned int chessboard[] = {
-        black_rook,black_knight,black_bishop,black_queen,black_king,black_bishop2,black_knight2,black_rook2,
-        black_pawn1,black_pawn2,black_pawn3,black_pawn4,black_pawn5,black_pawn6,black_pawn7,black_pawn8,
-        empty,empty,empty,empty,empty,empty,empty,empty,
-        empty,empty,empty,empty,empty,empty,empty,empty,
-        empty,empty,empty,empty,empty,empty,empty,empty,
-        empty,empty,empty,empty,empty,empty,empty,empty,
-        white_pawn1,white_pawn2,white_pawn3,white_pawn4,white_pawn5,white_pawn6,white_pawn7,white_pawn8,
-        white_rook,white_knight,white_bishop,white_queen,white_king,white_bishop2,white_knight2,white_rook2,
+        BLACK_ROOK,BLACK_KNIGHT,BLACK_BISHOP,BLACK_QUEEN,BLACK_KING,BLACK_BISHOP2,BLACK_KNIGHT2,BLACK_ROOK2,
+        BLACK_PAWN1,BLACK_PAWN2,BLACK_PAWN3,BLACK_PAWN4,BLACK_PAWN5,BLACK_PAWN6,BLACK_PAWN7,BLACK_PAWN8,
+        EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,
+        EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,
+        EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,
+        EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,
+        WHITE_PAWN1,WHITE_PAWN2,WHITE_PAWN3,WHITE_PAWN4,WHITE_PAWN5,WHITE_PAWN6,WHITE_PAWN7,WHITE_PAWN8,
+        WHITE_ROOK,WHITE_KNIGHT,WHITE_BISHOP,WHITE_QUEEN,WHITE_KING,WHITE_BISHOP2,WHITE_KNIGHT2,WHITE_ROOK2,
 };
 
 bool turn = true;
@@ -57,12 +53,12 @@ void print_chessboard(void) {
             c = !c;
         if (!j)
             printf("%d ", n--);
-        printf("%s", c == 1 ? WHT : BLK);
+        printf("%s", c == 1 ? WHITE_CASE_COLOR : BLACK_CASE_COLOR);
         if (chessboard[i] < 17)
             printf("%s ", pieces[chessboard[i]]);
         else
-            printf(WHT_PIECE"%s ", pieces[chessboard[i]]);
-        printf("\033[0m");
+            printf(WHITE_PIECE_COLOR"%s ", pieces[chessboard[i]]);
+        printf(DEFAULT_COLOR);
     }
 
     printf("\n  ");
@@ -85,6 +81,15 @@ void print_bitboard(void) {
     puts("");
 }
 
+void create_bitboard(char *current) {
+    for (size_t i = 0; i < 64; ++i) {
+        if (move_piece_validation(current, (char *) AN[i]) == 1)
+            bitboard[i] = 0;
+        else
+            bitboard[i] = 1;
+    }
+}
+
 int move_piece_validation(char *current, char *new) {
     int current_position = get_chessboard_position(current);
 
@@ -94,17 +99,9 @@ int move_piece_validation(char *current, char *new) {
     int new_position = get_chessboard_position(new);
 
     for (size_t j = 0; j < 64; ++j)
-        bitboard[j] = move_rules(current, AN[j]);
+        aux_bitboard[j] = move_rules(current, AN[j]);
 
-    int validation = bishop_validation(current, new);
-
-    if (validation == 1)
-        return 1;
-
-    if (validation != new_position && validation != 0)
-        return 1;
-
-    validation = rook_validation(current, new);
+    int validation = bishop_rule_validation(current, new);
 
     if (validation == 1)
         return 1;
@@ -112,7 +109,15 @@ int move_piece_validation(char *current, char *new) {
     if (validation != new_position && validation != 0)
         return 1;
 
-    if (!bitboard[new_position])
+    validation = rook_rule_validation(current, new);
+
+    if (validation == 1)
+        return 1;
+
+    if (validation != new_position && validation != 0)
+        return 1;
+
+    if (!aux_bitboard[new_position])
         return 1;
 
     if (turn) {
@@ -133,20 +138,20 @@ int move_piece_validation(char *current, char *new) {
 int move_piece(void) {
     char *current = (char *) malloc(2 * sizeof(char));
     char *new = (char *) malloc(2 * sizeof(char));
+
     printf("%s: ", turn ? "white" : "black");
     scanf(" %s %s", current, new);
 
     int current_position = get_chessboard_position(current);
     int new_position = get_chessboard_position(new);
 
-    int validation = move_piece_validation(current, new);
-    if (validation == 1) {
+    create_bitboard((char *) current);
+    if (bitboard[new_position] != 1) {
         printf("invalid move");
         return 1;
     }
-    else if (validation == 2) {
+    if (move_piece_validation(current, new) == 2)
         printf("white %s (%s) killed black %s (%s)\n", pieces[chessboard[current_position]], AN[current_position], pieces[chessboard[new_position]], AN[new_position]);
-    }
 
     chessboard[new_position] = chessboard[current_position];
     chessboard[current_position] = 0;
@@ -228,7 +233,7 @@ int generic_rule_verify(const char *current_algebraic_notation, const char *new_
     return 1;
 }
 
-int verify_validation(char *diagonal_algebraic_notation[], int current, int new) {
+int verify_move(char *diagonal_algebraic_notation[], int current, int new) {
     int k;
     if (current > new) {
         for (int j = current - 1; j >= new; --j) {
@@ -279,7 +284,7 @@ int verify_validation(char *diagonal_algebraic_notation[], int current, int new)
     return 0;
 }
 
-int bishop_validation(const char *current_algebraic_notation, const char *new_algebraic_notation) {
+int bishop_rule_validation(const char *current_algebraic_notation, const char *new_algebraic_notation) {
     int current_chessboard_position = get_chessboard_position(current_algebraic_notation);
     if (chessboard[current_chessboard_position] != 27 && chessboard[current_chessboard_position] != 30
     && chessboard[current_chessboard_position] != 3 && chessboard[current_chessboard_position] != 6
@@ -304,7 +309,7 @@ int bishop_validation(const char *current_algebraic_notation, const char *new_al
                     if ((j - i) < -8 || (j - i) > 8)
                         continue;
                     else
-                        return verify_validation(diagonal_algebraic_notation, i, j);
+                        return verify_move(diagonal_algebraic_notation, i, j);
                 }
             }
         }
@@ -312,7 +317,7 @@ int bishop_validation(const char *current_algebraic_notation, const char *new_al
     return 0;
 }
 
-int rook_validation(const char *current_algebraic_notation, const char *new_algebraic_notation) {
+int rook_rule_validation(const char *current_algebraic_notation, const char *new_algebraic_notation) {
     int current_chessboard_position = get_chessboard_position(current_algebraic_notation);
     if (chessboard[current_chessboard_position] != 25 && chessboard[current_chessboard_position] != 32
         && chessboard[current_chessboard_position] != 1 && chessboard[current_chessboard_position] != 8
@@ -337,7 +342,7 @@ int rook_validation(const char *current_algebraic_notation, const char *new_alge
                     if ((j - i) < -8 || (j - i) > 8)
                         continue;
                     else
-                        return verify_validation(vertical_and_horizontal_a_n, i, j);
+                        return verify_move(vertical_and_horizontal_a_n, i, j);
                 }
             }
         }

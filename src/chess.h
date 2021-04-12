@@ -1,6 +1,9 @@
 #ifndef CHESS_H
 #define CHESS_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <stdbool.h>
 
 #include "stack.h"
@@ -11,38 +14,52 @@
 #define CLEAR "cls"
 #endif
 
-#define WHT "\e[30;48;5;215m"
-#define BLK "\e[30;48;5;208m"
-#define WHT_PIECE "\e[1;37m"
+#define WHITE_CASE_COLOR "\e[30;48;5;215m"
+#define BLACK_CASE_COLOR "\e[30;48;5;208m"
+#define DEFAULT_COLOR "\033[0m"
+#define WHITE_PIECE_COLOR "\e[1;37m"
 
-enum pieces {empty,black_rook,black_knight,black_bishop,black_queen,black_king,black_bishop2,black_knight2,black_rook2,
-        black_pawn1,black_pawn2,black_pawn3,black_pawn4,black_pawn5,black_pawn6,black_pawn7,black_pawn8,
-        white_pawn1,white_pawn2,white_pawn3,white_pawn4,white_pawn5,white_pawn6,white_pawn7,white_pawn8,
-        white_rook,white_knight,white_bishop,white_queen,white_king,white_bishop2,white_knight2,white_rook2,};
+enum pieces {
+    EMPTY,BLACK_ROOK,BLACK_KNIGHT,BLACK_BISHOP,BLACK_QUEEN,BLACK_KING,BLACK_BISHOP2,BLACK_KNIGHT2,BLACK_ROOK2,
+    BLACK_PAWN1,BLACK_PAWN2,BLACK_PAWN3,BLACK_PAWN4,BLACK_PAWN5,BLACK_PAWN6,BLACK_PAWN7,BLACK_PAWN8,
+    WHITE_PAWN1,WHITE_PAWN2,WHITE_PAWN3,WHITE_PAWN4,WHITE_PAWN5,WHITE_PAWN6,WHITE_PAWN7,WHITE_PAWN8,
+    WHITE_ROOK,WHITE_KNIGHT,WHITE_BISHOP,WHITE_QUEEN,WHITE_KING,WHITE_BISHOP2,WHITE_KNIGHT2,WHITE_ROOK2,};
 
 const char *AN[64];
 const char *pieces[33];
 unsigned int chessboard[64];
-unsigned int bitboard[64];
+
+int bitboard[64];
+int aux_bitboard[64];
 
 bool turn;
 
 void print_chessboard(void);
 void print_bitboard(void);
+
 void back_stack(Stack *s);
+
+void create_bitboard(char *current);
+
 int move_piece(void);
+
+int get_chessboard_position(const char *piece_algebraic_notation);
+
 int move_piece_validation(char *current, char *new);
 int move_rules(const char *current_algebraic_notation, const char *new_algebraic_notation);
-int get_chessboard_position(const char *piece_algebraic_notation);
+
 int generic_rule_verify(const char *current_algebraic_notation, const char *new_algebraic_notation);
-int bishop_validation(const char *current_algebraic_notation, const char *new_algebraic_notation);
-int rook_validation(const char *current_algebraic_notation, const char *new_algebraic_notation);
-int verify_validation(char *diagonal_algebraic_notation[], int current, int new);
+
+int bishop_rule_validation(const char *current_algebraic_notation, const char *new_algebraic_notation);
+int rook_rule_validation(const char *current_algebraic_notation, const char *new_algebraic_notation);
+int verify_move(char *diagonal_algebraic_notation[], int current, int new);
+
 int white_pawn_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
 int white_bishop_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
 int white_knight_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
 int white_rook_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
 int white_king_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
+
 int black_pawn_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
 int black_bishop_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
 int black_knight_rule(const char *current_algebraic_notation, const char *new_algebraic_notation);
