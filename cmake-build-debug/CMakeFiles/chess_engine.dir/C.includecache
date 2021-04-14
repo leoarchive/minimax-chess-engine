@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.c
-chess.h
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
-
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
 stdio.h
 -
@@ -22,18 +18,6 @@ stdbool.h
 stack.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.h
 
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/main.c
-stdio.h
--
-stdlib.h
--
-time.h
--
-chess.h
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
-move.h
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h
-
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.c
 move.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h
@@ -45,10 +29,6 @@ stdlib.h
 -
 chess.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
-
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.c
-stack.h
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.h
 
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.h
 stdio.h

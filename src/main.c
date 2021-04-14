@@ -36,8 +36,18 @@ int main(void) {
             default:
                 continue;
         }
-        if (!turn)
-            move_generation();
+        if (!turn) {
+            pass_cb();
+            minimax(5);
+            if (best_piece) {
+                best_piece = minimax_best_piece;
+                best_position = minimax_best_move;
+                make_move();
+            }
+            else {
+                printf("error\n");
+            }
+        }
         //system(CLEAR);
         print_chessboard();
     }

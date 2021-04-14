@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 typedef struct node {
-    unsigned int *cb;
+    int *cb;
     struct node *next;
 }Node;
 
@@ -14,7 +14,7 @@ typedef struct stack {
 }Stack;
 
 Stack *create_stack(void);
-void push_stack(Stack *s, const unsigned int cb[]);
+void push_stack(Stack *s, int cb[]);
 void pull_stack(Stack *s);
 void output_stack(Stack *s);
 

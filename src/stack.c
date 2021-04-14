@@ -6,9 +6,9 @@ Stack *create_stack(void) {
     return s;
 }
 
-void push_stack(Stack *s, const unsigned int cb[]) {
+void push_stack(Stack *s, int cb[]) {
     Node *n = (Node *) malloc(sizeof(Node));
-    n->cb = (unsigned int *) malloc(64 * sizeof(unsigned int));
+    n->cb = (int *) malloc(64 * sizeof(int));
     for (size_t i = 0; i < 64; ++i)
         n->cb[i] = cb[i];
     n->next = s->top;

@@ -1,7 +1,7 @@
 #include "chess.h"
 
 #ifdef LINUX
-const char *pieces[] = {
+char *pieces[] = {
         " ",
         "♜","♞","♝","♛","♚","♝","♞","♜",
         "♟","♟","♟","♟","♟","♟","♟","♟",
@@ -9,7 +9,7 @@ const char *pieces[] = {
         "♖","♘","♗","♕","♔","♗","♘","♖"
 };
 #else
-const char *pieces[] = {
+char *pieces[] = {
         " ",
         "R","N","B","Q","K","B","N","R",
         "P","P","P","P","P","P","P","P",
@@ -18,7 +18,7 @@ const char *pieces[] = {
 };
 #endif
 
-const char *AN[] = {
+char *AN[] = {
         "a8","b8","c8","d8","e8","f8","g8","h8",
         "a7","b7","c7","d7","e7","f7","g7","h7",
         "a6","b6","c6","d6","e6","f6","g6","h6",
@@ -29,7 +29,7 @@ const char *AN[] = {
         "a1","b1","c1","d1","e1","f1","g1","h1"
 };
 
-unsigned int chessboard[] = {
+int chessboard[] = {
         BLACK_ROOK,BLACK_KNIGHT,BLACK_BISHOP,BLACK_QUEEN,BLACK_KING,BLACK_BISHOP2,BLACK_KNIGHT2,BLACK_ROOK2,
         BLACK_PAWN1,BLACK_PAWN2,BLACK_PAWN3,BLACK_PAWN4,BLACK_PAWN5,BLACK_PAWN6,BLACK_PAWN7,BLACK_PAWN8,
         EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,
@@ -91,12 +91,12 @@ void create_bitboard(char *current) {
 }
 
 int move_piece_validation(char *current, char *new) {
-    int current_position = get_chessboard_position(current);
+    int current_position = get_an_position(current);
 
     if (!chessboard[current_position])
         return 1;
 
-    int new_position = get_chessboard_position(new);
+    int new_position = get_an_position(new);
 
     for (size_t j = 0; j < 64; ++j)
         aux_bitboard[j] = move_rules(current, AN[j]);
@@ -142,8 +142,8 @@ int move_piece(void) {
     printf("%s: ", turn ? "white" : "black");
     scanf(" %s %s", current, new);
 
-    int current_position = get_chessboard_position(current);
-    int new_position = get_chessboard_position(new);
+    int current_position = get_an_position(current);
+    int new_position = get_an_position(new);
 
     create_bitboard((char *) current);
     if (bitboard[new_position] != 1) {
@@ -167,68 +167,68 @@ void back_stack(Stack *s) {
     turn = !turn;
 }
 
-int move_rules(const char *current_algebraic_notation, const char *new_algebraic_notation) {
-    if (!generic_rule_verify(current_algebraic_notation, new_algebraic_notation))
+int move_rules(char *c, char *n) {
+    if (!generic_rule_verify(c, n))
         return 0;
 
-    int current_chessboard_position = get_chessboard_position(current_algebraic_notation);
+    int current_chessboard_position = get_an_position(c);
 
     if (chessboard[current_chessboard_position] > 16 && chessboard[current_chessboard_position] < 25)
-        return white_pawn_rule(current_algebraic_notation, new_algebraic_notation);
+        return white_pawn_rule(c, n);
 
     if (chessboard[current_chessboard_position] == 27 || chessboard[current_chessboard_position] == 30)
-        return white_bishop_rule(current_algebraic_notation, new_algebraic_notation);
+        return white_bishop_rule(c, n);
 
     if (chessboard[current_chessboard_position] == 26 || chessboard[current_chessboard_position] == 31)
-        return white_knight_rule(current_algebraic_notation, new_algebraic_notation);
+        return white_knight_rule(c, n);
 
     if (chessboard[current_chessboard_position] == 25 || chessboard[current_chessboard_position] == 32)
-        return white_rook_rule(current_algebraic_notation, new_algebraic_notation);
+        return white_rook_rule(c, n);
 
     if (chessboard[current_chessboard_position] == 28) {
-        if (!white_rook_rule(current_algebraic_notation, new_algebraic_notation) &&
-            !white_bishop_rule(current_algebraic_notation, new_algebraic_notation))
+        if (!white_rook_rule(c, n) &&
+            !white_bishop_rule(c, n))
             return 0;
     }
 
     if (chessboard[current_chessboard_position] == 29)
-        return white_king_rule(current_algebraic_notation, new_algebraic_notation);
+        return white_king_rule(c, n);
 
     /* ----------------------------------------------------------------------------------------------- */
 
     if (chessboard[current_chessboard_position] > 8 && chessboard[current_chessboard_position] < 17)
-        return black_pawn_rule(current_algebraic_notation, new_algebraic_notation);
+        return black_pawn_rule(c, n);
 
     if (chessboard[current_chessboard_position] == 3 || chessboard[current_chessboard_position] == 6)
-        return black_bishop_rule(current_algebraic_notation, new_algebraic_notation);
+        return black_bishop_rule(c, n);
 
     if (chessboard[current_chessboard_position] == 2 || chessboard[current_chessboard_position] == 7)
-        return black_knight_rule(current_algebraic_notation, new_algebraic_notation);
+        return black_knight_rule(c, n);
 
     if (chessboard[current_chessboard_position] == 1 || chessboard[current_chessboard_position] == 8)
-        return black_rook_rule(current_algebraic_notation, new_algebraic_notation);
+        return black_rook_rule(c, n);
 
     if (chessboard[current_chessboard_position] == 4) {
-        if (!black_rook_rule(current_algebraic_notation, new_algebraic_notation) &&
-            !black_bishop_rule(current_algebraic_notation, new_algebraic_notation))
+        if (!black_rook_rule(c, n) &&
+            !black_bishop_rule(c, n))
             return 0;
     }
 
     if (chessboard[current_chessboard_position] == 5)
-        return black_king_rule(current_algebraic_notation, new_algebraic_notation);
+        return black_king_rule(c, n);
 
     return 1;
 }
 
-int get_chessboard_position(const char *piece_algebraic_notation) {
+int get_an_position(char *p) {
     for (int pos = 0; pos < 64; ++pos)
-        if (strcmp(AN[pos], piece_algebraic_notation) == 0)
+        if (strcmp(AN[pos], p) == 0)
             return pos;
     return 0;
 }
 
-int generic_rule_verify(const char *current_algebraic_notation, const char *new_algebraic_notation) {
-    if (strcmp(current_algebraic_notation, new_algebraic_notation) == 0)
+int generic_rule_verify(char *c, char *n) {
+    if (strcmp(c, n) == 0)
         return 0;
     return 1;
 }
@@ -284,8 +284,8 @@ int verify_move(char *diagonal_algebraic_notation[], int current, int new) {
     return 0;
 }
 
-int bishop_rule_validation(const char *current_algebraic_notation, const char *new_algebraic_notation) {
-    int current_chessboard_position = get_chessboard_position(current_algebraic_notation);
+int bishop_rule_validation(char *c, char *n) {
+    int current_chessboard_position = get_an_position(c);
     if (chessboard[current_chessboard_position] != 27 && chessboard[current_chessboard_position] != 30
     && chessboard[current_chessboard_position] != 3 && chessboard[current_chessboard_position] != 6
     && chessboard[current_chessboard_position] != 4 && chessboard[current_chessboard_position] != 28)
@@ -303,9 +303,9 @@ int bishop_rule_validation(const char *current_algebraic_notation, const char *n
     };
 
     for (int i = 0; i < 128; ++i) {
-        if (strcmp(diagonal_algebraic_notation[i], current_algebraic_notation) == 0) {
+        if (strcmp(diagonal_algebraic_notation[i], c) == 0) {
             for (int j = 0; j < 128; ++j) {
-                if (strcmp(diagonal_algebraic_notation[j], new_algebraic_notation) == 0) {
+                if (strcmp(diagonal_algebraic_notation[j], n) == 0) {
                     if ((j - i) < -8 || (j - i) > 8)
                         continue;
                     else
@@ -317,8 +317,8 @@ int bishop_rule_validation(const char *current_algebraic_notation, const char *n
     return 0;
 }
 
-int rook_rule_validation(const char *current_algebraic_notation, const char *new_algebraic_notation) {
-    int current_chessboard_position = get_chessboard_position(current_algebraic_notation);
+int rook_rule_validation(char *c, char *n) {
+    int current_chessboard_position = get_an_position(c);
     if (chessboard[current_chessboard_position] != 25 && chessboard[current_chessboard_position] != 32
         && chessboard[current_chessboard_position] != 1 && chessboard[current_chessboard_position] != 8
         && chessboard[current_chessboard_position] != 4 && chessboard[current_chessboard_position] != 28)
@@ -336,9 +336,9 @@ int rook_rule_validation(const char *current_algebraic_notation, const char *new
     };
 
     for (int i = 0; i < 128; ++i) {
-        if (strcmp(vertical_and_horizontal_a_n[i], current_algebraic_notation) == 0) {
+        if (strcmp(vertical_and_horizontal_a_n[i], c) == 0) {
             for (int j = 0; j < 128; ++j) {
-                if (strcmp(vertical_and_horizontal_a_n[j], new_algebraic_notation) == 0) {
+                if (strcmp(vertical_and_horizontal_a_n[j], n) == 0) {
                     if ((j - i) < -8 || (j - i) > 8)
                         continue;
                     else
@@ -350,22 +350,22 @@ int rook_rule_validation(const char *current_algebraic_notation, const char *new
     return 0;
 }
 
-int white_pawn_rule(const char *current_algebraic_notation, const char *new_algebraic_notation) {
+int white_pawn_rule(const char *c, char *n) {
     bool walk_two_houses = false;
-    if (current_algebraic_notation[1] == '2')
+    if (c[1] == '2')
         walk_two_houses = true;
 
-    int current_position_value = current_algebraic_notation[1] - '0';
-    int new_position_value = new_algebraic_notation[1] - '0';
+    int current_position_value = c[1] - '0';
+    int new_position_value = n[1] - '0';
 
-    int chessboard_position_value = get_chessboard_position(new_algebraic_notation);
+    int chessboard_position_value = get_an_position(n);
 
     if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0
-        && new_algebraic_notation[0] == current_algebraic_notation[0])
+        && n[0] == c[0])
         return 0;
 
     if (walk_two_houses) {
-        if (new_algebraic_notation[1] != '3' && new_algebraic_notation[1] != '4')
+        if (n[1] != '3' && n[1] != '4')
             return 0;
     }
     else {
@@ -373,9 +373,9 @@ int white_pawn_rule(const char *current_algebraic_notation, const char *new_alge
             return 0;
     }
 
-    if (new_algebraic_notation[0] != current_algebraic_notation[0]) {
-        if (new_algebraic_notation[0] != (current_algebraic_notation[0] + 1)
-            && new_algebraic_notation[0] != (current_algebraic_notation[0] - 1))
+    if (n[0] != c[0]) {
+        if (n[0] != (c[0] + 1)
+            && n[0] != (c[0] - 1))
             return 0;
 
         if (current_position_value == new_position_value)
@@ -397,32 +397,32 @@ int white_pawn_rule(const char *current_algebraic_notation, const char *new_alge
     return 1;
 }
 
-int white_bishop_rule(const char *current_algebraic_notation, const char *new_algebraic_notation) {
-    if (new_algebraic_notation[0] == current_algebraic_notation[0])
+int white_bishop_rule(const char *c, char *n) {
+    if (n[0] == c[0])
         return 0;
 
-    if (new_algebraic_notation[1] == current_algebraic_notation[1])
+    if (n[1] == c[1])
         return 0;
 
     int cont = 0;
     char letter;
-    if (new_algebraic_notation[0] > current_algebraic_notation[0]) {
-        letter = current_algebraic_notation[0];
-        while (letter++ != new_algebraic_notation[0])
+    if (n[0] > c[0]) {
+        letter = c[0];
+        while (letter++ != n[0])
             cont++;
     }
     else {
-        letter = current_algebraic_notation[0];
-        while (letter-- != new_algebraic_notation[0])
+        letter = c[0];
+        while (letter-- != n[0])
             cont++;
     }
 
-    int chessboard_position_value = get_chessboard_position(new_algebraic_notation);
+    int chessboard_position_value = get_an_position(n);
     if (chessboard[chessboard_position_value] > 16)
         return 0;
 
-    int current_position_value = current_algebraic_notation[1] - '0';
-    int new_position_value = new_algebraic_notation[1] - '0';
+    int current_position_value = c[1] - '0';
+    int new_position_value = n[1] - '0';
 
     if (new_position_value == (current_position_value + cont))
         return 1;
@@ -433,85 +433,85 @@ int white_bishop_rule(const char *current_algebraic_notation, const char *new_al
     return 0;
 }
 
-int white_knight_rule(const char *current_algebraic_notation, const char *new_algebraic_notation) {
-    int chessboard_position_value = get_chessboard_position(new_algebraic_notation);
+int white_knight_rule(const char *c, char *n) {
+    int chessboard_position_value = get_an_position(n);
     if (chessboard[chessboard_position_value] > 16)
         return 0;
 
-    int current_position_value = current_algebraic_notation[1] - '0';
-    int new_position_value = new_algebraic_notation[1] - '0';
+    int current_position_value = c[1] - '0';
+    int new_position_value = n[1] - '0';
 
-    if (new_position_value == (current_position_value + 2) && new_algebraic_notation[0] == (current_algebraic_notation[0] + 1))
+    if (new_position_value == (current_position_value + 2) && n[0] == (c[0] + 1))
         return 1;
 
-    if (new_position_value == (current_position_value + 2) && new_algebraic_notation[0] == (current_algebraic_notation[0] - 1))
+    if (new_position_value == (current_position_value + 2) && n[0] == (c[0] - 1))
         return 1;
 
-    if (new_position_value == (current_position_value - 2) && new_algebraic_notation[0] == (current_algebraic_notation[0] - 1))
+    if (new_position_value == (current_position_value - 2) && n[0] == (c[0] - 1))
         return 1;
 
-    if (new_position_value == (current_position_value - 2) && new_algebraic_notation[0] == (current_algebraic_notation[0] + 1))
+    if (new_position_value == (current_position_value - 2) && n[0] == (c[0] + 1))
         return 1;
 
-    if (new_algebraic_notation[0] == (current_algebraic_notation[0] + 2) && new_position_value == (current_position_value + 1))
+    if (n[0] == (c[0] + 2) && new_position_value == (current_position_value + 1))
         return 1;
 
-    if (new_algebraic_notation[0] == (current_algebraic_notation[0] + 2) && new_position_value == (current_position_value - 1))
+    if (n[0] == (c[0] + 2) && new_position_value == (current_position_value - 1))
         return 1;
 
-    if (new_algebraic_notation[0] == (current_algebraic_notation[0] - 2) && new_position_value == (current_position_value - 1))
+    if (n[0] == (c[0] - 2) && new_position_value == (current_position_value - 1))
         return 1;
 
-    if (new_algebraic_notation[0] == (current_algebraic_notation[0] - 2) && new_position_value == (current_position_value + 1))
+    if (n[0] == (c[0] - 2) && new_position_value == (current_position_value + 1))
         return 1;
 
     return 0;
 }
 
-int white_rook_rule(const char *current_algebraic_notation, const char *new_algebraic_notation) {
-    int chessboard_position_value = get_chessboard_position(new_algebraic_notation);
+int white_rook_rule(const char *c, char *n) {
+    int chessboard_position_value = get_an_position(n);
     if (chessboard[chessboard_position_value] > 16)
         return 0;
 
-    int current_position_value = current_algebraic_notation[1] - '0';
-    int new_position_value = new_algebraic_notation[1] - '0';
+    int current_position_value = c[1] - '0';
+    int new_position_value = n[1] - '0';
 
-    if (new_position_value != current_position_value && new_algebraic_notation[0] != current_algebraic_notation[0])
+    if (new_position_value != current_position_value && n[0] != c[0])
         return 0;
 
     return 1;
 }
 
-int white_king_rule(const char *current_algebraic_notation, const char *new_algebraic_notation) {
-    int chessboard_position_value = get_chessboard_position(new_algebraic_notation);
+int white_king_rule(const char *c, char *n) {
+    int chessboard_position_value = get_an_position(n);
     if (chessboard[chessboard_position_value] > 16)
         return 0;
 
-    int current_position_value = current_algebraic_notation[1] - '0';
-    int new_position_value = new_algebraic_notation[1] - '0';
+    int current_position_value = c[1] - '0';
+    int new_position_value = n[1] - '0';
 
-    if  (new_position_value == (current_position_value + 1) && new_algebraic_notation[0] == (current_algebraic_notation[0] + 1))
+    if  (new_position_value == (current_position_value + 1) && n[0] == (c[0] + 1))
         return 1;
 
-    if  (new_position_value == (current_position_value + 1) && new_algebraic_notation[0] == (current_algebraic_notation[0] - 1))
+    if  (new_position_value == (current_position_value + 1) && n[0] == (c[0] - 1))
         return 1;
 
-    if  (new_position_value == (current_position_value - 1) && new_algebraic_notation[0] == (current_algebraic_notation[0] - 1))
+    if  (new_position_value == (current_position_value - 1) && n[0] == (c[0] - 1))
         return 1;
 
-    if  (new_position_value == (current_position_value - 1) && new_algebraic_notation[0] == (current_algebraic_notation[0] + 1))
+    if  (new_position_value == (current_position_value - 1) && n[0] == (c[0] + 1))
         return 1;
 
-    if  (new_position_value == current_position_value && new_algebraic_notation[0] == (current_algebraic_notation[0] + 1))
+    if  (new_position_value == current_position_value && n[0] == (c[0] + 1))
         return 1;
 
-    if  (new_position_value == current_position_value && new_algebraic_notation[0] == (current_algebraic_notation[0] - 1))
+    if  (new_position_value == current_position_value && n[0] == (c[0] - 1))
         return 1;
 
-    if  (new_position_value == (current_position_value + 1) && new_algebraic_notation[0] == current_algebraic_notation[0])
+    if  (new_position_value == (current_position_value + 1) && n[0] == c[0])
         return 1;
 
-    if  (new_position_value == (current_position_value - 1) && new_algebraic_notation[0] == current_algebraic_notation[0])
+    if  (new_position_value == (current_position_value - 1) && n[0] == c[0])
         return 1;
 
     return 0;
@@ -519,21 +519,21 @@ int white_king_rule(const char *current_algebraic_notation, const char *new_alge
 
 /* -------------------------------------------------------------------------------------------------------- */
 
-int black_pawn_rule(const char *current_algebraic_notation, const char *new_algebraic_notation) {
+int black_pawn_rule(const char *c, char *n) {
     bool walk_two_houses = false;
-    if (current_algebraic_notation[1] == '7')
+    if (c[1] == '7')
         walk_two_houses = true;
 
-    int current_position_value = current_algebraic_notation[1] - '0';
-    int new_position_value = new_algebraic_notation[1] - '0';
+    int current_position_value = c[1] - '0';
+    int new_position_value = n[1] - '0';
 
-    int chessboard_position_value = get_chessboard_position(new_algebraic_notation);
+    int chessboard_position_value = get_an_position(n);
 
-    if (chessboard[chessboard_position_value] > 16 && new_algebraic_notation[0] == current_algebraic_notation[0])
+    if (chessboard[chessboard_position_value] > 16 && n[0] == c[0])
         return 0;
 
     if (walk_two_houses) {
-        if (new_algebraic_notation[1] != '6' && new_algebraic_notation[1] != '5')
+        if (n[1] != '6' && n[1] != '5')
             return 0;
     }
     else {
@@ -541,9 +541,9 @@ int black_pawn_rule(const char *current_algebraic_notation, const char *new_alge
             return 0;
     }
 
-    if (new_algebraic_notation[0] != current_algebraic_notation[0]) {
-        if (new_algebraic_notation[0] != (current_algebraic_notation[0] + 1)
-        && new_algebraic_notation[0] != (current_algebraic_notation[0] - 1))
+    if (n[0] != c[0]) {
+        if (n[0] != (c[0] + 1)
+        && n[0] != (c[0] - 1))
             return 0;
 
         if (current_position_value == new_position_value)
@@ -565,32 +565,32 @@ int black_pawn_rule(const char *current_algebraic_notation, const char *new_alge
     return 1;
 }
 
-int black_bishop_rule(const char *current_algebraic_notation, const char *new_algebraic_notation) {
-    if (new_algebraic_notation[0] == current_algebraic_notation[0])
+int black_bishop_rule(const char *c, char *n) {
+    if (n[0] == c[0])
         return 0;
 
-    if (new_algebraic_notation[1] == current_algebraic_notation[1])
+    if (n[1] == c[1])
         return 0;
 
     int cont = 0;
     char letter;
-    if (new_algebraic_notation[0] > current_algebraic_notation[0]) {
-        letter = current_algebraic_notation[0];
-        while (letter++ != new_algebraic_notation[0])
+    if (n[0] > c[0]) {
+        letter = c[0];
+        while (letter++ != n[0])
             cont++;
     }
     else {
-        letter = current_algebraic_notation[0];
-        while (letter-- != new_algebraic_notation[0])
+        letter = c[0];
+        while (letter-- != n[0])
             cont++;
     }
 
-    int chessboard_position_value = get_chessboard_position(new_algebraic_notation);
+    int chessboard_position_value = get_an_position(n);
     if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0)
         return 0;
 
-    int current_position_value = current_algebraic_notation[1] - '0';
-    int new_position_value = new_algebraic_notation[1] - '0';
+    int current_position_value = c[1] - '0';
+    int new_position_value = n[1] - '0';
 
     if (new_position_value == (current_position_value + cont))
         return 1;
@@ -601,85 +601,85 @@ int black_bishop_rule(const char *current_algebraic_notation, const char *new_al
     return 0;
 }
 
-int black_knight_rule(const char *current_algebraic_notation, const char *new_algebraic_notation) {
-    int chessboard_position_value = get_chessboard_position(new_algebraic_notation);
+int black_knight_rule(const char *c, char *n) {
+    int chessboard_position_value = get_an_position(n);
     if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0)
         return 0;
 
-    int current_position_value = current_algebraic_notation[1] - '0';
-    int new_position_value = new_algebraic_notation[1] - '0';
+    int current_position_value = c[1] - '0';
+    int new_position_value = n[1] - '0';
 
-    if (new_position_value == (current_position_value + 2) && new_algebraic_notation[0] == (current_algebraic_notation[0] + 1))
+    if (new_position_value == (current_position_value + 2) && n[0] == (c[0] + 1))
         return 1;
 
-    if (new_position_value == (current_position_value + 2) && new_algebraic_notation[0] == (current_algebraic_notation[0] - 1))
+    if (new_position_value == (current_position_value + 2) && n[0] == (c[0] - 1))
         return 1;
 
-    if (new_position_value == (current_position_value - 2) && new_algebraic_notation[0] == (current_algebraic_notation[0] - 1))
+    if (new_position_value == (current_position_value - 2) && n[0] == (c[0] - 1))
         return 1;
 
-    if (new_position_value == (current_position_value - 2) && new_algebraic_notation[0] == (current_algebraic_notation[0] + 1))
+    if (new_position_value == (current_position_value - 2) && n[0] == (c[0] + 1))
         return 1;
 
-    if (new_algebraic_notation[0] == (current_algebraic_notation[0] + 2) && new_position_value == (current_position_value + 1))
+    if (n[0] == (c[0] + 2) && new_position_value == (current_position_value + 1))
         return 1;
 
-    if (new_algebraic_notation[0] == (current_algebraic_notation[0] + 2) && new_position_value == (current_position_value - 1))
+    if (n[0] == (c[0] + 2) && new_position_value == (current_position_value - 1))
         return 1;
 
-    if (new_algebraic_notation[0] == (current_algebraic_notation[0] - 2) && new_position_value == (current_position_value - 1))
+    if (n[0] == (c[0] - 2) && new_position_value == (current_position_value - 1))
         return 1;
 
-    if (new_algebraic_notation[0] == (current_algebraic_notation[0] - 2) && new_position_value == (current_position_value + 1))
+    if (n[0] == (c[0] - 2) && new_position_value == (current_position_value + 1))
         return 1;
 
     return 0;
 }
 
-int black_rook_rule(const char *current_algebraic_notation, const char *new_algebraic_notation) {
-    int chessboard_position_value = get_chessboard_position(new_algebraic_notation);
+int black_rook_rule(const char *c, char *n) {
+    int chessboard_position_value = get_an_position(n);
     if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0)
         return 0;
 
-    int current_position_value = current_algebraic_notation[1] - '0';
-    int new_position_value = new_algebraic_notation[1] - '0';
+    int current_position_value = c[1] - '0';
+    int new_position_value = n[1] - '0';
 
-    if (new_position_value != current_position_value && new_algebraic_notation[0] != current_algebraic_notation[0])
+    if (new_position_value != current_position_value && n[0] != c[0])
         return 0;
 
     return 1;
 }
 
-int black_king_rule(const char *current_algebraic_notation, const char *new_algebraic_notation) {
-    int chessboard_position_value = get_chessboard_position(new_algebraic_notation);
+int black_king_rule(const char *c, char *n) {
+    int chessboard_position_value = get_an_position(n);
     if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0)
         return 0;
 
-    int current_position_value = current_algebraic_notation[1] - '0';
-    int new_position_value = new_algebraic_notation[1] - '0';
+    int current_position_value = c[1] - '0';
+    int new_position_value = n[1] - '0';
 
-    if  (new_position_value == (current_position_value + 1) && new_algebraic_notation[0] == (current_algebraic_notation[0] + 1))
+    if  (new_position_value == (current_position_value + 1) && n[0] == (c[0] + 1))
         return 1;
 
-    if  (new_position_value == (current_position_value + 1) && new_algebraic_notation[0] == (current_algebraic_notation[0] - 1))
+    if  (new_position_value == (current_position_value + 1) && n[0] == (c[0] - 1))
         return 1;
 
-    if  (new_position_value == (current_position_value - 1) && new_algebraic_notation[0] == (current_algebraic_notation[0] - 1))
+    if  (new_position_value == (current_position_value - 1) && n[0] == (c[0] - 1))
         return 1;
 
-    if  (new_position_value == (current_position_value - 1) && new_algebraic_notation[0] == (current_algebraic_notation[0] + 1))
+    if  (new_position_value == (current_position_value - 1) && n[0] == (c[0] + 1))
         return 1;
 
-    if  (new_position_value == current_position_value && new_algebraic_notation[0] == (current_algebraic_notation[0] + 1))
+    if  (new_position_value == current_position_value && n[0] == (c[0] + 1))
         return 1;
 
-    if  (new_position_value == current_position_value && new_algebraic_notation[0] == (current_algebraic_notation[0] - 1))
+    if  (new_position_value == current_position_value && n[0] == (c[0] - 1))
         return 1;
 
-    if  (new_position_value == (current_position_value + 1) && new_algebraic_notation[0] == current_algebraic_notation[0])
+    if  (new_position_value == (current_position_value + 1) && n[0] == c[0])
         return 1;
 
-    if  (new_position_value == (current_position_value - 1) && new_algebraic_notation[0] == current_algebraic_notation[0])
+    if  (new_position_value == (current_position_value - 1) && n[0] == c[0])
         return 1;
 
     return 0;
