@@ -4,6 +4,7 @@
 CMakeFiles/chess_engine.dir/src/chess.c.obj
  C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.c
  C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
+ C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h
  C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.h
 CMakeFiles/chess_engine.dir/src/main.c.obj
  C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h

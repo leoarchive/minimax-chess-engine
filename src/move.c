@@ -3,15 +3,6 @@
 int best_piece = 0;
 int best_position = 0;
 
-int acb[64];
-
-bool p = false;
-
-void pass_cb(void) {
-    for (int i = 0; i < 64; ++i)
-        acb[i] = chessboard[i];
-}
-
 void make_move(void) {
     int piece_position = get_cposition(best_piece);
     int validation = move_piece_validation((char *) AN[piece_position], (char *) AN[best_position]);
@@ -24,52 +15,6 @@ void make_move(void) {
     turn = !turn;
 }
 
-void make_move_acb(void) {
-    int piece_position = get_cposition(best_piece);
-    acb[best_position] = acb[piece_position];
-    acb[piece_position] = 0;
-}
-
-int cb_evaluation(void) {
-    int c = 0;
-    for (int i = 0; i < 64; ++i)
-        c += get_evaluation(acb[i]);
-    return c;
-}
-
-int minimax(int d) {
-    if (!d)
-        return cb_evaluation();
-    best_position_and_piece();
-    if (p) {
-        make_move_acb();
-        p = !p;
-        int evaluation = minimax(d - 1);
-        int max_evaluation = -INFINITY;
-        pass_cb();
-        if (evaluation > max_evaluation) {
-            max_evaluation = evaluation;
-            minimax_best_piece = best_piece;
-            minimax_best_move = best_position;
-            printf("(p) d => %d\nminimax_best_piece %d minimax_best_move %d evaluation %d\n", d, minimax_best_piece, minimax_best_move, evaluation);
-        }
-    }
-    else {
-        make_move_acb();
-        p = !p;
-        int evaluation = minimax(d - 1);
-        int min_evaluation = INFINITY;
-        pass_cb();
-        if (evaluation < min_evaluation) {
-            min_evaluation = evaluation;
-            minimax_best_piece = best_piece;
-            minimax_best_move = best_position;
-            printf("(!p) d => %d\nminimax_best_piece %d minimax_best_move %d evaluation %d\n", d, minimax_best_piece, minimax_best_move, evaluation);
-        }
-    }
-    return 0;
-}
-
 int move_generation(void) {
     best_position_and_piece();
     make_move();
@@ -77,55 +22,26 @@ int move_generation(void) {
 }
 
 void best_position_and_piece(void) {
-    int min, max;
-    if (p)
-        min = 17, max = 32;
-    else
-        min = 0, max = 16;
-
     int all_max_strength = 0;
-    int all_min_strength = 0;
-    for (int piece = min; piece <= max; ++piece) {
+    for (int piece = 0; piece <= 16; ++piece) {
         int piece_position = get_cposition(piece);
         create_bitboard(AN[piece_position]);
 
         int position = 0;
         int max_strength = 0;
-        int min_strength = 0;
         for (int i = 0; i < 64; ++i) {
             if (bitboard[i] == 1) {
-                if (p) {
-                    int position_strength = get_evaluation(chessboard[i]);
-                    if (position_strength < min_strength) {
-                        min_strength = position_strength;
-                        position = i;
-                    }
-                }
-                else {
-                    int position_strength = get_evaluation(chessboard[i]);
-                    if (position_strength > max_strength) {
-                        max_strength = position_strength;
-                        position = i;
-                    }
+                int position_strength = get_evaluation(chessboard[i]);
+                if (position_strength > max_strength) {
+                    max_strength = position_strength;
+                    position = i;
                 }
             }
         }
-
-        if (p) {
-            if (min_strength < all_min_strength) {
-                all_min_strength = min_strength;
-                best_piece = piece;
-                best_position = position;
-                printf("white\nbest_piece %s best_position %s\n", pieces[best_piece], AN[best_position]);
-            }
-        }
-        else {
-            if (max_strength > all_max_strength) {
-                all_max_strength = max_strength;
-                best_piece = piece;
-                best_position = position;
-                printf("black\nbest_piece %s best_position %s\n", pieces[best_piece], AN[best_position]);
-            }
+        if (max_strength > all_max_strength) {
+            all_max_strength = max_strength;
+            best_piece = piece;
+            best_position = position;
         }
     }
 
@@ -145,7 +61,6 @@ void aleatory_position(void) {
                 break;
             }
     } while (best_position == 0);
-    printf("aleatory\nbest_piece %s best_position %s\n", pieces[best_piece], AN[best_position]);
 }
 
 int get_cposition(int piece) {

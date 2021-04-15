@@ -3,7 +3,6 @@
 #include <time.h>
 
 #include "chess.h"
-#include "move.h"
 
 int main(void) {
     system(CLEAR);
@@ -36,18 +35,8 @@ int main(void) {
             default:
                 continue;
         }
-        if (!turn) {
-            pass_cb();
-            minimax(5);
-            if (best_piece) {
-                best_piece = minimax_best_piece;
-                best_position = minimax_best_move;
-                make_move();
-            }
-            else {
-                printf("error\n");
-            }
-        }
+        if (!turn)
+            move_generation();
         //system(CLEAR);
         print_chessboard();
     }

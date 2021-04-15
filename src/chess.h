@@ -7,6 +7,7 @@
 #include <stdbool.h>
 
 #include "stack.h"
+#include "move.h"
 
 #ifdef LINUX
 #define CLEAR "clear"
