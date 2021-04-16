@@ -4,6 +4,7 @@
 
 #include "chess.h"
 #include "validation.h"
+#include "bitboard.h"
 
 #if defined LINUX || defined __APPLE__
 char *pieces[] = {" ",
@@ -32,7 +33,7 @@ char *AN[] = {
         "a1","b1","c1","d1","e1","f1","g1","h1"
 };
 
-int chessboard[] = {
+int board[] = {
        1,2,3,4,5,6,7,8,
        9,10,11,12,13,14,15,16,
        0,0,0,0,0,0,0,0,
@@ -58,12 +59,12 @@ void print_chessboard(void) {
         }
         else
             c = !c;
-        printf("%s", c ? WHITE_CASE_COLOR : BLACK_CASE_COLOR);
-        if (chessboard[i] < 17)
-            printf("%s ", pieces[chessboard[i]]);
+        printf("%s", c ? WHITE : BLACK);
+        if (board[i] < 17)
+            printf("%s ", pieces[board[i]]);
         else
-            printf(WHITE_PIECE_COLOR"%s ", pieces[chessboard[i]]);
-        printf(DEFAULT_COLOR);
+            printf(WHITE_PIECE"%s ", pieces[board[i]]);
+        printf(DEFAULT);
     }
 
     printf("\n  ");
@@ -72,27 +73,6 @@ void print_chessboard(void) {
     while (l != 'i')
         printf("%c ", l++);
     puts("");
-}
-
-void print_bitboard(void) {
-    size_t j = 0;
-    for (size_t i = 0; i < 64; ++i, ++j) {
-        if (j == 8) {
-            j = 0;
-            puts("");
-        }
-        printf("%d ", bitboard[i]);
-    }
-    puts("");
-}
-
-void get_bitboard(char *f) {
-    for (size_t i = 0; i < 64; ++i) {
-        if (get_rules(f, AN[i]) == 1)
-            bitboard[i] = 1;
-        else
-            bitboard[i] = 0;
-    }
 }
 
 int move(void) {
@@ -105,26 +85,18 @@ int move(void) {
     int from_pos = get_position(from);
     int to_pos = get_position(to);
 
-    get_bitboard(from);
+    set_bitboard(from);
     if (!bitboard[to_pos]) {
         printf("invalid move");
         return 1;
     }
-    if (bitboard[to_pos] && chessboard[to_pos])
-        printf("white %s (%s) killed black %s (%s)\n", pieces[chessboard[from_pos]], AN[from_pos], pieces[chessboard[to_pos]], AN[to_pos]);
+    if (bitboard[to_pos] && board[to_pos])
+        printf("white %s (%s) killed black %s (%s)\n", pieces[board[from_pos]], AN[from_pos], pieces[board[to_pos]], AN[to_pos]);
 
-    chessboard[to_pos] = chessboard[from_pos];
-    chessboard[from_pos] = 0;
-    player = !player;
+    board[to_pos] = board[from_pos];
+    board[from_pos] = 0;
+    SWAP_TURN
     return 0;
-}
-
-void back(Stack *s) {
-    pull(s);
-    Node *w = s->top;
-    for (size_t i = 0; i < 64; ++i)
-        chessboard[i] = w->cb[i];
-    player = !player;
 }
 
 int get_rules(char *f, char *t) {
@@ -135,8 +107,8 @@ int get_rules(char *f, char *t) {
     to_value = t[1] - '0';
     from_char = f[0];
     to_char = t[0];
-    to_cb_pos = chessboard[get_position(t)];
-    int cb_pos = chessboard[get_position(f)];
+    to_cb_pos = board[get_position(t)];
+    int cb_pos = board[get_position(f)];
     if (!cb_pos)
         return 0;
 

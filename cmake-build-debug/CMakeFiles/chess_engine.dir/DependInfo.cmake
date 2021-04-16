@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "C:/Users/Leonardo/Documents/GitHub/chess-engine/src/bitboard.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/src/bitboard.c.obj"
   "C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/src/chess.c.obj"
   "C:/Users/Leonardo/Documents/GitHub/chess-engine/src/main.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/src/main.c.obj"
   "C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/src/move.c.obj"

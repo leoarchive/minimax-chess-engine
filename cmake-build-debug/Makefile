@@ -141,6 +141,33 @@ chess_engine/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/build
 .PHONY : chess_engine/fast
 
+src/bitboard.obj: src/bitboard.c.obj
+
+.PHONY : src/bitboard.obj
+
+# target to build an object file
+src/bitboard.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/bitboard.c.obj
+.PHONY : src/bitboard.c.obj
+
+src/bitboard.i: src/bitboard.c.i
+
+.PHONY : src/bitboard.i
+
+# target to preprocess a source file
+src/bitboard.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/bitboard.c.i
+.PHONY : src/bitboard.c.i
+
+src/bitboard.s: src/bitboard.c.s
+
+.PHONY : src/bitboard.s
+
+# target to generate assembly for a file
+src/bitboard.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/bitboard.c.s
+.PHONY : src/bitboard.c.s
+
 src/chess.obj: src/chess.c.obj
 
 .PHONY : src/chess.obj
@@ -285,6 +312,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... chess_engine
+	@echo ... src/bitboard.obj
+	@echo ... src/bitboard.i
+	@echo ... src/bitboard.s
 	@echo ... src/chess.obj
 	@echo ... src/chess.i
 	@echo ... src/chess.s

@@ -6,6 +6,8 @@
 
 #IncludeRegexTransform: 
 
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/bitboard.h
+
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.c
 stdio.h
 -
@@ -17,20 +19,12 @@ chess.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
 validation.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/validation.h
+bitboard.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/bitboard.h
 
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
 stdbool.h
 -
-stack.h
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.h
-move.h
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h
-
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h
-chess.h
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
-
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.h
 
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/validation.h
 

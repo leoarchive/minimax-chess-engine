@@ -13,5 +13,6 @@ typedef struct stack {
 Stack *create(void);
 void push(Stack *s, const int *cb);
 void pull(Stack *s);
+void back(Stack *s);
 
 #endif

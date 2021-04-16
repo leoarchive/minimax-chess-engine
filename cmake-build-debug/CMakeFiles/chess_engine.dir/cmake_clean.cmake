@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/chess_engine.dir/src/bitboard.c.obj"
   "CMakeFiles/chess_engine.dir/src/chess.c.obj"
   "CMakeFiles/chess_engine.dir/src/main.c.obj"
   "CMakeFiles/chess_engine.dir/src/move.c.obj"

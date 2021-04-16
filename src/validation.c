@@ -32,18 +32,18 @@ int get_validation(char *v[], int c, int n) {
                 if (strcmp(AN[k], v[j]) == 0)
                     break;
             if (player) {
-                if (chessboard[k] > 16) {
+                if (board[k] > 16) {
                     return 1;
                 }
-                else if (chessboard[k] < 17 && chessboard[k]) {
+                else if (board[k] < 17 && board[k]) {
                     return k;
                 }
             }
             if (!player) {
-                if (chessboard[k] < 17 && chessboard[k]) {
+                if (board[k] < 17 && board[k]) {
                     return 1;
                 }
-                else if (chessboard[k] > 16) {
+                else if (board[k] > 16) {
                     return k;
                 }
             }
@@ -55,18 +55,18 @@ int get_validation(char *v[], int c, int n) {
                 if (!strcmp(AN[k], v[j]))
                     break;
             if (!player) {
-                if (chessboard[k] > 16) {
+                if (board[k] > 16) {
                     return 1;
                 }
-                else if (chessboard[k] < 17 && chessboard[k]) {
+                else if (board[k] < 17 && board[k]) {
                     return k;
                 }
             }
             if (player) {
-                if (chessboard[k] < 17 && chessboard[k]) {
+                if (board[k] < 17 && board[k]) {
                     return 1;
                 }
-                else if (chessboard[k] > 16) {
+                else if (board[k] > 16) {
                     return k;
                 }
             }

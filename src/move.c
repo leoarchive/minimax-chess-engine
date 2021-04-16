@@ -2,109 +2,112 @@
 #include <stdlib.h>
 
 #include "move.h"
+#include "chess.h"
+#include "bitboard.h"
 
-#define WHITE_STRENGTH_PAWN 10
-#define WHITE_STRENGTH_KNIGHT 30
-#define WHITE_STRENGTH_BISHOP 30
-#define WHITE_STRENGTH_ROOK 50
-#define WHITE_STRENGTH_QUEEN 90
-#define WHITE_STRENGTH_KING 900
+#define WHITE_PAWN_VAL 10
+#define WHITE_KNIGHT_VAL 30
+#define WHITE_BISHOP_VAL 30
+#define WHITE_ROOK_VAL 50
+#define WHITE_QUEEN_VAL 90
+#define WHITE_KING_VAL 900
 
-#define BLACK_STRENGTH_PAWN (-10)
-#define BLACK_STRENGTH_KNIGHT (-30)
-#define BLACK_STRENGTH_BISHOP (-30)
-#define BLACK_STRENGTH_ROOK (-50)
-#define BLACK_STRENGTH_QUEEN (-90)
-#define BLACK_STRENGTH_KING (-900)
+#define BLACK_PAWN_VAL (-10)
+#define BLACK_KNIGHT_VAL (-30)
+#define BLACK_BISHOP_VAL (-30)
+#define BLACK_ROOK_VAL (-50)
+#define BLACK_QUEEN_VAL (-90)
+#define BLACK_KING_VAL (-900)
 
-int best_piece = 0;
-int best_position = 0;
+int piece = 0;
+int position = 0;
 
-int make_move(void) {
-    int piece_pos = get_cposition(best_piece);
-    int pos_pos = get_cposition(best_position);
-    get_bitboard(AN[piece_pos]);
-    if (bitboard[piece_pos] && chessboard[piece_pos])
-        printf("black %s (%s) killed white %s (%s)\n", pieces[chessboard[piece_pos]], AN[piece_pos], pieces[chessboard[pos_pos]], AN[pos_pos]);
+int make(void) {
+    int piece_pos = get_chessboard(piece);
+    int pos_pos = get_chessboard(position);
 
-    chessboard[best_position] = chessboard[piece_pos];
-    chessboard[piece_pos] = 0;
-    player = !player;
-    best_piece = 0;
-    best_position = 0;
+    set_bitboard(AN[piece_pos]);
+    if (bitboard[piece_pos] && board[piece_pos])
+        printf("black %s (%s) killed white %s (%s)\n", pieces[board[piece_pos]], AN[piece_pos], pieces[board[pos_pos]], AN[pos_pos]);
+
+    board[position] = board[piece_pos];
+    board[piece_pos] = 0;
+    piece = 0;
+    position = 0;
+    SWAP_TURN
     return 0;
 }
 
-int move_generation(void) {
-    best_position_and_piece();
-    make_move();
+int generation(void) {
+    set_move();
+    make();
     return 0;
 }
 
-void best_position_and_piece(void) {
-    int all_max_strength = 0;
-    for (int piece = 0; piece <= 16; ++piece) {
-        int piece_position = get_cposition(piece);
-        get_bitboard(AN[piece_position]);
+void set_move(void) {
+    int all_max_val = 0;
+    for (int i = 0; i <= 16; ++i) {
+        int p_pos = get_chessboard(i);
+        set_bitboard(AN[p_pos]);
 
-        int position = 0;
-        int max_strength = 0;
-        for (int i = 0; i < 64; ++i) {
-            if (bitboard[i] == 1) {
-                int position_strength = get_evaluation(chessboard[i]);
-                if (position_strength > max_strength) {
-                    max_strength = position_strength;
-                    position = i;
+        int p = 0;
+        int max_val = 0;
+        for (int j = 0; j < 64; ++j) {
+            if (bitboard[j] == 1) {
+                int pos_val = get_evaluation(board[j]);
+                if (pos_val > max_val) {
+                    max_val = pos_val;
+                    p = j;
                 }
             }
         }
-        if (max_strength > all_max_strength) {
-            all_max_strength = max_strength;
-            best_piece = piece;
-            best_position = position;
+        if (max_val > all_max_val) {
+            all_max_val = max_val;
+            piece = i;
+            position = p;
         }
     }
 
-    if (!best_piece)
-        aleatory_position();
+    if (!piece)
+        set_aleatory();
 }
 
-void aleatory_position(void) {
+void set_aleatory(void) {
     do {
-        best_piece = rand() % 16;
-        if (!best_piece)
+        piece = rand() % 16;
+        if (!piece)
             continue;
-        get_bitboard(AN[get_cposition(best_piece)]);
+        set_bitboard(AN[get_chessboard(piece)]);
         for (int i = 0; i < 64; ++i)
             if (bitboard[i] == 1) {
-                best_position = i;
+                position = i;
                 break;
             }
-    } while (best_position == 0);
+    } while (!position);
 }
 
-int get_cposition(int piece) {
+int get_chessboard(int p) {
     for (int i = 0; i < 64; ++i)
-        if (chessboard[i] == piece)
+        if (board[i] == p)
             return i;
     return 0;
 }
 
-int get_evaluation(int piece) {
-    switch (piece) {
+int get_evaluation(int p) {
+    switch (p) {
         case 1:
         case 8:
-            return BLACK_STRENGTH_ROOK;
+            return BLACK_ROOK_VAL;
         case 2:
         case 7:
-            return BLACK_STRENGTH_KNIGHT;
+            return BLACK_KNIGHT_VAL;
         case 3:
         case 6:
-            return BLACK_STRENGTH_BISHOP;
+            return BLACK_BISHOP_VAL;
         case 4:
-            return BLACK_STRENGTH_QUEEN;
+            return BLACK_QUEEN_VAL;
         case 5:
-            return BLACK_STRENGTH_KING;
+            return BLACK_KING_VAL;
         case 9:
         case 10:
         case 11:
@@ -113,7 +116,7 @@ int get_evaluation(int piece) {
         case 14:
         case 15:
         case 16:
-            return BLACK_STRENGTH_PAWN;
+            return BLACK_PAWN_VAL;
         case 17:
         case 18:
         case 19:
@@ -122,20 +125,20 @@ int get_evaluation(int piece) {
         case 22:
         case 23:
         case 24:
-            return WHITE_STRENGTH_PAWN;
+            return WHITE_PAWN_VAL;
         case 25:
         case 32:
-            return WHITE_STRENGTH_ROOK;
+            return WHITE_ROOK_VAL;
         case 26:
         case 31:
-            return WHITE_STRENGTH_KNIGHT;
+            return WHITE_KNIGHT_VAL;
         case 27:
         case 30:
-            return WHITE_STRENGTH_BISHOP;
+            return WHITE_BISHOP_VAL;
         case 28:
-            return WHITE_STRENGTH_QUEEN;
+            return WHITE_QUEEN_VAL;
         case 29:
-            return WHITE_STRENGTH_KING;
+            return WHITE_KING_VAL;
         default:
             return 0;
     }

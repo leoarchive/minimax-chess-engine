@@ -1,6 +1,7 @@
 #include <stdlib.h>
 
 #include "stack.h"
+#include "chess.h"
 
 Stack *create(void) {
     Stack *s = (Stack *) malloc(sizeof(Stack));
@@ -20,4 +21,12 @@ void push(Stack *s, const int *cb) {
 void pull(Stack *s) {
     if (s->top->next)
         s->top = s->top->next;
+}
+
+void back(Stack *s) {
+    pull(s);
+    Node *w = s->top;
+    for (size_t i = 0; i < 64; ++i)
+        board[i] = w->cb[i];
+    SWAP_TURN
 }
