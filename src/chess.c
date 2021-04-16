@@ -100,7 +100,7 @@ int move(void) {
 }
 
 int get_rules(char *f, char *t) {
-    if (strcmp(f, t) == 0)
+    if (!strcmp(f, t))
         return 0;
 
     from_value = f[1] - '0';
@@ -144,7 +144,7 @@ int get_rules(char *f, char *t) {
 
 int get_position(char *p) {
     for (int i = 0; i < 64; ++i)
-        if (strcmp(AN[i], p) == 0)
+        if (!strcmp(AN[i], p))
             return i;
     return 0;
 }
@@ -215,7 +215,7 @@ int pawn(void) {
                 return 0;
         }
 
-        if (to_cb_pos == 0)
+        if (!to_cb_pos)
             return 0;
     }
     return 1;

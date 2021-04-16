@@ -53,7 +53,7 @@ void set_move(void) {
         int p = 0;
         int max_val = 0;
         for (int j = 0; j < 64; ++j) {
-            if (bitboard[j] == 1) {
+            if (bitboard[j]) {
                 int pos_val = get_evaluation(board[j]);
                 if (pos_val > max_val) {
                     max_val = pos_val;
@@ -79,7 +79,7 @@ void set_aleatory(void) {
             continue;
         set_bitboard(AN[get_chessboard(piece)]);
         for (int i = 0; i < 64; ++i)
-            if (bitboard[i] == 1) {
+            if (bitboard[i]) {
                 position = i;
                 break;
             }
