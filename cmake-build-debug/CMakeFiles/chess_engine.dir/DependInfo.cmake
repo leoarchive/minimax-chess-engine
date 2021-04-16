@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "C:/Users/Leonardo/Documents/GitHub/chess-engine/src/main.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/src/main.c.obj"
   "C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/src/move.c.obj"
   "C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/src/stack.c.obj"
+  "C:/Users/Leonardo/Documents/GitHub/chess-engine/src/validation.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/src/validation.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

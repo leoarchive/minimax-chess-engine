@@ -7,9 +7,9 @@
 int main(void) {
     system(CLEAR);
     srand(time(NULL));
-    Stack *s = create_stack();
+    Stack *s = create();
     print_chessboard();
-    push_stack(s, chessboard);
+    push(s, chessboard);
 
     char i;
     while (1) {
@@ -17,12 +17,12 @@ int main(void) {
         scanf(" %c", &i);
         switch (i) {
             case 'b':
-                back_stack(s);
+                back(s);
                 break;
             case 'm':
-                if (move_piece())
+                if (move())
                     continue;
-                push_stack(s, chessboard);
+                push(s, chessboard);
                 break;
             case 'h':
                 puts("https://github.com/leozamboni/dumb-chess-engine");
@@ -35,7 +35,7 @@ int main(void) {
             default:
                 continue;
         }
-        if (!turn)
+        if (!player)
             move_generation();
         //system(CLEAR);
         print_chessboard();

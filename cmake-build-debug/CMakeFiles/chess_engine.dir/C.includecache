@@ -7,16 +7,18 @@
 #IncludeRegexTransform: 
 
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.c
-chess.h
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
-
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
 stdio.h
 -
 stdlib.h
 -
 string.h
 -
+chess.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
+validation.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/validation.h
+
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
 stdbool.h
 -
 stack.h
@@ -24,31 +26,11 @@ C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.h
 move.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h
 
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/main.c
-stdio.h
--
-stdlib.h
--
-time.h
--
-chess.h
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
-
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.c
-move.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h
-
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h
-stdio.h
--
-stdlib.h
--
 chess.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
 
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.h
-stdio.h
--
-stdlib.h
--
+
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/validation.h
 

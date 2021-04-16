@@ -1,16 +1,19 @@
-#include "chess.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-#ifdef LINUX
-char *pieces[] = {
-        " ",
+#include "chess.h"
+#include "validation.h"
+
+#if defined LINUX || defined __APPLE__
+char *pieces[] = {" ",
         "♜","♞","♝","♛","♚","♝","♞","♜",
         "♟","♟","♟","♟","♟","♟","♟","♟",
         "♙","♙","♙","♙","♙","♙","♙","♙",
         "♖","♘","♗","♕","♔","♗","♘","♖"
 };
 #else
-char *pieces[] = {
-        " ",
+char *pieces[] = {" ",
         "R","N","B","Q","K","B","N","R",
         "P","P","P","P","P","P","P","P",
         "P","P","P","P","P","P","P","P",
@@ -30,30 +33,32 @@ char *AN[] = {
 };
 
 int chessboard[] = {
-        BLACK_ROOK,BLACK_KNIGHT,BLACK_BISHOP,BLACK_QUEEN,BLACK_KING,BLACK_BISHOP2,BLACK_KNIGHT2,BLACK_ROOK2,
-        BLACK_PAWN1,BLACK_PAWN2,BLACK_PAWN3,BLACK_PAWN4,BLACK_PAWN5,BLACK_PAWN6,BLACK_PAWN7,BLACK_PAWN8,
-        EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,
-        EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,
-        EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,
-        EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,
-        WHITE_PAWN1,WHITE_PAWN2,WHITE_PAWN3,WHITE_PAWN4,WHITE_PAWN5,WHITE_PAWN6,WHITE_PAWN7,WHITE_PAWN8,
-        WHITE_ROOK,WHITE_KNIGHT,WHITE_BISHOP,WHITE_QUEEN,WHITE_KING,WHITE_BISHOP2,WHITE_KNIGHT2,WHITE_ROOK2,
+       1,2,3,4,5,6,7,8,
+       9,10,11,12,13,14,15,16,
+       0,0,0,0,0,0,0,0,
+       0,0,0,0,0,0,0,0,
+       0,0,0,0,0,0,0,0,
+       0,0,0,0,0,0,0,0,
+       17,18,19,20,21,22,23,24,
+       25,26,27,28,29,30,31,32
 };
 
-bool turn = true;
+bool player = true;
 
 void print_chessboard(void) {
-    int j = 0, c = 0, n = 8;
+    int j = 0;
+    int n = 8;
+    bool c = false;
+    printf("%d ", n--);
     for (size_t i = 0; i < 64; ++i, ++j) {
         if (j == 8) {
             j = 0;
             puts("");
+            printf("%d ", n--);
         }
         else
             c = !c;
-        if (!j)
-            printf("%d ", n--);
-        printf("%s", c == 1 ? WHITE_CASE_COLOR : BLACK_CASE_COLOR);
+        printf("%s", c ? WHITE_CASE_COLOR : BLACK_CASE_COLOR);
         if (chessboard[i] < 17)
             printf("%s ", pieces[chessboard[i]]);
         else
@@ -81,605 +86,312 @@ void print_bitboard(void) {
     puts("");
 }
 
-void create_bitboard(char *current) {
+void get_bitboard(char *f) {
     for (size_t i = 0; i < 64; ++i) {
-        if (move_piece_validation(current, (char *) AN[i]) == 1)
-            bitboard[i] = 0;
-        else
+        if (get_rules(f, AN[i]) == 1)
             bitboard[i] = 1;
+        else
+            bitboard[i] = 0;
     }
 }
 
-int move_piece_validation(char *current, char *new) {
-    int current_position = get_an_position(current);
+int move(void) {
+    char *from = (char *) malloc(2 * sizeof(char));
+    char *to = (char *) malloc(2 * sizeof(char));
 
-    if (!chessboard[current_position])
-        return 1;
+    printf("%s: ", player ? "white" : "black");
+    scanf(" %s %s", from, to);
 
-    int new_position = get_an_position(new);
+    int from_pos = get_position(from);
+    int to_pos = get_position(to);
 
-    for (size_t j = 0; j < 64; ++j)
-        aux_bitboard[j] = move_rules(current, AN[j]);
-
-    int validation = bishop_rule_validation(current, new);
-
-    if (validation == 1)
-        return 1;
-
-    if (validation != new_position && validation != 0)
-        return 1;
-
-    validation = rook_rule_validation(current, new);
-
-    if (validation == 1)
-        return 1;
-
-    if (validation != new_position && validation != 0)
-        return 1;
-
-    if (!aux_bitboard[new_position])
-        return 1;
-
-    if (turn) {
-        if (chessboard[current_position] < 17)
-            return 1;
-    }
-    else {
-        if (chessboard[current_position] > 16)
-            return 1;
-    }
-
-    if (chessboard[new_position] != 0)
-        return 2;
-
-    return 0;
-}
-
-int move_piece(void) {
-    char *current = (char *) malloc(2 * sizeof(char));
-    char *new = (char *) malloc(2 * sizeof(char));
-
-    printf("%s: ", turn ? "white" : "black");
-    scanf(" %s %s", current, new);
-
-    int current_position = get_an_position(current);
-    int new_position = get_an_position(new);
-
-    create_bitboard((char *) current);
-    if (bitboard[new_position] != 1) {
+    get_bitboard(from);
+    if (!bitboard[to_pos]) {
         printf("invalid move");
         return 1;
     }
-    if (move_piece_validation(current, new) == 2)
-        printf("white %s (%s) killed black %s (%s)\n", pieces[chessboard[current_position]], AN[current_position], pieces[chessboard[new_position]], AN[new_position]);
+    if (bitboard[to_pos] && chessboard[to_pos])
+        printf("white %s (%s) killed black %s (%s)\n", pieces[chessboard[from_pos]], AN[from_pos], pieces[chessboard[to_pos]], AN[to_pos]);
 
-    chessboard[new_position] = chessboard[current_position];
-    chessboard[current_position] = 0;
-    turn = !turn;
+    chessboard[to_pos] = chessboard[from_pos];
+    chessboard[from_pos] = 0;
+    player = !player;
     return 0;
 }
 
-void back_stack(Stack *s) {
-    pull_stack(s);
+void back(Stack *s) {
+    pull(s);
     Node *w = s->top;
     for (size_t i = 0; i < 64; ++i)
         chessboard[i] = w->cb[i];
-    turn = !turn;
+    player = !player;
 }
 
-int move_rules(char *c, char *n) {
-    if (!generic_rule_verify(c, n))
+int get_rules(char *f, char *t) {
+    if (strcmp(f, t) == 0)
         return 0;
 
-    int current_chessboard_position = get_an_position(c);
+    from_value = f[1] - '0';
+    to_value = t[1] - '0';
+    from_char = f[0];
+    to_char = t[0];
+    to_cb_pos = chessboard[get_position(t)];
+    int cb_pos = chessboard[get_position(f)];
+    if (!cb_pos)
+        return 0;
 
-    if (chessboard[current_chessboard_position] > 16 && chessboard[current_chessboard_position] < 25)
-        return white_pawn_rule(c, n);
-
-    if (chessboard[current_chessboard_position] == 27 || chessboard[current_chessboard_position] == 30)
-        return white_bishop_rule(c, n);
-
-    if (chessboard[current_chessboard_position] == 26 || chessboard[current_chessboard_position] == 31)
-        return white_knight_rule(c, n);
-
-    if (chessboard[current_chessboard_position] == 25 || chessboard[current_chessboard_position] == 32)
-        return white_rook_rule(c, n);
-
-    if (chessboard[current_chessboard_position] == 28) {
-        if (!white_rook_rule(c, n) &&
-            !white_bishop_rule(c, n))
+    if (player) {
+        if (cb_pos < 17)
+            return 0;
+    }
+    else {
+        if (cb_pos > 16)
             return 0;
     }
 
-    if (chessboard[current_chessboard_position] == 29)
-        return white_king_rule(c, n);
+    if (cb_pos > 16 && cb_pos < 25 || cb_pos > 8 && cb_pos < 17)
+        return pawn();
 
-    /* ----------------------------------------------------------------------------------------------- */
+    if (cb_pos == 27 || cb_pos == 30 || cb_pos == 3 || cb_pos == 6)
+        return bishop(f, t);
 
-    if (chessboard[current_chessboard_position] > 8 && chessboard[current_chessboard_position] < 17)
-        return black_pawn_rule(c, n);
+    if (cb_pos == 26 || cb_pos == 31 || cb_pos == 2 || cb_pos == 7)
+        return knight();
 
-    if (chessboard[current_chessboard_position] == 3 || chessboard[current_chessboard_position] == 6)
-        return black_bishop_rule(c, n);
+    if (cb_pos == 25 || cb_pos == 32 || cb_pos == 1 || cb_pos == 8)
+        return rook(f, t);
 
-    if (chessboard[current_chessboard_position] == 2 || chessboard[current_chessboard_position] == 7)
-        return black_knight_rule(c, n);
+    if (cb_pos == 28 || cb_pos == 4)
+        return queen(f, t);
 
-    if (chessboard[current_chessboard_position] == 1 || chessboard[current_chessboard_position] == 8)
-        return black_rook_rule(c, n);
-
-    if (chessboard[current_chessboard_position] == 4) {
-        if (!black_rook_rule(c, n) &&
-            !black_bishop_rule(c, n))
-            return 0;
-    }
-
-    if (chessboard[current_chessboard_position] == 5)
-        return black_king_rule(c, n);
+    if (cb_pos == 29 || cb_pos == 5)
+        return king();
 
     return 1;
 }
 
-int get_an_position(char *p) {
-    for (int pos = 0; pos < 64; ++pos)
-        if (strcmp(AN[pos], p) == 0)
-            return pos;
+int get_position(char *p) {
+    for (int i = 0; i < 64; ++i)
+        if (strcmp(AN[i], p) == 0)
+            return i;
     return 0;
 }
 
-int generic_rule_verify(char *c, char *n) {
-    if (strcmp(c, n) == 0)
-        return 0;
-    return 1;
-}
+int pawn(void) {
+    bool two_square = false;
+    if (player) {
+        if (from_value == 2)
+            two_square = true;
 
-int verify_move(char *diagonal_algebraic_notation[], int current, int new) {
-    int k;
-    if (current > new) {
-        for (int j = current - 1; j >= new; --j) {
-            for (k = 0; k < 64; ++k)
-                if (strcmp(AN[k], diagonal_algebraic_notation[j]) == 0)
-                    break;
-            if (turn) {
-                if (chessboard[k] > 16) {
-                    return 1;
-                }
-                else if (chessboard[k] < 17 && chessboard[k] > 0) {
-                    return k;
-                }
-            }
-            if (!turn) {
-                if (chessboard[k] < 17 && chessboard[k] > 0) {
-                    return 1;
-                }
-                else if (chessboard[k] > 16) {
-                    return k;
-                }
-            }
+        if (to_cb_pos && to_cb_pos < 17 && to_char == from_char)
+            return 0;
+
+        if (to_value < from_value)
+            return 0;
+    }
+    else {
+        if (from_value == 7)
+            two_square = true;
+
+        if (to_cb_pos > 16 && to_char == from_char)
+            return 0;
+
+        if (to_value > from_value)
+            return 0;
+    }
+
+    if (two_square) {
+        if (player) {
+            if (to_value != 3 && to_value != 4)
+                return 0;
+        }
+        else {
+            if (to_value != 6 && to_value != 5)
+                return 0;
         }
     }
     else {
-        for (int j = current + 1; j <= new; ++j) {
-            for (k = 0; k < 64; ++k)
-                if (strcmp(AN[k], diagonal_algebraic_notation[j]) == 0)
-                    break;
-            if (!turn) {
-                if (chessboard[k] > 16) {
-                    return 1;
-                }
-                else if (chessboard[k] < 17 && chessboard[k] > 0) {
-                    return k;
-                }
-            }
-            if (turn) {
-                if (chessboard[k] < 17 && chessboard[k] > 0) {
-                    return 1;
-                }
-                else if (chessboard[k] > 16) {
-                    return k;
-                }
-            }
+        if (player) {
+            if (to_value > (from_value + 1))
+                return 0;
+        }
+        else {
+            if (to_value < (from_value - 1))
+                return 0;
         }
     }
-    return 0;
-}
 
-int bishop_rule_validation(char *c, char *n) {
-    int current_chessboard_position = get_an_position(c);
-    if (chessboard[current_chessboard_position] != 27 && chessboard[current_chessboard_position] != 30
-    && chessboard[current_chessboard_position] != 3 && chessboard[current_chessboard_position] != 6
-    && chessboard[current_chessboard_position] != 4 && chessboard[current_chessboard_position] != 28)
-        return 0;
+    if (to_char != from_char) {
+        if (to_char != (from_char + 1) && to_char != (from_char - 1))
+            return 0;
 
-    char *diagonal_algebraic_notation[] = {
-            "a8","b8","a7","c8","b7","a6","d8","c7", "b6","a5","e8","d7","c6","b5","a4","f8",
-            "e7","d6","c5","b4","a3","g8","f7","e6", "d5","c4","b3","a2","h8","g7","f6","e5",
-            "d4","c3","b2","a1","h7","g6","f5","e4", "d3","c2","b1","h6","g5","f4","e3","d2",
-            "c1","h5","g4","f3","e2","d1","h4","g3", "f2","e1","h3","g2","f1","h2","g1","h1",
-            "h8","g8","h7","f8","g7","h6","e8","f7", "g6","h5","d8","e7","f6","g5","h4","c8",
-            "d7","e6","f5","g4","h3","b8","c7","d6", "e5","f4","g3","h2","a8","b7","c6","d5",
-            "e4","f3","g2","h1","a7","b6","c5","d4", "e3","f2","g1","a6","b5","c4","d3","e2",
-            "f1","a5","b4","c3","d2","e1","a4","b3", "c2","d1","a3","b2","c1","a2","b1","a1"
-    };
+        if (from_value == to_value)
+            return 0;
 
-    for (int i = 0; i < 128; ++i) {
-        if (strcmp(diagonal_algebraic_notation[i], c) == 0) {
-            for (int j = 0; j < 128; ++j) {
-                if (strcmp(diagonal_algebraic_notation[j], n) == 0) {
-                    if ((j - i) < -8 || (j - i) > 8)
-                        continue;
-                    else
-                        return verify_move(diagonal_algebraic_notation, i, j);
-                }
-            }
+        if (player) {
+            if (to_cb_pos > 16)
+                return 0;
+
+            if (to_value > (from_value + 1))
+                return 0;
         }
-    }
-    return 0;
-}
+        else {
+            if (to_cb_pos && to_cb_pos < 17)
+                return 0;
 
-int rook_rule_validation(char *c, char *n) {
-    int current_chessboard_position = get_an_position(c);
-    if (chessboard[current_chessboard_position] != 25 && chessboard[current_chessboard_position] != 32
-        && chessboard[current_chessboard_position] != 1 && chessboard[current_chessboard_position] != 8
-        && chessboard[current_chessboard_position] != 4 && chessboard[current_chessboard_position] != 28)
-        return 0;
-
-    char *vertical_and_horizontal_a_n[] = {
-            "a8","b8","c8","d8","e8","f8","g8","h8", "a7","b7","c7","d7","e7","f7","g7","h7",
-            "a6","b6","c6","d6","e6","f6","g6","h6", "a5","b5","c5","d5","e5","f5","g5","h5",
-            "a4","b4","c4","d4","e4","f4","g4","h4", "a3","b3","c3","d3","e3","f3","g3","h3",
-            "a2","b2","c2","d2","e2","f2","g2","h2", "a1","b1","c1","d1","e1","f1","g1","h1",
-            "a8","a7","a6","a5","a4","a3","a2","a1", "b8","b7","b6","b5","b4","b3","b2","b1",
-            "c8","c7","c6","c5","c4","c3","c2","c1", "d8","d7","d6","d5","d4","d3","d2","d1",
-            "e8","e7","e6","e5","e4","e3","e2","e1", "f8","f7","f6","f5","f4","f3","f2","f1",
-            "g8","g7","g6","g5","g4","g3","g2","g1", "h8","h7","h6","h5","h4","h3","h2","h1",
-    };
-
-    for (int i = 0; i < 128; ++i) {
-        if (strcmp(vertical_and_horizontal_a_n[i], c) == 0) {
-            for (int j = 0; j < 128; ++j) {
-                if (strcmp(vertical_and_horizontal_a_n[j], n) == 0) {
-                    if ((j - i) < -8 || (j - i) > 8)
-                        continue;
-                    else
-                        return verify_move(vertical_and_horizontal_a_n, i, j);
-                }
-            }
+            if (to_value < (from_value - 1))
+                return 0;
         }
+
+        if (to_cb_pos == 0)
+            return 0;
     }
-    return 0;
+    return 1;
 }
 
-int white_pawn_rule(const char *c, char *n) {
-    bool walk_two_houses = false;
-    if (c[1] == '2')
-        walk_two_houses = true;
-
-    int current_position_value = c[1] - '0';
-    int new_position_value = n[1] - '0';
-
-    int chessboard_position_value = get_an_position(n);
-
-    if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0
-        && n[0] == c[0])
-        return 0;
-
-    if (walk_two_houses) {
-        if (n[1] != '3' && n[1] != '4')
+int bishop(char *f, char *t) {
+    if (player) {
+        if (to_cb_pos > 16)
             return 0;
     }
     else {
-        if (new_position_value > (current_position_value + 1))
+        if (to_cb_pos && to_cb_pos < 17)
             return 0;
     }
 
-    if (n[0] != c[0]) {
-        if (n[0] != (c[0] + 1)
-            && n[0] != (c[0] - 1))
-            return 0;
+    if (to_char == from_char)
+        return 0;
 
-        if (current_position_value == new_position_value)
-            return 0;
+    if (to_char == from_char)
+        return 0;
 
-        if (chessboard[chessboard_position_value] > 16)
-            return 0;
+    int v = validation(f, t, false);
+    int to_pos = get_position(t);
+    if (v == 1)
+        return 0;
+    if (v && v != to_pos)
+        return 0;
 
-        if (chessboard[chessboard_position_value] == 0)
-            return 0;
+    int c = 0;
+    char l;
+    if (to_char > from_char) {
+        l = from_char;
+        while (l++ != to_char)
+            c++;
+    }
+    else {
+        l = from_char;
+        while (l-- != to_char)
+            c++;
+    }
 
-        if (new_position_value > (current_position_value + 1))
+    if (to_value == (from_value + c))
+        return 1;
+
+    if (to_value == (from_value - c))
+        return 1;
+
+    return 0;
+}
+
+int knight(void) {
+    if (player) {
+        if (to_cb_pos > 16)
+            return 0;
+    }
+    else {
+        if (to_cb_pos && to_cb_pos < 17)
             return 0;
     }
 
-    if (new_position_value < current_position_value)
+    if (to_value == (from_value + 2) && to_char == (from_char + 1))
+        return 1;
+
+    if (to_value == (from_value + 2) && to_char == (from_char - 1))
+        return 1;
+
+    if (to_value == (from_value - 2) && to_char == (from_char - 1))
+        return 1;
+
+    if (to_value == (from_value - 2) && to_char == (from_char + 1))
+        return 1;
+
+    if (to_char == (from_char + 2) && to_value == (from_value + 1))
+        return 1;
+
+    if (to_char == (from_char + 2) && to_value == (from_value - 1))
+        return 1;
+
+    if (to_char == (from_char - 2) && to_value == (from_value - 1))
+        return 1;
+
+    if (to_char == (from_char - 2) && to_value == (from_value + 1))
+        return 1;
+
+    return 0;
+}
+
+int rook(char *f, char *t) {
+    if (player) {
+        if (to_cb_pos > 16)
+            return 0;
+    }
+    else {
+        if (to_cb_pos && to_cb_pos < 17)
+            return 0;
+    }
+
+    if (to_value != from_value && to_char != from_char)
+        return 0;
+
+    int v = validation(f, t, true);
+    int to_pos = get_position(t);
+    if (v == 1)
+        return 0;
+    if (v && v != to_pos)
         return 0;
 
     return 1;
 }
 
-int white_bishop_rule(const char *c, char *n) {
-    if (n[0] == c[0])
+int queen(char *f, char *t) {
+    if (!rook(f, t) && !bishop(f, t))
         return 0;
-
-    if (n[1] == c[1])
-        return 0;
-
-    int cont = 0;
-    char letter;
-    if (n[0] > c[0]) {
-        letter = c[0];
-        while (letter++ != n[0])
-            cont++;
-    }
-    else {
-        letter = c[0];
-        while (letter-- != n[0])
-            cont++;
-    }
-
-    int chessboard_position_value = get_an_position(n);
-    if (chessboard[chessboard_position_value] > 16)
-        return 0;
-
-    int current_position_value = c[1] - '0';
-    int new_position_value = n[1] - '0';
-
-    if (new_position_value == (current_position_value + cont))
-        return 1;
-
-    if (new_position_value == (current_position_value - cont))
-        return 1;
-
-    return 0;
-}
-
-int white_knight_rule(const char *c, char *n) {
-    int chessboard_position_value = get_an_position(n);
-    if (chessboard[chessboard_position_value] > 16)
-        return 0;
-
-    int current_position_value = c[1] - '0';
-    int new_position_value = n[1] - '0';
-
-    if (new_position_value == (current_position_value + 2) && n[0] == (c[0] + 1))
-        return 1;
-
-    if (new_position_value == (current_position_value + 2) && n[0] == (c[0] - 1))
-        return 1;
-
-    if (new_position_value == (current_position_value - 2) && n[0] == (c[0] - 1))
-        return 1;
-
-    if (new_position_value == (current_position_value - 2) && n[0] == (c[0] + 1))
-        return 1;
-
-    if (n[0] == (c[0] + 2) && new_position_value == (current_position_value + 1))
-        return 1;
-
-    if (n[0] == (c[0] + 2) && new_position_value == (current_position_value - 1))
-        return 1;
-
-    if (n[0] == (c[0] - 2) && new_position_value == (current_position_value - 1))
-        return 1;
-
-    if (n[0] == (c[0] - 2) && new_position_value == (current_position_value + 1))
-        return 1;
-
-    return 0;
-}
-
-int white_rook_rule(const char *c, char *n) {
-    int chessboard_position_value = get_an_position(n);
-    if (chessboard[chessboard_position_value] > 16)
-        return 0;
-
-    int current_position_value = c[1] - '0';
-    int new_position_value = n[1] - '0';
-
-    if (new_position_value != current_position_value && n[0] != c[0])
-        return 0;
-
     return 1;
 }
 
-int white_king_rule(const char *c, char *n) {
-    int chessboard_position_value = get_an_position(n);
-    if (chessboard[chessboard_position_value] > 16)
-        return 0;
-
-    int current_position_value = c[1] - '0';
-    int new_position_value = n[1] - '0';
-
-    if  (new_position_value == (current_position_value + 1) && n[0] == (c[0] + 1))
-        return 1;
-
-    if  (new_position_value == (current_position_value + 1) && n[0] == (c[0] - 1))
-        return 1;
-
-    if  (new_position_value == (current_position_value - 1) && n[0] == (c[0] - 1))
-        return 1;
-
-    if  (new_position_value == (current_position_value - 1) && n[0] == (c[0] + 1))
-        return 1;
-
-    if  (new_position_value == current_position_value && n[0] == (c[0] + 1))
-        return 1;
-
-    if  (new_position_value == current_position_value && n[0] == (c[0] - 1))
-        return 1;
-
-    if  (new_position_value == (current_position_value + 1) && n[0] == c[0])
-        return 1;
-
-    if  (new_position_value == (current_position_value - 1) && n[0] == c[0])
-        return 1;
-
-    return 0;
-}
-
-/* -------------------------------------------------------------------------------------------------------- */
-
-int black_pawn_rule(const char *c, char *n) {
-    bool walk_two_houses = false;
-    if (c[1] == '7')
-        walk_two_houses = true;
-
-    int current_position_value = c[1] - '0';
-    int new_position_value = n[1] - '0';
-
-    int chessboard_position_value = get_an_position(n);
-
-    if (chessboard[chessboard_position_value] > 16 && n[0] == c[0])
-        return 0;
-
-    if (walk_two_houses) {
-        if (n[1] != '6' && n[1] != '5')
+int king(void) {
+    if (player) {
+        if (to_cb_pos > 16)
             return 0;
     }
     else {
-        if (new_position_value < (current_position_value - 1))
+        if (to_cb_pos && to_cb_pos < 17)
             return 0;
     }
 
-    if (n[0] != c[0]) {
-        if (n[0] != (c[0] + 1)
-        && n[0] != (c[0] - 1))
-            return 0;
-
-        if (current_position_value == new_position_value)
-            return 0;
-
-        if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0)
-            return 0;
-
-        if (chessboard[chessboard_position_value] == 0)
-            return 0;
-
-        if (new_position_value < (current_position_value - 1))
-            return 0;
-    }
-
-    if (new_position_value > current_position_value)
-        return 0;
-
-    return 1;
-}
-
-int black_bishop_rule(const char *c, char *n) {
-    if (n[0] == c[0])
-        return 0;
-
-    if (n[1] == c[1])
-        return 0;
-
-    int cont = 0;
-    char letter;
-    if (n[0] > c[0]) {
-        letter = c[0];
-        while (letter++ != n[0])
-            cont++;
-    }
-    else {
-        letter = c[0];
-        while (letter-- != n[0])
-            cont++;
-    }
-
-    int chessboard_position_value = get_an_position(n);
-    if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0)
-        return 0;
-
-    int current_position_value = c[1] - '0';
-    int new_position_value = n[1] - '0';
-
-    if (new_position_value == (current_position_value + cont))
+    if  (to_value == (from_value + 1) && to_char == (from_char + 1))
         return 1;
 
-    if (new_position_value == (current_position_value - cont))
+    if  (to_value == (from_value + 1) && to_char == (from_char - 1))
         return 1;
 
-    return 0;
-}
-
-int black_knight_rule(const char *c, char *n) {
-    int chessboard_position_value = get_an_position(n);
-    if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0)
-        return 0;
-
-    int current_position_value = c[1] - '0';
-    int new_position_value = n[1] - '0';
-
-    if (new_position_value == (current_position_value + 2) && n[0] == (c[0] + 1))
+    if  (to_value == (from_value - 1) && to_char == (from_char - 1))
         return 1;
 
-    if (new_position_value == (current_position_value + 2) && n[0] == (c[0] - 1))
+    if  (to_value == (from_value - 1) && to_char == (from_char + 1))
         return 1;
 
-    if (new_position_value == (current_position_value - 2) && n[0] == (c[0] - 1))
+    if  (to_value == from_value && to_char == (from_char + 1))
         return 1;
 
-    if (new_position_value == (current_position_value - 2) && n[0] == (c[0] + 1))
+    if  (to_value == from_value && to_char == (from_char - 1))
         return 1;
 
-    if (n[0] == (c[0] + 2) && new_position_value == (current_position_value + 1))
+    if  (to_value == (from_value + 1) && to_char == from_char)
         return 1;
 
-    if (n[0] == (c[0] + 2) && new_position_value == (current_position_value - 1))
-        return 1;
-
-    if (n[0] == (c[0] - 2) && new_position_value == (current_position_value - 1))
-        return 1;
-
-    if (n[0] == (c[0] - 2) && new_position_value == (current_position_value + 1))
-        return 1;
-
-    return 0;
-}
-
-int black_rook_rule(const char *c, char *n) {
-    int chessboard_position_value = get_an_position(n);
-    if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0)
-        return 0;
-
-    int current_position_value = c[1] - '0';
-    int new_position_value = n[1] - '0';
-
-    if (new_position_value != current_position_value && n[0] != c[0])
-        return 0;
-
-    return 1;
-}
-
-int black_king_rule(const char *c, char *n) {
-    int chessboard_position_value = get_an_position(n);
-    if (chessboard[chessboard_position_value] < 17 && chessboard[chessboard_position_value] > 0)
-        return 0;
-
-    int current_position_value = c[1] - '0';
-    int new_position_value = n[1] - '0';
-
-    if  (new_position_value == (current_position_value + 1) && n[0] == (c[0] + 1))
-        return 1;
-
-    if  (new_position_value == (current_position_value + 1) && n[0] == (c[0] - 1))
-        return 1;
-
-    if  (new_position_value == (current_position_value - 1) && n[0] == (c[0] - 1))
-        return 1;
-
-    if  (new_position_value == (current_position_value - 1) && n[0] == (c[0] + 1))
-        return 1;
-
-    if  (new_position_value == current_position_value && n[0] == (c[0] + 1))
-        return 1;
-
-    if  (new_position_value == current_position_value && n[0] == (c[0] - 1))
-        return 1;
-
-    if  (new_position_value == (current_position_value + 1) && n[0] == c[0])
-        return 1;
-
-    if  (new_position_value == (current_position_value - 1) && n[0] == c[0])
+    if  (to_value == (from_value - 1) && to_char == from_char)
         return 1;
 
     return 0;

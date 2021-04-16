@@ -249,6 +249,33 @@ src/stack.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/stack.c.s
 .PHONY : src/stack.c.s
 
+src/validation.obj: src/validation.c.obj
+
+.PHONY : src/validation.obj
+
+# target to build an object file
+src/validation.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/validation.c.obj
+.PHONY : src/validation.c.obj
+
+src/validation.i: src/validation.c.i
+
+.PHONY : src/validation.i
+
+# target to preprocess a source file
+src/validation.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/validation.c.i
+.PHONY : src/validation.c.i
+
+src/validation.s: src/validation.c.s
+
+.PHONY : src/validation.s
+
+# target to generate assembly for a file
+src/validation.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/validation.c.s
+.PHONY : src/validation.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -270,6 +297,9 @@ help:
 	@echo ... src/stack.obj
 	@echo ... src/stack.i
 	@echo ... src/stack.s
+	@echo ... src/validation.obj
+	@echo ... src/validation.i
+	@echo ... src/validation.s
 .PHONY : help
 
 

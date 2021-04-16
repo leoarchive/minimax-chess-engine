@@ -1,12 +1,14 @@
+#include <stdlib.h>
+
 #include "stack.h"
 
-Stack *create_stack(void) {
+Stack *create(void) {
     Stack *s = (Stack *) malloc(sizeof(Stack));
     s->top = NULL;
     return s;
 }
 
-void push_stack(Stack *s, int cb[]) {
+void push(Stack *s, const int *cb) {
     Node *n = (Node *) malloc(sizeof(Node));
     n->cb = (int *) malloc(64 * sizeof(int));
     for (size_t i = 0; i < 64; ++i)
@@ -15,23 +17,7 @@ void push_stack(Stack *s, int cb[]) {
     s->top = n;
 }
 
-void pull_stack(Stack *s) {
+void pull(Stack *s) {
     if (s->top->next)
         s->top = s->top->next;
-}
-
-void output_stack(Stack *s) {
-    Node *w = s->top;
-    int j = 0;
-    while (w) {
-        for (size_t i = 0; i < 64; ++i, ++j) {
-            if (j == 8) {
-                j = 0;
-                puts("");
-            }
-            printf("%d ", w->cb[i]);
-        }
-        puts("");
-        w = w->next;
-    }
 }

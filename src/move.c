@@ -1,18 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "move.h"
+
+#define WHITE_STRENGTH_PAWN 10
+#define WHITE_STRENGTH_KNIGHT 30
+#define WHITE_STRENGTH_BISHOP 30
+#define WHITE_STRENGTH_ROOK 50
+#define WHITE_STRENGTH_QUEEN 90
+#define WHITE_STRENGTH_KING 900
+
+#define BLACK_STRENGTH_PAWN (-10)
+#define BLACK_STRENGTH_KNIGHT (-30)
+#define BLACK_STRENGTH_BISHOP (-30)
+#define BLACK_STRENGTH_ROOK (-50)
+#define BLACK_STRENGTH_QUEEN (-90)
+#define BLACK_STRENGTH_KING (-900)
 
 int best_piece = 0;
 int best_position = 0;
 
-void make_move(void) {
-    int piece_position = get_cposition(best_piece);
-    int validation = move_piece_validation((char *) AN[piece_position], (char *) AN[best_position]);
-    if (validation == 2)
-        printf("black %s (%s) killed white %s (%s)\n", pieces[best_piece],  AN[piece_position], pieces[chessboard[best_position]], AN[best_position]);
-    chessboard[best_position] = chessboard[piece_position];
-    chessboard[piece_position] = 0;
+int make_move(void) {
+    int piece_pos = get_cposition(best_piece);
+    int pos_pos = get_cposition(best_position);
+    get_bitboard(AN[piece_pos]);
+    if (bitboard[piece_pos] && chessboard[piece_pos])
+        printf("black %s (%s) killed white %s (%s)\n", pieces[chessboard[piece_pos]], AN[piece_pos], pieces[chessboard[pos_pos]], AN[pos_pos]);
+
+    chessboard[best_position] = chessboard[piece_pos];
+    chessboard[piece_pos] = 0;
+    player = !player;
     best_piece = 0;
     best_position = 0;
-    turn = !turn;
+    return 0;
 }
 
 int move_generation(void) {
@@ -25,7 +45,7 @@ void best_position_and_piece(void) {
     int all_max_strength = 0;
     for (int piece = 0; piece <= 16; ++piece) {
         int piece_position = get_cposition(piece);
-        create_bitboard(AN[piece_position]);
+        get_bitboard(AN[piece_position]);
 
         int position = 0;
         int max_strength = 0;
@@ -54,9 +74,9 @@ void aleatory_position(void) {
         best_piece = rand() % 16;
         if (!best_piece)
             continue;
-        create_bitboard(AN[get_cposition(best_piece)]);
+        get_bitboard(AN[get_cposition(best_piece)]);
         for (int i = 0; i < 64; ++i)
-            if (bitboard[i]) {
+            if (bitboard[i] == 1) {
                 best_position = i;
                 break;
             }
