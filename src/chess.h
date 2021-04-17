@@ -9,11 +9,11 @@
 #define CLEAR "cls"
 #endif
 
-#define WHITE "\e[30;48;5;215m"
-#define BLACK "\e[30;48;5;208m"
-#define DEFAULT "\033[0m"
-#define WHITE_PIECE "\e[1;37m"
-
+#define W "\e[30;48;5;215m"
+#define B "\e[30;48;5;208m"
+#define WP "\e[1;97m"
+#define BP ""
+#define D "\033[0m"
 #define SWAP_TURN player = !player;
 
 int from_value;

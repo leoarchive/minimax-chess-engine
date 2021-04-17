@@ -12,8 +12,8 @@ Stack *create(void) {
 void push(Stack *s, const int *cb) {
     Node *n = (Node *) malloc(sizeof(Node));
     n->cb = (int *) malloc(64 * sizeof(int));
-    for (size_t i = 0; i < 64; ++i)
-        n->cb[i] = cb[i];
+    for (size_t k = 0; k < 64; ++k)
+        n->cb[k] = cb[k];
     n->next = s->top;
     s->top = n;
 }
@@ -26,7 +26,7 @@ void pull(Stack *s) {
 void back(Stack *s) {
     pull(s);
     Node *w = s->top;
-    for (size_t i = 0; i < 64; ++i)
-        board[i] = w->cb[i];
+    for (size_t k = 0; k < 64; ++k)
+        board[k] = w->cb[k];
     SWAP_TURN
 }

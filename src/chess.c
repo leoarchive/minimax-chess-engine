@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
 #include "chess.h"
 #include "validation.h"
@@ -34,45 +35,29 @@ char *AN[] = {
 };
 
 int board[] = {
-       1,2,3,4,5,6,7,8,
-       9,10,11,12,13,14,15,16,
-       0,0,0,0,0,0,0,0,
-       0,0,0,0,0,0,0,0,
-       0,0,0,0,0,0,0,0,
-       0,0,0,0,0,0,0,0,
-       17,18,19,20,21,22,23,24,
-       25,26,27,28,29,30,31,32
+        1,2,3,4,5,6,7,8,
+        9,10,11,12,13,14,15,16,
+        0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,
+        17,18,19,20,21,22,23,24,
+        25,26,27,28,29,30,31,32
 };
 
 bool player = true;
 
 void print_chessboard(void) {
-    int j = 0;
-    int n = 8;
+    int n = CHAR_BIT;
     bool c = false;
     printf("%d ", n--);
-    for (size_t i = 0; i < 64; ++i, ++j) {
-        if (j == 8) {
-            j = 0;
-            puts("");
-            printf("%d ", n--);
-        }
-        else
-            c = !c;
-        printf("%s", c ? WHITE : BLACK);
-        if (board[i] < 17)
-            printf("%s ", pieces[board[i]]);
-        else
-            printf(WHITE_PIECE"%s ", pieces[board[i]]);
-        printf(DEFAULT);
+    for (size_t i = 0, j = 0; i < 64; ++i, j = j == 8 ? 1 : j + 1, c = j != 8 ? !c : c) {
+        if (j == 8) printf("\n%d ", n--);
+        printf("%s%s%s "D, c ? B : W, board[i] < 17 ? BP : WP, pieces[board[i]]);
     }
-
     printf("\n  ");
-
-    char l = 'a';
-    while (l != 'i')
-        printf("%c ", l++);
-    puts("");
+    char l = 'a'; while (l != 'i') printf("%c ", l++);
+    puts(" ");
 }
 
 int move(void) {
