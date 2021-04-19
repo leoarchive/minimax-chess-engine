@@ -20,13 +20,15 @@ int from_value;
 int to_value;
 char from_char;
 char to_char;
-int to_cb_pos;
+int to_pos;
+int from_pos;
 
 char *AN[64];
 char *pieces[33];
 int board[64];
 
 bool player;
+
 void print_chessboard(size_t i, int n, bool c);
 void print_bitboard(void);
 

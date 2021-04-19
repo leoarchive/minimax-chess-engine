@@ -8,23 +8,23 @@
 
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/bitboard.h
 
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.c
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
+stdbool.h
+-
+
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.c
 stdio.h
 -
 stdlib.h
 -
 string.h
 -
+move.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h
 chess.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
-validation.h
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/validation.h
 bitboard.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/bitboard.h
 
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
-stdbool.h
--
-
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/validation.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h
 

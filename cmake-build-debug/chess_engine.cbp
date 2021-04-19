@@ -79,6 +79,9 @@
 		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/bitboard.c">
 			<Option target="chess_engine"/>
 		</Unit>
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/bitboard.h">
+			<Option target="chess_engine"/>
+		</Unit>
 		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.c">
 			<Option target="chess_engine"/>
 		</Unit>
