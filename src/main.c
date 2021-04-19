@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <limits.h>
 
 #include "chess.h"
 #include "stack.h"
@@ -11,7 +12,8 @@ int main(void) {
     system(CLEAR);
     srand(time(NULL));
     Stack *s = create();
-    print_chessboard();
+    print_chessboard(0, CHAR_BIT, false);
+    //print_chessboard();
     push(s, board);
 
     char i;
@@ -40,6 +42,6 @@ int main(void) {
         }
         if (!player)
             generation();
-        print_chessboard();
+        print_chessboard(0, CHAR_BIT, false);
     }
 }

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <limits.h>
 
 #include "chess.h"
 #include "validation.h"
@@ -47,17 +46,13 @@ int board[] = {
 
 bool player = true;
 
-void print_chessboard(void) {
-    int n = CHAR_BIT;
-    bool c = false;
-    printf("%d ", n--);
-    for (size_t i = 0, j = 0; i < 64; ++i, j = j == 8 ? 1 : j + 1, c = j != 8 ? !c : c) {
-        if (j == 8) printf("\n%d ", n--);
-        printf("%s%s%s "D, c ? B : W, board[i] < 17 ? BP : WP, pieces[board[i]]);
-    }
-    printf("\n  ");
-    char l = 'a'; while (l != 'i') printf("%c ", l++);
-    puts(" ");
+void print_chessboard(size_t i, int n, bool c) {
+    if (i == 64) { printf("\n  "); char l = 'a'; while (l != 'i') printf("%c ", l++); puts(""); return;}
+    else if (!i) printf("%d ", n--);
+    else if (!(i % 8)) printf("\n%d ", n--);
+    else c = !c;
+    printf("%s%s%s "D, c ? B : W, board[i] < 17 ? BP : WP, pieces[board[i]]);
+    print_chessboard(++i, n, c);
 }
 
 int move(void) {
@@ -67,19 +62,14 @@ int move(void) {
     printf("%s: ", player ? "white" : "black");
     scanf(" %s %s", from, to);
 
-    int from_pos = get_position(from);
-    int to_pos = get_position(to);
+    int from_pos = get_position(from), to_pos = get_position(to);
 
     set_bitboard(from);
-    if (!bitboard[to_pos]) {
-        printf("invalid move");
-        return 1;
-    }
+    if (!bitboard[to_pos]) { printf("invalid move"); return 1;}
     if (bitboard[to_pos] && board[to_pos])
         printf("white %s (%s) killed black %s (%s)\n", pieces[board[from_pos]], AN[from_pos], pieces[board[to_pos]], AN[to_pos]);
 
-    board[to_pos] = board[from_pos];
-    board[from_pos] = 0;
+    board[to_pos] = board[from_pos], board[from_pos] = 0;
     SWAP_TURN
     return 0;
 }

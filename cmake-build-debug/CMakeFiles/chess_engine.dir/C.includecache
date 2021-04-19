@@ -15,8 +15,6 @@ stdlib.h
 -
 string.h
 -
-limits.h
--
 chess.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
 validation.h

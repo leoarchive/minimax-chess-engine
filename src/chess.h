@@ -27,8 +27,7 @@ char *pieces[33];
 int board[64];
 
 bool player;
-
-void print_chessboard(void);
+void print_chessboard(size_t i, int n, bool c);
 void print_bitboard(void);
 
 int move(void);
