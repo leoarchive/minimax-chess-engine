@@ -40,8 +40,9 @@ int main(void) {
             default:
                 continue;
         }
-        if (!player)
-            generation();
+        if (!player) {
+            set_move2();
+        }
         print_chessboard(0, CHAR_BIT, false);
     }
 }

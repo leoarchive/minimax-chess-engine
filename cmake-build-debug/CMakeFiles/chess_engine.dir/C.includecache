@@ -19,12 +19,8 @@ stdlib.h
 -
 string.h
 -
-move.h
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h
 chess.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
 bitboard.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/bitboard.h
-
-C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h
 
