@@ -76,40 +76,43 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/bitboard.c">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/bitboard.c">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/bitboard.h">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/bitboard.h">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.c">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.c">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.h">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/main.c">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/main.c">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.c">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/move.c">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/move.h">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.c">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/stack.c">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/stack.h">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/stack.h">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/tables.c">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/tables.c">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/validation.c">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/tables.h">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/src/validation.h">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/validation.c">
+			<Option target="chess_engine"/>
+		</Unit>
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/validation.h">
 			<Option target="chess_engine"/>
 		</Unit>
 		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/CMakeLists.txt">

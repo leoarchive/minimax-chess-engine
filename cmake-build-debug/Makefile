@@ -141,194 +141,194 @@ chess_engine/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/build
 .PHONY : chess_engine/fast
 
-src/bitboard.obj: src/bitboard.c.obj
+bitboard.obj: bitboard.c.obj
 
-.PHONY : src/bitboard.obj
-
-# target to build an object file
-src/bitboard.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/bitboard.c.obj
-.PHONY : src/bitboard.c.obj
-
-src/bitboard.i: src/bitboard.c.i
-
-.PHONY : src/bitboard.i
-
-# target to preprocess a source file
-src/bitboard.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/bitboard.c.i
-.PHONY : src/bitboard.c.i
-
-src/bitboard.s: src/bitboard.c.s
-
-.PHONY : src/bitboard.s
-
-# target to generate assembly for a file
-src/bitboard.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/bitboard.c.s
-.PHONY : src/bitboard.c.s
-
-src/chess.obj: src/chess.c.obj
-
-.PHONY : src/chess.obj
+.PHONY : bitboard.obj
 
 # target to build an object file
-src/chess.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/chess.c.obj
-.PHONY : src/chess.c.obj
+bitboard.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/bitboard.c.obj
+.PHONY : bitboard.c.obj
 
-src/chess.i: src/chess.c.i
+bitboard.i: bitboard.c.i
 
-.PHONY : src/chess.i
+.PHONY : bitboard.i
 
 # target to preprocess a source file
-src/chess.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/chess.c.i
-.PHONY : src/chess.c.i
+bitboard.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/bitboard.c.i
+.PHONY : bitboard.c.i
 
-src/chess.s: src/chess.c.s
+bitboard.s: bitboard.c.s
 
-.PHONY : src/chess.s
+.PHONY : bitboard.s
 
 # target to generate assembly for a file
-src/chess.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/chess.c.s
-.PHONY : src/chess.c.s
+bitboard.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/bitboard.c.s
+.PHONY : bitboard.c.s
 
-src/main.obj: src/main.c.obj
+chess.obj: chess.c.obj
 
-.PHONY : src/main.obj
+.PHONY : chess.obj
 
 # target to build an object file
-src/main.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/main.c.obj
-.PHONY : src/main.c.obj
+chess.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/chess.c.obj
+.PHONY : chess.c.obj
 
-src/main.i: src/main.c.i
+chess.i: chess.c.i
 
-.PHONY : src/main.i
+.PHONY : chess.i
 
 # target to preprocess a source file
-src/main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/main.c.i
-.PHONY : src/main.c.i
+chess.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/chess.c.i
+.PHONY : chess.c.i
 
-src/main.s: src/main.c.s
+chess.s: chess.c.s
 
-.PHONY : src/main.s
+.PHONY : chess.s
 
 # target to generate assembly for a file
-src/main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/main.c.s
-.PHONY : src/main.c.s
+chess.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/chess.c.s
+.PHONY : chess.c.s
 
-src/move.obj: src/move.c.obj
+main.obj: main.c.obj
 
-.PHONY : src/move.obj
+.PHONY : main.obj
 
 # target to build an object file
-src/move.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/move.c.obj
-.PHONY : src/move.c.obj
+main.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/main.c.obj
+.PHONY : main.c.obj
 
-src/move.i: src/move.c.i
+main.i: main.c.i
 
-.PHONY : src/move.i
+.PHONY : main.i
 
 # target to preprocess a source file
-src/move.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/move.c.i
-.PHONY : src/move.c.i
+main.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/main.c.i
+.PHONY : main.c.i
 
-src/move.s: src/move.c.s
+main.s: main.c.s
 
-.PHONY : src/move.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-src/move.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/move.c.s
-.PHONY : src/move.c.s
+main.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/main.c.s
+.PHONY : main.c.s
 
-src/stack.obj: src/stack.c.obj
+move.obj: move.c.obj
 
-.PHONY : src/stack.obj
+.PHONY : move.obj
 
 # target to build an object file
-src/stack.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/stack.c.obj
-.PHONY : src/stack.c.obj
+move.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/move.c.obj
+.PHONY : move.c.obj
 
-src/stack.i: src/stack.c.i
+move.i: move.c.i
 
-.PHONY : src/stack.i
+.PHONY : move.i
 
 # target to preprocess a source file
-src/stack.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/stack.c.i
-.PHONY : src/stack.c.i
+move.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/move.c.i
+.PHONY : move.c.i
 
-src/stack.s: src/stack.c.s
+move.s: move.c.s
 
-.PHONY : src/stack.s
+.PHONY : move.s
 
 # target to generate assembly for a file
-src/stack.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/stack.c.s
-.PHONY : src/stack.c.s
+move.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/move.c.s
+.PHONY : move.c.s
 
-src/tables.obj: src/tables.c.obj
+stack.obj: stack.c.obj
 
-.PHONY : src/tables.obj
+.PHONY : stack.obj
 
 # target to build an object file
-src/tables.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/tables.c.obj
-.PHONY : src/tables.c.obj
+stack.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/stack.c.obj
+.PHONY : stack.c.obj
 
-src/tables.i: src/tables.c.i
+stack.i: stack.c.i
 
-.PHONY : src/tables.i
+.PHONY : stack.i
 
 # target to preprocess a source file
-src/tables.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/tables.c.i
-.PHONY : src/tables.c.i
+stack.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/stack.c.i
+.PHONY : stack.c.i
 
-src/tables.s: src/tables.c.s
+stack.s: stack.c.s
 
-.PHONY : src/tables.s
+.PHONY : stack.s
 
 # target to generate assembly for a file
-src/tables.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/tables.c.s
-.PHONY : src/tables.c.s
+stack.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/stack.c.s
+.PHONY : stack.c.s
 
-src/validation.obj: src/validation.c.obj
+tables.obj: tables.c.obj
 
-.PHONY : src/validation.obj
+.PHONY : tables.obj
 
 # target to build an object file
-src/validation.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/validation.c.obj
-.PHONY : src/validation.c.obj
+tables.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/tables.c.obj
+.PHONY : tables.c.obj
 
-src/validation.i: src/validation.c.i
+tables.i: tables.c.i
 
-.PHONY : src/validation.i
+.PHONY : tables.i
 
 # target to preprocess a source file
-src/validation.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/validation.c.i
-.PHONY : src/validation.c.i
+tables.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/tables.c.i
+.PHONY : tables.c.i
 
-src/validation.s: src/validation.c.s
+tables.s: tables.c.s
 
-.PHONY : src/validation.s
+.PHONY : tables.s
 
 # target to generate assembly for a file
-src/validation.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/validation.c.s
-.PHONY : src/validation.c.s
+tables.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/tables.c.s
+.PHONY : tables.c.s
+
+validation.obj: validation.c.obj
+
+.PHONY : validation.obj
+
+# target to build an object file
+validation.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/validation.c.obj
+.PHONY : validation.c.obj
+
+validation.i: validation.c.i
+
+.PHONY : validation.i
+
+# target to preprocess a source file
+validation.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/validation.c.i
+.PHONY : validation.c.i
+
+validation.s: validation.c.s
+
+.PHONY : validation.s
+
+# target to generate assembly for a file
+validation.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/validation.c.s
+.PHONY : validation.c.s
 
 # Help Target
 help:
@@ -339,27 +339,27 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... chess_engine
-	@echo ... src/bitboard.obj
-	@echo ... src/bitboard.i
-	@echo ... src/bitboard.s
-	@echo ... src/chess.obj
-	@echo ... src/chess.i
-	@echo ... src/chess.s
-	@echo ... src/main.obj
-	@echo ... src/main.i
-	@echo ... src/main.s
-	@echo ... src/move.obj
-	@echo ... src/move.i
-	@echo ... src/move.s
-	@echo ... src/stack.obj
-	@echo ... src/stack.i
-	@echo ... src/stack.s
-	@echo ... src/tables.obj
-	@echo ... src/tables.i
-	@echo ... src/tables.s
-	@echo ... src/validation.obj
-	@echo ... src/validation.i
-	@echo ... src/validation.s
+	@echo ... bitboard.obj
+	@echo ... bitboard.i
+	@echo ... bitboard.s
+	@echo ... chess.obj
+	@echo ... chess.i
+	@echo ... chess.s
+	@echo ... main.obj
+	@echo ... main.i
+	@echo ... main.s
+	@echo ... move.obj
+	@echo ... move.i
+	@echo ... move.s
+	@echo ... stack.obj
+	@echo ... stack.i
+	@echo ... stack.s
+	@echo ... tables.obj
+	@echo ... tables.i
+	@echo ... tables.s
+	@echo ... validation.obj
+	@echo ... validation.i
+	@echo ... validation.s
 .PHONY : help
 
 

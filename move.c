@@ -196,7 +196,6 @@ void set_move(void) {
                 pc = p;
                 ps = m;
             }
-            //printf("WHITE piece %s (%s) pos %s search %d\n", pieces[p], AN[get_chessboard(p)], AN[m], s);
         }
         else {
             if (s < min) {
@@ -204,13 +203,10 @@ void set_move(void) {
                 pc = p;
                 ps = m;
             }
-            //printf("BLACK piece %s (%s) pos %s search %d\n", pieces[p], AN[get_chessboard(p)], AN[m], s);
         }
         pass();
     }
-    //printf("BEST => piece %s search %d\n", pieces[pc], min);
     set_bitboard(AN[get_chessboard(pc)]);
-    //print_bitboard();
     int pcc = get_chessboard(pc);
     board[ps] = board[pcc];
     board[pcc] = 0;
