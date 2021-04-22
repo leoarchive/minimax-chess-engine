@@ -19,10 +19,14 @@ CMakeFiles/chess_engine.dir/src/main.c.obj: ../src/stack.h
 CMakeFiles/chess_engine.dir/src/move.c.obj: ../src/bitboard.h
 CMakeFiles/chess_engine.dir/src/move.c.obj: ../src/chess.h
 CMakeFiles/chess_engine.dir/src/move.c.obj: ../src/move.c
+CMakeFiles/chess_engine.dir/src/move.c.obj: ../src/move.h
+CMakeFiles/chess_engine.dir/src/move.c.obj: ../src/tables.h
 
 CMakeFiles/chess_engine.dir/src/stack.c.obj: ../src/chess.h
 CMakeFiles/chess_engine.dir/src/stack.c.obj: ../src/stack.c
 CMakeFiles/chess_engine.dir/src/stack.c.obj: ../src/stack.h
+
+CMakeFiles/chess_engine.dir/src/tables.c.obj: ../src/tables.c
 
 CMakeFiles/chess_engine.dir/src/validation.c.obj: ../src/chess.h
 CMakeFiles/chess_engine.dir/src/validation.c.obj: ../src/validation.c

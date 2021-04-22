@@ -92,12 +92,12 @@ clean: CMakeFiles/chess_engine.dir/clean
 CMakeFiles/chess_engine.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target chess_engine"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target chess_engine"
 .PHONY : CMakeFiles/chess_engine.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/chess_engine.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles 8
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/chess_engine.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/chess_engine.dir/rule

@@ -73,7 +73,7 @@ int validation(char *f, char *t, bool r) {
             if (strcmp(ver_and_hor[i], f) == 0) {
                 for (int j = 0; j < 128; ++j) {
                     if (strcmp(ver_and_hor[j], t) == 0) {
-                        if ((j - i) < -8 || (j - i) > 8)
+                        if ((j - i) < -9 || (j - i) > 9)
                             continue;
                         else
                             return get_validation(ver_and_hor, i, j);
@@ -87,7 +87,7 @@ int validation(char *f, char *t, bool r) {
             if (strcmp(diag[i], f) == 0) {
                 for (int j = 0; j < 128; ++j) {
                     if (strcmp(diag[j], t) == 0) {
-                        if ((j - i) < -8 || (j - i) > 8)
+                        if ((j - i) < -9 || (j - i) > 9)
                             continue;
                         else
                             return get_validation(diag, i, j);

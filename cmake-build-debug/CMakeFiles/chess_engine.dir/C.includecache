@@ -13,14 +13,18 @@ stdbool.h
 -
 
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.c
-stdio.h
--
 stdlib.h
--
-string.h
 -
 chess.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/chess.h
 bitboard.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/src/bitboard.h
+move.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h
+tables.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/tables.h
+
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/move.h
+
+C:/Users/Leonardo/Documents/GitHub/chess-engine/src/tables.h
 

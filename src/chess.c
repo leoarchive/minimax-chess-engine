@@ -110,7 +110,7 @@ int get_rules(char *f, char *t) {
             return 0;
     }
     else {
-        if (from_pos > 16 || to_pos && to_pos < 16)
+        if (from_pos > 16 || to_pos && to_pos < 17)
             return 0;
     }
 

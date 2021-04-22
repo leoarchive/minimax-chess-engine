@@ -276,6 +276,33 @@ src/stack.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/stack.c.s
 .PHONY : src/stack.c.s
 
+src/tables.obj: src/tables.c.obj
+
+.PHONY : src/tables.obj
+
+# target to build an object file
+src/tables.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/tables.c.obj
+.PHONY : src/tables.c.obj
+
+src/tables.i: src/tables.c.i
+
+.PHONY : src/tables.i
+
+# target to preprocess a source file
+src/tables.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/tables.c.i
+.PHONY : src/tables.c.i
+
+src/tables.s: src/tables.c.s
+
+.PHONY : src/tables.s
+
+# target to generate assembly for a file
+src/tables.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/src/tables.c.s
+.PHONY : src/tables.c.s
+
 src/validation.obj: src/validation.c.obj
 
 .PHONY : src/validation.obj
@@ -327,6 +354,9 @@ help:
 	@echo ... src/stack.obj
 	@echo ... src/stack.i
 	@echo ... src/stack.s
+	@echo ... src/tables.obj
+	@echo ... src/tables.i
+	@echo ... src/tables.s
 	@echo ... src/validation.obj
 	@echo ... src/validation.i
 	@echo ... src/validation.s
