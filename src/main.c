@@ -41,7 +41,7 @@ int main(void) {
                 continue;
         }
         if (!player) {
-            set_move2();
+            set_move();
         }
         print_chessboard(0, CHAR_BIT, false);
     }

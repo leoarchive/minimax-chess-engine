@@ -18,7 +18,7 @@
 #define BLACK_QUEEN (-90)
 #define BLACK_KING (-900)
 #define INF 99999
-#define DEPTH 2
+#define DEPTH 6
 int chessboard[64];
 
 void backup(void) {
@@ -42,21 +42,21 @@ int get_chessboard(int p) {
 int get_value(int p) {
     switch (p) {
         case 1:
-//        case 8: return BLACK_ROOK;
-//        case 2:
-//        case 7: return BLACK_KNIGHT;
-//        case 3:
-//        case 6: return BLACK_BISHOP;
-//        case 4: return BLACK_QUEEN;
-//        case 5: return BLACK_KING;
-//        case 9:
-//        case 10:
-//        case 11:
-//        case 12:
-//        case 13:
-//        case 14:
-//        case 15:
-//        case 16: return BLACK_PAWN;
+        case 8: return BLACK_ROOK;
+        case 2:
+        case 7: return BLACK_KNIGHT;
+        case 3:
+        case 6: return BLACK_BISHOP;
+        case 4: return BLACK_QUEEN;
+        case 5: return BLACK_KING;
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+        case 15:
+        case 16: return BLACK_PAWN;
         case 17:
         case 18:
         case 19:
@@ -78,23 +78,18 @@ int get_value(int p) {
 }
 
 int evaluate(void) {
-//    int white = 0;
-//    int black = 0;
-//    for (int i = 0; i < 64; ++i) {
-//        if (board[i] > 16)
-//            white += get_value(board[i]);
-//        else if (chessboard[i])
-//            black -= get_value(board[i]);
-//    }
-//    if (player)
-//        return white - black;
-//    else
-//        return black + white;
-    int a = 0;
+    int white = 0;
+    int black = 0;
     for (int i = 0; i < 64; ++i) {
-        a += get_value(board[i]);
+        if (board[i] > 16)
+            white += get_value(board[i]);
+        else if (board[i])
+            black -= get_value(board[i]);
     }
-    return a;
+    if (player)
+        return white - black;
+    else
+        return black + white;
 }
 
 int piece;
@@ -103,6 +98,7 @@ int pos;
 void get_move(void) {
     int min_value = 0;
     int max_value = 0;
+    bool not = true;
     int ini;
     int end;
     if (player)
@@ -115,10 +111,11 @@ void get_move(void) {
             if (bitboard[j]) {
                 int val = get_value(board[j]);
                 if (player) {
-                    if (val > min_value) {
+                    if (val < min_value) {
                         min_value = val;
                         piece = i;
                         pos = j;
+                        not = false;
                     }
                 }
                 else {
@@ -126,12 +123,13 @@ void get_move(void) {
                         max_value = val;
                         piece = i;
                         pos = j;
+                        not = false;
                     }
                 }
             }
         }
     }
-    if (!max_value || !min_value) {
+    if (not) {
          do {
              piece = -1;
              pos = 0;
@@ -169,7 +167,7 @@ int search(int d) {
     board[cbp] = 0;
     SWAP_TURN
     print_chessboard(0, 8, false);
-    //system("cls");
+    system("cls");
     return search(d - 1);
 }
 
@@ -177,14 +175,22 @@ void set_move(void) {
     backup();
     int pc, ps;
     int min = INF;
+    int max = -INF;
     for (int i = 0; i < 64; ++i) {
         int s = search(DEPTH);
-        //printf("piece %s (%s) pos %s search %d\n", pieces[p], AN[get_chessboard(p)], AN[m], s);
-        //print_chessboard(0, 8,  false);
-        if (s < min) {
-            min = s;
-            pc = p;
-            ps = m;
+        if (player) {
+            if (s > max) {
+                max = s;
+                pc = p;
+                ps = m;
+            }
+        }
+        else {
+            if (s < min) {
+                min = s;
+                pc = p;
+                ps = m;
+            }
         }
         pass();
     }
