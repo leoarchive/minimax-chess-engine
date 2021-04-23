@@ -101,22 +101,9 @@ CMakeFiles/chess_engine.dir/chess.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chess_engine.dir/chess.c.s"
 	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Leonardo\Documents\GitHub\chess-engine\chess.c -o CMakeFiles\chess_engine.dir\chess.c.s
 
-CMakeFiles/chess_engine.dir/stack.c.obj: CMakeFiles/chess_engine.dir/flags.make
-CMakeFiles/chess_engine.dir/stack.c.obj: ../stack.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/chess_engine.dir/stack.c.obj"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\chess_engine.dir\stack.c.obj -c C:\Users\Leonardo\Documents\GitHub\chess-engine\stack.c
-
-CMakeFiles/chess_engine.dir/stack.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chess_engine.dir/stack.c.i"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Leonardo\Documents\GitHub\chess-engine\stack.c > CMakeFiles\chess_engine.dir\stack.c.i
-
-CMakeFiles/chess_engine.dir/stack.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chess_engine.dir/stack.c.s"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Leonardo\Documents\GitHub\chess-engine\stack.c -o CMakeFiles\chess_engine.dir\stack.c.s
-
 CMakeFiles/chess_engine.dir/move.c.obj: CMakeFiles/chess_engine.dir/flags.make
 CMakeFiles/chess_engine.dir/move.c.obj: ../move.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/chess_engine.dir/move.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/chess_engine.dir/move.c.obj"
 	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\chess_engine.dir\move.c.obj -c C:\Users\Leonardo\Documents\GitHub\chess-engine\move.c
 
 CMakeFiles/chess_engine.dir/move.c.i: cmake_force
@@ -129,7 +116,7 @@ CMakeFiles/chess_engine.dir/move.c.s: cmake_force
 
 CMakeFiles/chess_engine.dir/bitboard.c.obj: CMakeFiles/chess_engine.dir/flags.make
 CMakeFiles/chess_engine.dir/bitboard.c.obj: ../bitboard.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/chess_engine.dir/bitboard.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/chess_engine.dir/bitboard.c.obj"
 	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\chess_engine.dir\bitboard.c.obj -c C:\Users\Leonardo\Documents\GitHub\chess-engine\bitboard.c
 
 CMakeFiles/chess_engine.dir/bitboard.c.i: cmake_force
@@ -142,7 +129,7 @@ CMakeFiles/chess_engine.dir/bitboard.c.s: cmake_force
 
 CMakeFiles/chess_engine.dir/validation.c.obj: CMakeFiles/chess_engine.dir/flags.make
 CMakeFiles/chess_engine.dir/validation.c.obj: ../validation.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/chess_engine.dir/validation.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/chess_engine.dir/validation.c.obj"
 	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\chess_engine.dir\validation.c.obj -c C:\Users\Leonardo\Documents\GitHub\chess-engine\validation.c
 
 CMakeFiles/chess_engine.dir/validation.c.i: cmake_force
@@ -155,7 +142,7 @@ CMakeFiles/chess_engine.dir/validation.c.s: cmake_force
 
 CMakeFiles/chess_engine.dir/tables.c.obj: CMakeFiles/chess_engine.dir/flags.make
 CMakeFiles/chess_engine.dir/tables.c.obj: ../tables.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/chess_engine.dir/tables.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/chess_engine.dir/tables.c.obj"
 	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\chess_engine.dir\tables.c.obj -c C:\Users\Leonardo\Documents\GitHub\chess-engine\tables.c
 
 CMakeFiles/chess_engine.dir/tables.c.i: cmake_force
@@ -170,7 +157,6 @@ CMakeFiles/chess_engine.dir/tables.c.s: cmake_force
 chess_engine_OBJECTS = \
 "CMakeFiles/chess_engine.dir/main.c.obj" \
 "CMakeFiles/chess_engine.dir/chess.c.obj" \
-"CMakeFiles/chess_engine.dir/stack.c.obj" \
 "CMakeFiles/chess_engine.dir/move.c.obj" \
 "CMakeFiles/chess_engine.dir/bitboard.c.obj" \
 "CMakeFiles/chess_engine.dir/validation.c.obj" \
@@ -181,7 +167,6 @@ chess_engine_EXTERNAL_OBJECTS =
 
 chess_engine.exe: CMakeFiles/chess_engine.dir/main.c.obj
 chess_engine.exe: CMakeFiles/chess_engine.dir/chess.c.obj
-chess_engine.exe: CMakeFiles/chess_engine.dir/stack.c.obj
 chess_engine.exe: CMakeFiles/chess_engine.dir/move.c.obj
 chess_engine.exe: CMakeFiles/chess_engine.dir/bitboard.c.obj
 chess_engine.exe: CMakeFiles/chess_engine.dir/validation.c.obj
@@ -190,7 +175,7 @@ chess_engine.exe: CMakeFiles/chess_engine.dir/build.make
 chess_engine.exe: CMakeFiles/chess_engine.dir/linklibs.rsp
 chess_engine.exe: CMakeFiles/chess_engine.dir/objects1.rsp
 chess_engine.exe: CMakeFiles/chess_engine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable chess_engine.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable chess_engine.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\chess_engine.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

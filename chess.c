@@ -22,8 +22,8 @@ char *pieces[] = {" ",
 };
 #endif
 
-#define WHITE_CAPTURE "white %s (%s) capture black %s (%s)\n", pieces[board[from_pos_m]], AN[from_pos_m], \
-            pieces[board[to_pos_m]], AN[to_pos_m]
+#define CAPTURE "%s %s (%s) capture %s %s (%s)\n", player ? "white" : "black", pieces[board[from_pos_m]], \
+        AN[from_pos_m], player ? "white" : "black", pieces[board[to_pos_m]], AN[to_pos_m]
 
 char *AN[] = {
         "a8","b8","c8","d8","e8","f8","g8","h8",
@@ -84,7 +84,7 @@ int move(void) {
         return 1;
     }
     else if (board[to_pos_m])
-        printf(WHITE_CAPTURE);
+        printf(CAPTURE);
 
     board[to_pos_m] = board[from_pos_m];
     board[from_pos_m] = 0;

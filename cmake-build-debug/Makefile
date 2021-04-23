@@ -249,33 +249,6 @@ move.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/move.c.s
 .PHONY : move.c.s
 
-stack.obj: stack.c.obj
-
-.PHONY : stack.obj
-
-# target to build an object file
-stack.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/stack.c.obj
-.PHONY : stack.c.obj
-
-stack.i: stack.c.i
-
-.PHONY : stack.i
-
-# target to preprocess a source file
-stack.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/stack.c.i
-.PHONY : stack.c.i
-
-stack.s: stack.c.s
-
-.PHONY : stack.s
-
-# target to generate assembly for a file
-stack.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/stack.c.s
-.PHONY : stack.c.s
-
 tables.obj: tables.c.obj
 
 .PHONY : tables.obj
@@ -351,9 +324,6 @@ help:
 	@echo ... move.obj
 	@echo ... move.i
 	@echo ... move.s
-	@echo ... stack.obj
-	@echo ... stack.i
-	@echo ... stack.s
 	@echo ... tables.obj
 	@echo ... tables.i
 	@echo ... tables.s

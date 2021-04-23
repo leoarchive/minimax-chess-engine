@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_CHECK_C
   "C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/chess.c.obj"
   "C:/Users/Leonardo/Documents/GitHub/chess-engine/main.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/main.c.obj"
   "C:/Users/Leonardo/Documents/GitHub/chess-engine/move.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/move.c.obj"
-  "C:/Users/Leonardo/Documents/GitHub/chess-engine/stack.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/stack.c.obj"
   "C:/Users/Leonardo/Documents/GitHub/chess-engine/tables.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/tables.c.obj"
   "C:/Users/Leonardo/Documents/GitHub/chess-engine/validation.c" "C:/Users/Leonardo/Documents/GitHub/chess-engine/cmake-build-debug/CMakeFiles/chess_engine.dir/validation.c.obj"
   )

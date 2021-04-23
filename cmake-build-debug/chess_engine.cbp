@@ -97,12 +97,6 @@
 		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/move.h">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/stack.c">
-			<Option target="chess_engine"/>
-		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/stack.h">
-			<Option target="chess_engine"/>
-		</Unit>
 		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/tables.c">
 			<Option target="chess_engine"/>
 		</Unit>

@@ -11,21 +11,15 @@ CMakeFiles/chess_engine.dir/chess.c.obj
  C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.h
  C:/Users/Leonardo/Documents/GitHub/chess-engine/validation.h
 CMakeFiles/chess_engine.dir/main.c.obj
- C:/Users/Leonardo/Documents/GitHub/chess-engine/bitboard.h
  C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.h
  C:/Users/Leonardo/Documents/GitHub/chess-engine/main.c
  C:/Users/Leonardo/Documents/GitHub/chess-engine/move.h
- C:/Users/Leonardo/Documents/GitHub/chess-engine/stack.h
 CMakeFiles/chess_engine.dir/move.c.obj
  C:/Users/Leonardo/Documents/GitHub/chess-engine/bitboard.h
  C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.h
  C:/Users/Leonardo/Documents/GitHub/chess-engine/move.c
  C:/Users/Leonardo/Documents/GitHub/chess-engine/move.h
  C:/Users/Leonardo/Documents/GitHub/chess-engine/tables.h
-CMakeFiles/chess_engine.dir/stack.c.obj
- C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.h
- C:/Users/Leonardo/Documents/GitHub/chess-engine/stack.c
- C:/Users/Leonardo/Documents/GitHub/chess-engine/stack.h
 CMakeFiles/chess_engine.dir/tables.c.obj
  C:/Users/Leonardo/Documents/GitHub/chess-engine/tables.c
 CMakeFiles/chess_engine.dir/validation.c.obj
