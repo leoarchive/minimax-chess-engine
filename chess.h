@@ -3,10 +3,13 @@
 
 #include <stdbool.h>
 
-#if defined LINUX || defined __APPLE__
+#if defined LINUX
 #define CLEAR "clear"
+#define WINOUTPUT
 #else
+#include <windows.h>
 #define CLEAR "cls"
+#define WINOUTPUT SetConsoleOutputCP(65001);
 #endif
 
 #define W "\e[30;48;5;215m"
@@ -15,6 +18,8 @@
 #define BP ""
 #define D "\033[0m"
 #define SWAP_TURN player = !player;
+#define color bool
+#define white true
 
 int from_value;
 int to_value;
@@ -30,7 +35,6 @@ int board[64];
 bool player;
 
 void print_chessboard(size_t i, int n, bool c);
-void print_bitboard(void);
 
 int move(void);
 

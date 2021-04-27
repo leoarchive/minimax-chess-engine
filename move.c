@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "chess.h"
@@ -50,18 +49,18 @@ int get_chessboard(int p) {
 }
 
 int evaluate(void) {
-    int white = 0;
-    int black = 0;
+    int wht = 0;
+    int blk = 0;
     for (int i = 0; i < 64; ++i) {
         if (board[i] > 16)
-            white += get_value(i, i);
+            wht += get_value(i, i);
         else if (board[i])
-            black -= get_value(i, i);
+            blk -= get_value(i, i);
     }
     if (player)
-        return white - black;
+        return wht - blk;
     else
-        return black + white;
+        return blk + wht;
 }
 
 void move_generation(void) {
@@ -89,6 +88,7 @@ void move_generation(void) {
         unmove();
     }
     int piece_value = get_chessboard(piece);
+    set_bitboard(AN[piece_value]);
     board[move] = board[piece_value];
     board[piece_value] = 0;
     SWAP_TURN

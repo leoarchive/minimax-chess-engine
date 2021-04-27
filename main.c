@@ -5,16 +5,21 @@
 
 #include "chess.h"
 #include "move.h"
+#include "bitboard.h"
 
 int main(void) {
+    WINOUTPUT
     system(CLEAR);
     srand(time(NULL));
 
+    print_chessboard(0, CHAR_BIT, false);
     while (1) {
-        print_chessboard(0, CHAR_BIT, false);
         puts("");
-        move();
+        if (move())
+            continue;
+        system(CLEAR);
         move_generation();
-        //system(CLEAR);
+        print_chessboard(0, CHAR_BIT, false);
+        print_bitboard();
     }
 }

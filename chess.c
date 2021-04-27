@@ -6,21 +6,12 @@
 #include "validation.h"
 #include "bitboard.h"
 
-#if defined LINUX || defined __APPLE__
 char *pieces[] = {" ",
         "♜","♞","♝","♛","♚","♝","♞","♜",
         "♟","♟","♟","♟","♟","♟","♟","♟",
         "♙","♙","♙","♙","♙","♙","♙","♙",
         "♖","♘","♗","♕","♔","♗","♘","♖"
 };
-#else
-char *pieces[] = {" ",
-        "R","N","B","Q","K","B","N","R",
-        "P","P","P","P","P","P","P","P",
-        "P","P","P","P","P","P","P","P",
-        "R","N","B","Q","K","B","N","R"
-};
-#endif
 
 #define CAPTURE "%s %s (%s) capture %s %s (%s)\n", player ? "white" : "black", pieces[board[from_pos_m]], \
         AN[from_pos_m], player ? "white" : "black", pieces[board[to_pos_m]], AN[to_pos_m]
@@ -47,7 +38,7 @@ int board[] = {
         25,26,27,28,29,30,31,32
 };
 
-bool player = true;
+color player = white;
 
 void print_chessboard(size_t i, int n, bool c) {
     if (i == 64) {
@@ -95,7 +86,6 @@ int move(void) {
 int get_rules(char *f, char *t) {
     if (!strcmp(f, t))
         return 0;
-
     from_value = f[1] - '0';
     to_value = t[1] - '0';
     from_char = f[0];
@@ -192,7 +182,7 @@ int pawn(void) {
 
 int bishop(char *f, char *t) {
     int v = validation(f, t, false);
-    if (to_char == from_char || v == 1 || v && v != to_pos)
+    if (to_char == from_char || v == 1 || v && v != get_position(t))
         return 0;
 
     int c = 0; char l;
@@ -227,7 +217,7 @@ int knight(void) {
 
 int rook(char *f, char *t) {
     int v = validation(f, t, true);
-    if (to_value != from_value && to_char != from_char || v == 1 || v && v != to_pos)
+    if (to_value != from_value && to_char != from_char || v == 1 || v && v != get_position(t))
         return 0;
     return 1;
 }
