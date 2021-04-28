@@ -20,6 +20,7 @@ int main(void) {
         system(CLEAR);
         move_generation();
         print_chessboard(0, CHAR_BIT, false);
-        print_bitboard();
+        //LIST_print();
+        //print_bitboard();
     }
 }

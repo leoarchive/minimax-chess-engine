@@ -14,21 +14,21 @@ stdbool.h
 windows.h
 -
 
-C:/Users/Leonardo/Documents/GitHub/chess-engine/main.c
-stdio.h
--
+C:/Users/Leonardo/Documents/GitHub/chess-engine/move.c
 stdlib.h
 -
-time.h
--
-limits.h
+stdio.h
 -
 chess.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.h
-move.h
-C:/Users/Leonardo/Documents/GitHub/chess-engine/move.h
 bitboard.h
 C:/Users/Leonardo/Documents/GitHub/chess-engine/bitboard.h
+move.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/move.h
+tables.h
+C:/Users/Leonardo/Documents/GitHub/chess-engine/tables.h
 
 C:/Users/Leonardo/Documents/GitHub/chess-engine/move.h
+
+C:/Users/Leonardo/Documents/GitHub/chess-engine/tables.h
 

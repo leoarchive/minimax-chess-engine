@@ -12,14 +12,19 @@
 #define WINOUTPUT SetConsoleOutputCP(65001);
 #endif
 
-#define W "\e[30;48;5;215m"
-#define B "\e[30;48;5;208m"
-#define WP "\e[1;97m"
-#define BP ""
-#define D "\033[0m"
+#define WHITEBG "\e[30;48;5;215m"
+#define BLACKBG "\e[30;48;5;208m"
+#define WHITEPC "\e[1;97m"
+#define BLACKPC ""
+#define DEFAULT "\033[0m"
 #define SWAP_TURN player = !player;
 #define color bool
 #define white true
+
+#define BLACKINIT 1
+#define BLACKEND 16
+#define WHITEINIT 17
+#define WHITEEND 32
 
 int from_value;
 int to_value;
@@ -32,9 +37,15 @@ char *AN[64];
 char *pieces[33];
 int board[64];
 
+int w_cap[32];
+int b_cap[32];
+int w_cnt;
+int b_cnt;
+
 bool player;
 
 void print_chessboard(size_t i, int n, bool c);
+void print_capture(void);
 
 int move(void);
 

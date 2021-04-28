@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "chess.h"
 #include "bitboard.h"
@@ -19,32 +20,44 @@
 #define BLACK_KING (-900)
 
 #define INF 99999
-#define DEPTH 8
+#define DEPTH 3
+#define TIMES 32
 
-int chessboard[64];
+typedef struct moves{
+    int from;
+    int to;
+}MOVE;
 
+int aux_board[64];
+int LIST[TIMES * 2];
+int EVAL[TIMES];
+int from_aux, to_aux;
+int cnt = 0;
+
+MOVE get_move(void);
 int get_value(int p, int s);
-void get_move(void);
 int evaluate(void);
-int search(int d);
-
-int piece_aux, move_aux;
 
 void save_board(void) {
     for (int i = 0; i < 64; ++i)
-        chessboard[i] = board[i];
+        aux_board[i] = board[i];
 }
 
 void unmove(void) {
     for (int i = 0; i < 64; ++i)
-        board[i] = chessboard[i];
+        board[i] = aux_board[i];
+}
+
+void make_move(int f, int t) {
+    board[t] = board[f];
+    board[f] = 0;
+    SWAP_TURN
 }
 
 int get_chessboard(int p) {
-    for (int i = 0; i < 64; ++i) {
+    for (int i = 0; i < 64; ++i)
         if (board[i] == p)
             return i;
-    }
     return 0;
 }
 
@@ -63,125 +76,165 @@ int evaluate(void) {
         return blk + wht;
 }
 
+int minimax(int d);
+void LIST_init(void);
+
 void move_generation(void) {
     save_board();
-    int piece, move;
+    LIST_init();
+    for (int i = 0; i < TIMES; ++i)
+        EVAL[i] = 0;
+    int from, to;
     int min = INF;
     int max = -INF;
-    int s;
-    for (int i = 0; i < 16; ++i) {
-        s = search(DEPTH);
+    int eval;
+    for (int i = 0; i < TIMES; ++i) {
+        eval = minimax(DEPTH);
+        EVAL[i] = eval;
         if (player) {
-            if (s > max) {
-                max = s;
-                piece = piece_aux;
-                move = move_aux;
+            if (eval > max) {
+                max = eval;
+                from = from_aux;
+                to = to_aux;
             }
         }
         else {
-            if (s < min) {
-                min = s;
-                piece = piece_aux;
-                move = move_aux;
+            if (eval < min) {
+                min = eval;
+                from = from_aux;
+                to = to_aux;
             }
         }
         unmove();
     }
-    int piece_value = get_chessboard(piece);
+    int piece_value = get_chessboard(from);
     set_bitboard(AN[piece_value]);
-    board[move] = board[piece_value];
-    board[piece_value] = 0;
-    SWAP_TURN
+    printf("black: %s %s\n", AN[piece_value], AN[to]);
+    if (board[to]) {
+        if (player)
+            w_cap[w_cnt++] = board[to];
+        else
+            b_cap[b_cnt++] = board[to];
+    }
+    print_capture();
+    make_move(piece_value, to);
 }
 
-int piece;
-int pos;
+void LIST_init(void) {
+    cnt = 0;
+    for (int i = 0; i < (TIMES * 2); ++i)
+        LIST[i] = 0;
+}
 
-int search(int d) {
+int LIST_verify(int f, int t) {
+    for (int i = 0; i < (TIMES * 2); i+=2)
+        if (LIST[i] == f && LIST[i+1] == t)
+            return 1;
+    return 0;
+}
+
+void LIST_print(void) {
+    int j = 0;
+    for (int i = 0; i < (TIMES * 2); i+=2, j++)
+        printf("[%d] from %s(%d) to %s eval %d\n", i, pieces[LIST[i]], LIST[i], AN[LIST[i+1]], EVAL[j]);
+}
+
+MOVE aleatory(int min_piece, int max_piece);
+
+int minimax(int d) {
     if (!d)
         return evaluate();
-    get_move();
-    int piece_val = get_chessboard(piece);
-    board[pos] = board[piece_val];
-    board[piece_val] = 0;
+    MOVE get;
+    get = get_move();
     if (d == DEPTH) {
-        piece_aux = piece;
-        move_aux = pos;
+        if (LIST_verify(get.from, get.to))
+            get = aleatory(BLACKINIT, BLACKEND);
+        from_aux = get.from,
+        to_aux = get.to,
+        LIST[cnt] = from_aux,
+        LIST[cnt + 1] = to_aux,
+        cnt += 2;
     }
-    print_chessboard(0, 8, false);
-    system(CLEAR);
-    SWAP_TURN
-    get_move();
-    piece_val = get_chessboard(piece);
-    board[pos] = board[piece_val];
-    board[piece_val] = 0;
-    print_chessboard(0, 8, false);
-    system(CLEAR);
-    SWAP_TURN
-    return search(d - 1);
+    make_move(get_chessboard(get.from), get.to);
+    //print_chessboard(0, 8, false);
+    //system(CLEAR);
+    get = get_move();
+    make_move(get_chessboard(get.from), get.to);
+    //print_chessboard(0, 8, false);
+    //system(CLEAR);
+    return minimax(d - 1);
 }
 
-void get_move(void) {
-    int min_value = 0;
-    int max_value = 0;
-    bool getend = true;
-    int ini;
-    int end;
+MOVE get_move(void) {
+    MOVE get;
+    int min = 0;
+    int max = 0;
+    int eval;
+    int min_piece;
+    int max_piece;
+    bool end = false;
     if (player)
-        ini = 17, end = 32;
+        min_piece = WHITEINIT,
+        max_piece = WHITEEND;
     else
-        ini = 0, end = 16;
-    for (int i = ini; i <= end; ++i) {
+        min_piece = BLACKINIT,
+        max_piece = BLACKEND;
+    for (int i = min_piece; i <= max_piece; ++i) {
         set_bitboard(AN[get_chessboard(i)]);
         for (int j = 0; j < 64; ++j) {
             if (bitboard[j]) {
-                int val = get_value(j, j);
+                eval = get_value(j, j);
                 if (player) {
-                    if (val < min_value) {
-                        min_value = val;
-                        piece = i;
-                        pos = j;
-                        getend = false;
-                    }
+                    if (eval < min)
+                        get.from = i,
+                        get.to = j,
+                        min = eval,
+                        end = true;
                 }
                 else {
-                    if (val > max_value) {
-                        max_value = val;
-                        piece = i;
-                        pos = j;
-                        getend = false;
-                    }
+                    if (eval > max)
+                        get.from = i,
+                        get.to = j,
+                        max = eval,
+                        end = true;
                 }
             }
         }
     }
-    if (getend) {
-         do {
-             piece = -1;
-             int pb_max = 0;
-             while (piece < ini)
-                 piece = rand() % end;
-             set_bitboard(AN[get_chessboard(piece)]);
-             for (int i = 0; i < 64; ++i) {
-                 if (bitboard[i]) {
-                     int pb = get_value(get_chessboard(piece), i);
-                     if (player) {
-                         if (pb > pb_max) {
-                             pb_max = pb;
-                             pos = i;
-                         }
-                     }
-                     else {
-                         if (pb < pb_max) {
-                             pb_max = pb;
-                             pos = i;
-                         }
-                     }
-                     getend = false;
-                 }
-             }
-         } while (getend);
-    }
+    if (!end)
+        return aleatory(min_piece, max_piece);
+    return get;
+}
+
+MOVE aleatory(int min_piece, int max_piece) {
+    MOVE get;
+    bool end = false;
+    int eval;
+    do {
+        int min = INF;
+        int max = -INF;
+        get.from = 0;
+        while (get.from < min_piece)
+            get.from = rand() % max_piece;
+        set_bitboard(AN[get_chessboard(get.from)]);
+        for (int i = 0; i < 64; ++i) {
+            if (bitboard[i]) {
+                eval = get_value(get_chessboard(get.from), i);
+                if (player) {
+                    if (eval > max)
+                        get.to = i,
+                        max = eval;
+                }
+                else {
+                    if (eval < min)
+                        get.to = i,
+                        min = eval;
+                }
+                end = true;
+            }
+        }
+    } while (!end);
+    return get;
 }
 
 int get_value(int p, int s) {

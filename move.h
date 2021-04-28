@@ -2,5 +2,6 @@
 #define MOVE_H
 
 void move_generation(void);
+void LIST_print(void);
 
 #endif

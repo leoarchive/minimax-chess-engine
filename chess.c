@@ -13,9 +13,6 @@ char *pieces[] = {" ",
         "♖","♘","♗","♕","♔","♗","♘","♖"
 };
 
-#define CAPTURE "%s %s (%s) capture %s %s (%s)\n", player ? "white" : "black", pieces[board[from_pos_m]], \
-        AN[from_pos_m], player ? "white" : "black", pieces[board[to_pos_m]], AN[to_pos_m]
-
 char *AN[] = {
         "a8","b8","c8","d8","e8","f8","g8","h8",
         "a7","b7","c7","d7","e7","f7","g7","h7",
@@ -39,6 +36,8 @@ int board[] = {
 };
 
 color player = white;
+int w_cnt = 0;
+int b_cnt = 0;
 
 void print_chessboard(size_t i, int n, bool c) {
     if (i == 64) {
@@ -46,7 +45,6 @@ void print_chessboard(size_t i, int n, bool c) {
         char l = 'a';
         while (l != 'i')
             printf("%c ", l++);
-        puts("");
         return;
     }
     else if (!i)
@@ -55,18 +53,19 @@ void print_chessboard(size_t i, int n, bool c) {
         printf("\n%d ", n--);
     else
         c = !c;
-    printf("%s%s%s "D, c ? B : W, board[i] < 17 ? BP : WP, pieces[board[i]]);
+    printf("%s%s%s "DEFAULT, c ? BLACKBG : WHITEBG, board[i] < 17 ? BLACKPC : WHITEPC, pieces[board[i]]);
     print_chessboard(++i, n, c);
 }
 
 int move(void) {
     char *from = (char *) malloc(2 * sizeof(char));
     char *to = (char *) malloc(2 * sizeof(char));
-
+    print_capture();
     printf("%s: ", player ? "white" : "black");
     scanf(" %s %s", from, to);
 
     set_bitboard(from);
+    //print_bitboard();
     int from_pos_m = get_position(from);
     int to_pos_m = get_position(to);
 
@@ -74,10 +73,14 @@ int move(void) {
         printf("invalid move");
         return 1;
     }
-    else if (board[to_pos_m])
-        printf(CAPTURE);
+    else if (board[to_pos_m]) {
+        if (player)
+            w_cap[w_cnt++] = board[to_pos_m];
+        else
+            b_cap[b_cnt++] = board[to_pos_m];
+    }
 
-    board[to_pos_m] = board[from_pos_m];
+    board[to_pos_m] = board[from_pos_m],
     board[from_pos_m] = 0;
     SWAP_TURN
     return 0;
@@ -86,11 +89,11 @@ int move(void) {
 int get_rules(char *f, char *t) {
     if (!strcmp(f, t))
         return 0;
-    from_value = f[1] - '0';
-    to_value = t[1] - '0';
-    from_char = f[0];
-    to_char = t[0];
-    from_pos = board[get_position(f)];
+    from_value = f[1] - '0',
+    to_value = t[1] - '0',
+    from_char = f[0],
+    to_char = t[0],
+    from_pos = board[get_position(f)],
     to_pos = board[get_position(t)];
     if (!from_pos)
         return 0;
@@ -120,10 +123,9 @@ int get_rules(char *f, char *t) {
 }
 
 int get_position(char *p) {
-    for (int i = 0; i < 64; ++i) {
+    for (int i = 0; i < 64; ++i)
         if (!strcmp(AN[i], p))
             return i;
-    }
     return 0;
 }
 
@@ -239,4 +241,16 @@ int king(void) {
     || to_value == (from_value - 1) && to_char == from_char)
         return 1;
     return 0;
+}
+
+void print_capture(void) {
+    if (player) {
+        for (int i = 0; i < w_cnt; ++i)
+            printf("%s ", pieces[w_cap[i]]);
+    }
+    else {
+        for (int i = 0; i < b_cnt; ++i)
+            printf("%s ", pieces[b_cap[i]]);
+    }
+    puts("");
 }

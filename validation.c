@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <string.h>
 
 #include "chess.h"
@@ -14,7 +13,7 @@ char *diag[] = {
         "f1","a5","b4","c3","d2","e1","a4","b3","c2","d1","a3","b2","c1","a2","b1","a1"
 };
 
-char *ver_and_hor[] = {
+char *verhor[] = {
         "a8","b8","c8","d8","e8","f8","g8","h8","a7","b7","c7","d7","e7","f7","g7","h7",
         "a6","b6","c6","d6","e6","f6","g6","h6","a5","b5","c5","d5","e5","f5","g5","h5",
         "a4","b4","c4","d4","e4","f4","g4","h4","a3","b3","c3","d3","e3","f3","g3","h3",
@@ -25,42 +24,42 @@ char *ver_and_hor[] = {
         "g8","g7","g6","g5","g4","g3","g2","g1","h8","h7","h6","h5","h4","h3","h2","h1",
 };
 
-int get_validation(char *v[], int c, int n) {
+int get_validation(char *v[], int f, int t) {
     int k;
-    if (c > n) {
-        for (int j = c - 1; j >= n; --j) {
+    if (f > t) {
+        for (int j = f - 1; j > t; --j) {
             for (k = 0; k < 64; ++k)
-                if (strcmp(AN[k], v[j]) == 0)
+                if (!strcmp(AN[k], v[j]))
                     break;
             if (player) {
-                if (board[k] > 16)
+                if (board[k] > BLACKEND)
                     return 1;
-                else if (board[k] && board[k] < 17)
+                else if (board[k] && board[k] < WHITEINIT)
                     return k;
             }
             if (!player) {
-                if (board[k] && board[k] < 17)
+                if (board[k] && board[k] < WHITEINIT)
                     return 1;
-                else if (board[k] > 16)
+                else if (board[k] > BLACKEND)
                     return k;
             }
         }
     }
     else {
-        for (int j = c + 1; j <= n; ++j) {
+        for (int j = f + 1; j < t; ++j) {
             for (k = 0; k < 64; ++k)
                 if (!strcmp(AN[k], v[j]))
                     break;
             if (!player) {
-                if (board[k] > 16)
+                if (board[k] > BLACKEND)
                     return 1;
-                else if (board[k] && board[k] < 17)
+                else if (board[k] && board[k] < WHITEINIT)
                     return k;
             }
             if (player) {
-                if (board[k] && board[k] < 17)
+                if (board[k] && board[k] < WHITEINIT)
                     return 1;
-                else if (board[k] > 16)
+                else if (board[k] > BLACKEND)
                     return k;
             }
         }
@@ -71,13 +70,13 @@ int get_validation(char *v[], int c, int n) {
 int validation(char *f, char *t, bool r) {
     if (r) {
         for (int i = 0; i < 128; ++i) {
-            if (strcmp(ver_and_hor[i], f) == 0) {
+            if (!strcmp(verhor[i], f)) {
                 for (int j = 0; j < 128; ++j) {
-                    if (strcmp(ver_and_hor[j], t) == 0) {
-                        if ((j - i) < -8 || (j - i) > 8)
+                    if (!strcmp(verhor[j], t)) {
+                        if ((j - i) < -7 || (j - i) > 7)
                             continue;
                         else
-                            return get_validation(ver_and_hor, i, j);
+                            return get_validation(verhor, i, j);
                     }
                 }
             }
@@ -85,9 +84,9 @@ int validation(char *f, char *t, bool r) {
     }
     else {
         for (int i = 0; i < 128; ++i) {
-            if (strcmp(diag[i], f) == 0) {
+            if (!strcmp(diag[i], f)) {
                 for (int j = 0; j < 128; ++j) {
-                    if (strcmp(diag[j], t) == 0) {
+                    if (!strcmp(diag[j], t)) {
                         if ((j - i) < -8 || (j - i) > 8)
                             continue;
                         else
