@@ -1,5 +1,5 @@
-#ifndef MOVE_H
-#define MOVE_H
+#ifndef MINIMAX_H
+#define MINIMAX_H
 
 void move_generation(void);
 void LIST_print(void);
