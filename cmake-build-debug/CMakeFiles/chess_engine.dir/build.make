@@ -101,18 +101,18 @@ CMakeFiles/chess_engine.dir/chess.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chess_engine.dir/chess.c.s"
 	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Leonardo\Documents\GitHub\chess-engine\chess.c -o CMakeFiles\chess_engine.dir\chess.c.s
 
-CMakeFiles/chess_engine.dir/move.c.obj: CMakeFiles/chess_engine.dir/flags.make
-CMakeFiles/chess_engine.dir/move.c.obj: ../move.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/chess_engine.dir/move.c.obj"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\chess_engine.dir\move.c.obj -c C:\Users\Leonardo\Documents\GitHub\chess-engine\move.c
+CMakeFiles/chess_engine.dir/minimax.c.obj: CMakeFiles/chess_engine.dir/flags.make
+CMakeFiles/chess_engine.dir/minimax.c.obj: ../minimax.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Leonardo\Documents\GitHub\chess-engine\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/chess_engine.dir/minimax.c.obj"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\chess_engine.dir\minimax.c.obj -c C:\Users\Leonardo\Documents\GitHub\chess-engine\minimax.c
 
-CMakeFiles/chess_engine.dir/move.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chess_engine.dir/move.c.i"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Leonardo\Documents\GitHub\chess-engine\move.c > CMakeFiles\chess_engine.dir\move.c.i
+CMakeFiles/chess_engine.dir/minimax.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chess_engine.dir/minimax.c.i"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Leonardo\Documents\GitHub\chess-engine\minimax.c > CMakeFiles\chess_engine.dir\minimax.c.i
 
-CMakeFiles/chess_engine.dir/move.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chess_engine.dir/move.c.s"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Leonardo\Documents\GitHub\chess-engine\move.c -o CMakeFiles\chess_engine.dir\move.c.s
+CMakeFiles/chess_engine.dir/minimax.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chess_engine.dir/minimax.c.s"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Leonardo\Documents\GitHub\chess-engine\minimax.c -o CMakeFiles\chess_engine.dir\minimax.c.s
 
 CMakeFiles/chess_engine.dir/bitboard.c.obj: CMakeFiles/chess_engine.dir/flags.make
 CMakeFiles/chess_engine.dir/bitboard.c.obj: ../bitboard.c
@@ -157,7 +157,7 @@ CMakeFiles/chess_engine.dir/tables.c.s: cmake_force
 chess_engine_OBJECTS = \
 "CMakeFiles/chess_engine.dir/main.c.obj" \
 "CMakeFiles/chess_engine.dir/chess.c.obj" \
-"CMakeFiles/chess_engine.dir/move.c.obj" \
+"CMakeFiles/chess_engine.dir/minimax.c.obj" \
 "CMakeFiles/chess_engine.dir/bitboard.c.obj" \
 "CMakeFiles/chess_engine.dir/validation.c.obj" \
 "CMakeFiles/chess_engine.dir/tables.c.obj"
@@ -167,7 +167,7 @@ chess_engine_EXTERNAL_OBJECTS =
 
 chess_engine.exe: CMakeFiles/chess_engine.dir/main.c.obj
 chess_engine.exe: CMakeFiles/chess_engine.dir/chess.c.obj
-chess_engine.exe: CMakeFiles/chess_engine.dir/move.c.obj
+chess_engine.exe: CMakeFiles/chess_engine.dir/minimax.c.obj
 chess_engine.exe: CMakeFiles/chess_engine.dir/bitboard.c.obj
 chess_engine.exe: CMakeFiles/chess_engine.dir/validation.c.obj
 chess_engine.exe: CMakeFiles/chess_engine.dir/tables.c.obj

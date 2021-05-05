@@ -9,17 +9,18 @@ CMakeFiles/chess_engine.dir/chess.c.obj
  C:/Users/Leonardo/Documents/GitHub/chess-engine/bitboard.h
  C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.c
  C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.h
+ C:/Users/Leonardo/Documents/GitHub/chess-engine/minimax.h
  C:/Users/Leonardo/Documents/GitHub/chess-engine/validation.h
 CMakeFiles/chess_engine.dir/main.c.obj
  C:/Users/Leonardo/Documents/GitHub/chess-engine/bitboard.h
  C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.h
  C:/Users/Leonardo/Documents/GitHub/chess-engine/main.c
- C:/Users/Leonardo/Documents/GitHub/chess-engine/move.h
-CMakeFiles/chess_engine.dir/move.c.obj
+ C:/Users/Leonardo/Documents/GitHub/chess-engine/minimax.h
+CMakeFiles/chess_engine.dir/minimax.c.obj
  C:/Users/Leonardo/Documents/GitHub/chess-engine/bitboard.h
  C:/Users/Leonardo/Documents/GitHub/chess-engine/chess.h
- C:/Users/Leonardo/Documents/GitHub/chess-engine/move.c
- C:/Users/Leonardo/Documents/GitHub/chess-engine/move.h
+ C:/Users/Leonardo/Documents/GitHub/chess-engine/minimax.c
+ C:/Users/Leonardo/Documents/GitHub/chess-engine/minimax.h
  C:/Users/Leonardo/Documents/GitHub/chess-engine/tables.h
 CMakeFiles/chess_engine.dir/tables.c.obj
  C:/Users/Leonardo/Documents/GitHub/chess-engine/tables.c

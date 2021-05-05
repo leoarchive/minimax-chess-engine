@@ -91,10 +91,10 @@
 		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/main.c">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/move.c">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/minimax.c">
 			<Option target="chess_engine"/>
 		</Unit>
-		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/move.h">
+		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/minimax.h">
 			<Option target="chess_engine"/>
 		</Unit>
 		<Unit filename="C:/Users/Leonardo/Documents/GitHub/chess-engine/tables.c">

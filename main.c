@@ -20,8 +20,9 @@ int main(void) {
 			continue;
 		else if (m == 2)
 			return 0;
-		system(CLEAR);
-		move_generation();
+		puts("");
+		//system(CLEAR);
+		//move_generation();
 		print_chessboard(0, CHAR_BIT, false);
 		//LIST_print();
 		//print_bitboard();

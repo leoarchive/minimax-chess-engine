@@ -2,7 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/chess_engine.dir/bitboard.c.obj"
   "CMakeFiles/chess_engine.dir/chess.c.obj"
   "CMakeFiles/chess_engine.dir/main.c.obj"
-  "CMakeFiles/chess_engine.dir/move.c.obj"
+  "CMakeFiles/chess_engine.dir/minimax.c.obj"
   "CMakeFiles/chess_engine.dir/tables.c.obj"
   "CMakeFiles/chess_engine.dir/validation.c.obj"
   "chess_engine.exe"

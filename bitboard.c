@@ -13,12 +13,9 @@ void set_bitboard(char *f) {
 }
 
 void print_bitboard(void) {
-    size_t j = 0;
-    for (size_t i = 0; i < 64; ++i, ++j) {
-        if (j == 8) {
-            j = 0;
+    for (size_t i = 0; i < 64; ++i) {
+        if (i  % 8 == 0) 
             puts("");
-        }
         printf("%d ", bitboard[i]);
     }
     puts("");

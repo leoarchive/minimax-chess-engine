@@ -49,6 +49,8 @@ void print_capture(void);
 
 int move(void);
 
+int checkmate(void);
+
 int get_rules(char *f, char *t);
 int get_position(char *p);
 

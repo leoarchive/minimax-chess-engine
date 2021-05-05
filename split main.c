@@ -37,7 +37,6 @@ int board[] = {
 };
 
 color player = white;
-bool check;
 int w_cnt = 0;
 int b_cnt = 0;
 
@@ -77,12 +76,6 @@ int move(void) {
 	//print_bitboard();
 	int from_pos_m = get_position(from);
 	int to_pos_m = get_position(to);
-		
-	if (player && check && board[from_pos_m] != 29
-	|| !player && check && board[from_pos_m] != 5)
-		return 1;
-	else
-		check = false;
 
 	if (!bitboard[to_pos_m]) {
 		printf("invalid move");
@@ -97,24 +90,52 @@ int move(void) {
 
 	board[to_pos_m] = board[from_pos_m],
 	board[from_pos_m] = 0;
-
-	set_bitboard(to);
-	checkmate();
-
 	SWAP_TURN
 	return 0;
 }
 
-
 int checkmate(void) {
-	int king;
+	bool check = false;
+	bool mate = false;
+	int KING;
+	int min_piece, max_piece;
 	if (player)
-		king = 5;
+		min_piece = BLACKINIT,
+			  max_piece = BLACKEND;
+	KING = 29;
 	else
-		king = 29;
-	if (bitboard[get_chessboard(king)]) 
-		check = true;
-	return 0; 
+		min_piece = WHITEINIT,
+			  max_piece = WHITEEND;
+	KING = 5;
+	set_bitboard(AN[get_chessboard(KING)]);
+	int king_bitboard[64]; 
+	for (size_t i = 0; i < 64; ++i)
+		king_bitboard[i] = bitboard[i];
+	printf("KING -- %s", AN[get_chessboard(KING)]);
+	for (int i = min_piece; i < max_piece; ++i) {
+		set_bitboard(AN[get_chessboard(i)]);
+		if (bitboard[get_chessboard(KING)]) {
+			check = true;
+			printf("TRUE\n");
+		}
+		for (size_t j = 0; j < 64; ++j) {
+			if (king_bitboard[j] && bitboard[j]) {
+				mate = true;
+				break;
+			}
+		}
+	}
+	for (int i = 0; i < 64; i++) {
+		if (i % 8 == 0)
+			puts("");
+		printf("%d ", king_bitboard[i]);
+	}
+	if (check && mate)	
+		return 1;
+	else if (check && !mate)
+		return 2;	
+	else 
+		return 0;
 }
 
 int get_rules(char *f, char *t) {

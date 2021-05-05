@@ -222,32 +222,32 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/main.c.s
 .PHONY : main.c.s
 
-move.obj: move.c.obj
+minimax.obj: minimax.c.obj
 
-.PHONY : move.obj
+.PHONY : minimax.obj
 
 # target to build an object file
-move.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/move.c.obj
-.PHONY : move.c.obj
+minimax.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/minimax.c.obj
+.PHONY : minimax.c.obj
 
-move.i: move.c.i
+minimax.i: minimax.c.i
 
-.PHONY : move.i
+.PHONY : minimax.i
 
 # target to preprocess a source file
-move.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/move.c.i
-.PHONY : move.c.i
+minimax.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/minimax.c.i
+.PHONY : minimax.c.i
 
-move.s: move.c.s
+minimax.s: minimax.c.s
 
-.PHONY : move.s
+.PHONY : minimax.s
 
 # target to generate assembly for a file
-move.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/move.c.s
-.PHONY : move.c.s
+minimax.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_engine.dir\build.make CMakeFiles/chess_engine.dir/minimax.c.s
+.PHONY : minimax.c.s
 
 tables.obj: tables.c.obj
 
@@ -321,9 +321,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
-	@echo ... move.obj
-	@echo ... move.i
-	@echo ... move.s
+	@echo ... minimax.obj
+	@echo ... minimax.i
+	@echo ... minimax.s
 	@echo ... tables.obj
 	@echo ... tables.i
 	@echo ... tables.s
