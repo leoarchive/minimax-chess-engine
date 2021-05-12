@@ -1,8 +1,8 @@
-# chess engine
+# minimax chess engine
 ```
 v0.1 -- initial release 
 
-example:
+for move:
 d2 d4
 
 ```
