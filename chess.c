@@ -37,9 +37,13 @@ int board[] = {
 };
 
 color player = white;
+
 bool check;
+
 int w_cnt = 0;
 int b_cnt = 0;
+
+int *unmove_board;
 
 void print_chessboard(size_t i, int n, bool c) {
 	if (i == 64) {
@@ -59,8 +63,6 @@ void print_chessboard(size_t i, int n, bool c) {
 	print_chessboard(++i, n, c);
 }
 
-int checkmate(void);
-
 int move(void) {
 	char *from = (char *) malloc(2 * sizeof(char));
 	char *to = (char *) malloc(2 * sizeof(char));
@@ -77,12 +79,6 @@ int move(void) {
 	//print_bitboard();
 	int from_pos_m = get_position(from);
 	int to_pos_m = get_position(to);
-		
-	if (player && check && board[from_pos_m] != 29
-	|| !player && check && board[from_pos_m] != 5)
-		return 1;
-	else
-		check = false;
 
 	if (!bitboard[to_pos_m]) {
 		printf("invalid move");
@@ -97,35 +93,54 @@ int move(void) {
 
 	board[to_pos_m] = board[from_pos_m],
 	board[from_pos_m] = 0;
-
-	set_bitboard(to);
-	checkmate();
-
 	SWAP_TURN
 	return 0;
 }
 
-
-int checkmate(void) {
+int check_check {
 	int king;
-	if (player)
-		king = 5;
-	else
+	int king_pos;
+	int min_piece;
+	int max_piece;
+	
+	if (player) {
+		min_piece = BLACKINIT;
+		max_piece = BLACKEND;
+		king = 5;		
+	} 
+	else {
+		min_piece = WHITEINIT;
+		max_piece = WHITEEND;
 		king = 29;
-	if (bitboard[get_chessboard(king)]) 
-		check = true;
-	return 0; 
+	}	
+	
+	king_pos = get_chessboard(king);
+		
+	set_bitboard(AN[king_pos]);
+	unmove_board = bitboard; 	
+
+	SWAP_TURN
+	for (size_t i = min_piece; i < max_piece; ++i) {
+		set_bitboard(AN[get_chessboard(i)]);	
+		if (bitboard[king_pos]) {
+			check = true;
+			break;
+		}
+	}
+	SWAP_TURN
 }
 
 int get_rules(char *f, char *t) {
 	if (!strcmp(f, t))
 		return 0;
+
 	from_value = f[1] - '0';
 	to_value = t[1] - '0';
 	from_char = f[0];
 	to_char = t[0];
 	from_pos = board[get_position(f)];
 	to_pos = board[get_position(t)];
+
 	if (!from_pos)
 		return 0;
 
@@ -274,6 +289,11 @@ int king(void) {
 	return 0;
 }
 
+int un_move_board(void) {
+	for (size_t i = 0; i < 64; ++i)
+		board[i] = unmove_board[i];
+}
+
 void print_capture(void) {
 	if (player) {
 		for (int i = 0; i < w_cnt; ++i)
@@ -283,5 +303,6 @@ void print_capture(void) {
 		for (int i = 0; i < b_cnt; ++i)
 			printf("%s ", pieces[b_cap[i]]);
 	}
-	puts("");
+	if (player && w_cnt || !player && b_cnt)
+		puts("");
 }

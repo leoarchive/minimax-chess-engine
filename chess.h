@@ -17,7 +17,10 @@
 #define WHITEPC "\e[1;97m"
 #define BLACKPC ""
 #define DEFAULT "\033[0m"
+
 #define SWAP_TURN player = !player;
+#define SAVE_BOARD unmove_board = board; 
+
 #define color bool
 #define white true
 
@@ -48,8 +51,7 @@ void print_chessboard(size_t i, int n, bool c);
 void print_capture(void);
 
 int move(void);
-
-int checkmate(void);
+int un_move_board(void);
 
 int get_rules(char *f, char *t);
 int get_position(char *p);
