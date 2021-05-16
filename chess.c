@@ -43,6 +43,17 @@ bool check;
 int w_cnt = 0;
 int b_cnt = 0;
 
+int from_value;
+int to_value;
+char from_char;
+char to_char;
+int to_pos;
+int from_pos;
+
+int w_cap[32];
+int b_cap[32];
+
+
 int *unmove_board;
 
 void print_chessboard(size_t i, int n, bool c) {
@@ -97,7 +108,7 @@ int move(void) {
 	return 0;
 }
 
-int check_check {
+int check_check() {
 	int king;
 	int king_pos;
 	int min_piece;
