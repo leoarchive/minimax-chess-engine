@@ -3,6 +3,8 @@
 #include "bitboard.h"
 #include "chess.h"
 
+int bitboard[64];
+
 void set_bitboard(char *f) {
     for (size_t i = 0; i < 64; ++i) {
         if (get_rules(f, AN[i]) == 1)
