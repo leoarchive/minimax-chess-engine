@@ -38,8 +38,6 @@ int board[] = {
 
 color player = white;
 
-bool check;
-
 int w_cnt = 0;
 int b_cnt = 0;
 
@@ -53,8 +51,7 @@ int from_pos;
 int w_cap[32];
 int b_cap[32];
 
-
-int *unmove_board;
+int unmove_board[64];
 
 void print_chessboard(size_t i, int n, bool c) {
 	if (i == 64) {
@@ -86,13 +83,18 @@ int move(void) {
 	if (!strcmp(from,"e"))
 		return 2;
 
-	set_bitboard(from);
-	//print_bitboard();
 	int from_pos_m = get_position(from);
 	int to_pos_m = get_position(to);
 
-	if (!bitboard[to_pos_m]) {
+	if (checkmate_check(from_pos_m, to_pos_m)) {
 		printf("invalid move");
+		return 1;
+	}
+
+	set_bitboard(from);
+
+	if (!bitboard[to_pos_m]) {
+		printf("invalid move bitboard");
 		return 1;
 	}
 	else if (board[to_pos_m]) {
@@ -104,41 +106,52 @@ int move(void) {
 
 	board[to_pos_m] = board[from_pos_m],
 	board[from_pos_m] = 0;
+
 	SWAP_TURN
 	return 0;
 }
 
-int check_check() {
+int checkmate_check(int f, int t) {
 	int king;
 	int king_pos;
 	int min_piece;
 	int max_piece;
-	
+	bool INVALID_MOVE;
+
 	if (player) {
 		min_piece = BLACKINIT;
 		max_piece = BLACKEND;
-		king = 5;		
+		king = 29;		
 	} 
 	else {
 		min_piece = WHITEINIT;
 		max_piece = WHITEEND;
-		king = 29;
+		king = 5;
 	}	
 	
-	king_pos = get_chessboard(king);
-		
-	set_bitboard(AN[king_pos]);
-	unmove_board = bitboard; 	
-
 	SWAP_TURN
+	SAVE_BOARD
+
+	board[t] = board[f],
+	board[f] = 0;
+
+	king_pos = get_chessboard(king);
+
 	for (size_t i = min_piece; i < max_piece; ++i) {
-		set_bitboard(AN[get_chessboard(i)]);	
+		set_bitboard(AN[get_chessboard(i)]);
 		if (bitboard[king_pos]) {
-			check = true;
+			INVALID_MOVE = true;
 			break;
 		}
-	}
+	}	
+
+	UN_MOVE
 	SWAP_TURN
+
+	if (INVALID_MOVE) 
+		return 1;
+	else
+		return 0;
 }
 
 int get_rules(char *f, char *t) {
@@ -177,6 +190,13 @@ int get_rules(char *f, char *t) {
 	else if (from_pos == 29 || from_pos == 5)
 		return king();
 	return 1;
+}
+
+int get_chessboard(int p) {
+	for (int i = 0; i < 64; ++i)
+		if (board[i] == p)
+			return i;
+	return 0;
 }
 
 int get_position(char *p) {
@@ -300,9 +320,14 @@ int king(void) {
 	return 0;
 }
 
-int un_move_board(void) {
+void un_move_board(void) {
 	for (size_t i = 0; i < 64; ++i)
 		board[i] = unmove_board[i];
+}
+
+void save_chessboard(void) {
+	for (size_t i = 0; i < 64; ++i)
+		unmove_board[i] = board[i];
 }
 
 void print_capture(void) {

@@ -4,24 +4,25 @@
 #include <stdbool.h>
 
 #ifdef __linux__
-#define CLEAR "clear"
-#define WINOUTPUT
+	#define CLEAR "clear"
+	#define WINOUTPUT
 #elif __WIN32__
-#include <windows.h>
-#define CLEAR "cls"
-#define WINOUTPUT SetConsoleOutputCP(65001);
+	#include <windows.h>
+	#define CLEAR "cls"
+	#define WINOUTPUT SetConsoleOutputCP(65001);
 #else
-    #error unsuported plataform
+	#error unsuported plataform
 #endif
 
 #define WHITEBG "\e[30;48;5;215m"
 #define BLACKBG "\e[30;48;5;208m"
 #define WHITEPC "\e[1;97m"
 #define BLACKPC ""
-#define DEFAULT "\033[0m"
+#define DEFAULT "\e[0m"
 
 #define SWAP_TURN player = !player;
-#define SAVE_BOARD unmove_board = board; 
+#define SAVE_BOARD save_chessboard(); 
+#define UN_MOVE un_move_board();
 
 #define color bool
 #define white true
@@ -35,8 +36,8 @@ extern int from_value;
 extern int to_value;
 extern char from_char;
 extern char to_char;
-extern int to_pos;
 extern int from_pos;
+extern int to_pos;
 
 extern char *AN[64];
 extern char *pieces[33];
@@ -53,10 +54,14 @@ void print_chessboard(size_t i, int n, bool c);
 void print_capture(void);
 
 int move(void);
-int un_move_board(void);
+
+int checkmate_check(int f, int t);
+void un_move_board(void);
+void save_chessboard(void);
 
 int get_rules(char *f, char *t);
 int get_position(char *p);
+int get_chessboard(int p);
 
 int pawn(void);
 int bishop(char *f, char *t);

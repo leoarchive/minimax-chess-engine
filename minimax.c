@@ -60,13 +60,6 @@ void make_move(int f, int t) {
 	SWAP_TURN
 }
 
-int get_chessboard(int p) {
-	for (int i = 0; i < 64; ++i)
-		if (board[i] == p)
-			return i;
-	return 0;
-}
-
 void LIST_INIT(void) {
 	cnt = 0;
 	for (int i = 0; i < (TIMES * 2); ++i)
@@ -196,9 +189,11 @@ MOVE get_move(void) {
 	
 	for (int i = min_piece; i <= max_piece; ++i) {
 		set_bitboard(AN[get_chessboard(i)]);
+
 		for (int j = 0; j < 64; ++j) {
 			if (bitboard[j]) {
 				eval = get_value(j, j);
+
 				if (player) {
 					if (eval < min) {
 						get.from = i;
