@@ -130,7 +130,8 @@ int checkmate_check(int f, int t) {
 	}	
 	
 	SWAP_TURN
-	SAVE_BOARD
+
+	save_chessboard();
 
 	board[t] = board[f],
 	board[f] = 0;
@@ -145,7 +146,8 @@ int checkmate_check(int f, int t) {
 		}
 	}	
 
-	UN_MOVE
+	un_move_board();	
+
 	SWAP_TURN
 
 	if (INVALID_MOVE) 

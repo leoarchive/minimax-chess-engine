@@ -21,8 +21,6 @@
 #define DEFAULT "\e[0m"
 
 #define SWAP_TURN player = !player;
-#define SAVE_BOARD save_chessboard(); 
-#define UN_MOVE un_move_board();
 
 #define color bool
 #define white true
