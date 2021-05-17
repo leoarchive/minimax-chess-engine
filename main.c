@@ -21,8 +21,8 @@ int main(void) {
 		else if (m == 2)
 			return 0;
 		puts("");
-		//system(CLEAR);
-		//move_generation();
+		system(CLEAR);
+		move_generation();
 		print_chessboard(0, CHAR_BIT, false);
 		//LIST_print();
 		//print_bitboard();
