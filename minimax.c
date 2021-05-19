@@ -43,7 +43,7 @@ int main(void) {
 		puts("");
 		system(CLEAR);
 		get_move_generation();
-		list_print();
+		//list_print();
 		print_chessboard_and_pieces(0, 8, false);	
 	}
 }
