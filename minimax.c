@@ -62,7 +62,7 @@ int list_moves_check(int f, int t) {
 
 void list_print(void) {
 	for (size_t i = 0; i < TIMES; ++i) 
-		printf("%d from %s to %s eval %d\n", i, AN[list_from_moves[i]], AN[list_to_moves[i]], list_evaluates[i]);
+		printf("%d from %s to %s eval %d\n", i, PIECES[list_from_moves[i]], AN[list_to_moves[i]], list_evaluates[i]);
 }
 
 void _set_move(int f, int t) {
@@ -74,7 +74,7 @@ void _set_move(int f, int t) {
 int get_evaluate(void) {
 	int white_evaluate = 0;
 	int black_evaluate = 0;
-	for (size_t i = 0; i < 64; ++i) {
+	for (int i = 0; i < 64; ++i) {
 		if 	(board[i] > BLACK_PIECES_VALUE_MAX) 	white_evaluate += get_value(i, i);
 		else if (board[i]) 				black_evaluate -= get_value(i, i);
 	}
@@ -139,8 +139,12 @@ int minimax(int d) {
 	}
 	
 	_set_move(get_position_from_value(get.from), get.to);
+	print_chessboard_and_pieces(0, 8, false);
+	system(CLEAR);
 	get = get_move();
 	_set_move(get_position_from_value(get.from), get.to);
+	print_chessboard_and_pieces(0, 8, false);
+	system(CLEAR);
 	return minimax(d - 1);
 }
 
@@ -206,13 +210,17 @@ Move get_move_aleatory(int min_piece, int max_piece) {
 		for (int i = 0; i < 64; ++i) {
 			if (bitboard[i]) {
 				eval = get_value(get_position_from_value(get.from), i);
-				if (player && eval > max) {
-					get.to 	= i;
-					max	= eval;
+				if (player) {
+					if (eval > max) {
+						get.to 	= i;
+						max	= eval;
+					}
 				}
-				else if (eval < min) {
-					get.to 	= i;
-					min 	= eval;
+				else {
+					if (eval < min) {
+						get.to 	= i;
+						min 	= eval;
+					}
 				}
 				end = true;	
 			}
@@ -342,7 +350,7 @@ int get_value(int p, int s) {
         	5.0,  5.0,  5.0,  5.0,  5.0,  5.0,  5.0,  5.0,
         	0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
 	};
-	if  	(board[p] > 5 && board[p] < 17)  return BLACK_PAWN - black_pawn[s]; 
+	if  	(board[p] > 8 && board[p] < 17)  return BLACK_PAWN - black_pawn[s]; 
 	else if (board[p] > 16 && board[p] < 25) return WHITE_PAWN + white_pawn[s];
 	switch  (board[p]) {
 		case 1: case 8: 	return BLACK_ROOK   - black_rook[s];
@@ -355,6 +363,6 @@ int get_value(int p, int s) {
 		case 27: case 30:	return WHITE_BISHOP + white_bishop[s];
 		case 28: 		return WHITE_QUEEN  + white_queen[s];
 		case 29: 		return WHITE_KING   + white_king[s];	
-		default:		0; 
 	}	
+	return 0;
 } 

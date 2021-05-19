@@ -40,12 +40,12 @@ int 	black_captures_counter = 0;
 int 	white_captures[32];
 int 	black_captures[32];
 
-int  	from_value    = 0;
-int  	to_value      = 0;
-int  	from_position = 0;
-int  	to_position   = 0;
-char 	from_char     = 0;
-char 	to_char       = 0;
+int  	from_value;
+int  	to_value;  
+int  	from_position;
+int  	to_position;    
+char 	from_char;      
+char 	to_char;        
 
 int	aux_board[64];
 int	bitboard[64];
@@ -96,11 +96,11 @@ int set_move(void) {
 }
 
 int is_checkmate(int f, int t) {
-	int  king_value       = 0;
-	int  king_position    = 0;
-	int  min_pieces_value = 0;
-	int  max_pieces_value = 0;	
-	bool INVALID_MOVE     = false;
+	int  king_value;        
+	int  king_position;     
+	int  min_pieces_value;  
+	int  max_pieces_value;  	
+	bool INVALID_MOVE;     
 
 	if (player) {
 		min_pieces_value = BLACK_PIECES_VALUE_MIN;
