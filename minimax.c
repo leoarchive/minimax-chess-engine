@@ -33,7 +33,6 @@ int main(void) {
 	WIN_OUTPUT
 	system(CLEAR);
 	srand(time(NULL));
-
 	print_chessboard_and_pieces(0, 8, false);
 	while (1) {
 		puts("");
@@ -86,58 +85,51 @@ int get_evaluate(void) {
 void get_move_generation(void) {
 	set_aux_board();
 	list_moves_init();
-	list_counter = 0;
 	for (size_t i = 0; i < TIMES; ++i) list_evaluates[i] = 0;
-
+	list_counter 	= 	0;
+	int min 	= 	INFINITY;
+	int max		= 	-INFINITY;
 	int eval;	
 	int from;
 	int to;
-	int min 	= INFINITY;
-	int max 	= -INFINITY;
-	
 	for (size_t i = 0; i < TIMES; ++i) {
-		eval 		  = minimax(DEPTH);
-		list_evaluates[i] = eval;
+		eval 		  = 	minimax(DEPTH);
+		list_evaluates[i] = 	eval;
 		if (player && eval > max) {
-			max 	= eval;	
-			from 	= from_aux;
-			to 	= to_aux;
+			max 	  = 	eval;	
+			from 	  = 	from_aux;
+			to 	  = 	to_aux;
 		}
 		else if (eval < min) {
-			min 	= eval;
-			from 	= from_aux;
-			to 	= to_aux;
+			min 	  =	eval;
+			from 	  = 	from_aux;
+			to 	  = 	to_aux;
 		}
 		get_aux_board();
 	}
-
 	int piece_value = get_position_from_value(from);
 	set_bitboard(AN[piece_value]);
 	printf("black: %s %s\n", AN[piece_value], AN[to]);
-
 	if (board[to]) {
-		if (player) white_captures[white_captures_counter++] = board[to];
-		else 	    black_captures[black_captures_counter++] = board[to];
+		if (player) 	white_captures[white_captures_counter++] = board[to];
+		else 	    	black_captures[black_captures_counter++] = board[to];
 	}
-
 	print_capture_pieces();
 	_set_move(piece_value, to);
 }
 
 int minimax(int d) {
 	if (!d) return get_evaluate();
-	
 	Move get;
 	get = get_move();
 	if (d == DEPTH) {
 		if (list_moves_check(get.from, get.to)) get = get_move_aleatory(BLACK_PIECES_VALUE_MIN, BLACK_PIECES_VALUE_MAX);
-		from_aux 	= get.from;
-		to_aux 		= get.to;
-		list_from_moves[list_counter] 	= from_aux;
-		list_to_moves[list_counter] 	= to_aux;
+		from_aux 			= 	get.from;
+		to_aux 				= 	get.to;
+		list_from_moves[list_counter] 	= 	from_aux;
+		list_to_moves[list_counter] 	= 	to_aux;
 		list_counter++;
 	}
-	
 	_set_move(get_position_from_value(get.from), get.to);
 	print_chessboard_and_pieces(0, 8, false);
 	system(CLEAR);
@@ -150,13 +142,12 @@ int minimax(int d) {
 
 Move get_move(void) {
 	Move get;
-	int min = 0;
-	int max = 0;
+	int min 	  = 0;
+	int max 	  = 0;
 	int eval;
 	int min_piece;
 	int max_piece;
 	bool end;
-	
 	if (player) {
 		min_piece = WHITE_PIECES_VALUE_MIN;
 		max_piece = WHITE_PIECES_VALUE_MAX;
@@ -165,7 +156,6 @@ Move get_move(void) {
 		min_piece = BLACK_PIECES_VALUE_MIN;
 		max_piece = BLACK_PIECES_VALUE_MAX;
 	}
-	
 	for (int i = min_piece; i <= max_piece; ++i) {
 		set_bitboard(AN[get_position_from_value(i)]);
 		for(int j = 0; j < 64; ++j) {
@@ -173,18 +163,18 @@ Move get_move(void) {
 				eval = get_value(j, j);
 				if (player) {
 					if (eval < min) {
-						get.from = i;
-						get.to 	 = j;
-						min 	 = eval;
-						end 	 = true;
+						get.from 	= 	i;
+						get.to 	 	= 	j;
+						min 	 	= 	eval;
+						end 	 	= 	true;
 					}
 				}
 				else {
 					if (eval > max) {
-						get.from = i;
-						get.to   = j;
-						max 	 = eval;
-						end 	 = true;
+						get.from 	= 	i;
+						get.to   	= 	j;
+						max 	 	= 	eval;
+						end 	 	= 	true;
 					}
 				}
 			}
@@ -198,28 +188,25 @@ Move get_move_aleatory(int min_piece, int max_piece) {
 	Move get;
 	bool end;
 	int eval;
-
 	do {
 		int min 	= INFINITY;
 		int max 	= -INFINITY;
 		get.from 	= 0;
-
 		while (get.from < min_piece) get.from = rand() % max_piece;
-
 		set_bitboard(AN[get_position_from_value(get.from)]);
 		for (int i = 0; i < 64; ++i) {
 			if (bitboard[i]) {
 				eval = get_value(get_position_from_value(get.from), i);
 				if (player) {
 					if (eval > max) {
-						get.to 	= i;
-						max	= eval;
+						get.to 		= 	i;
+						max		= 	eval;
 					}
 				}
 				else {
 					if (eval < min) {
-						get.to 	= i;
-						min 	= eval;
+						get.to 		= 	i;
+						min 		= 	eval;
 					}
 				}
 				end = true;	

@@ -13,24 +13,24 @@
 	#error unsuported plataform
 #endif
 
-#define WHITE_BACKGROUND "\e[30;48;5;215m"
-#define BLACK_BACKGROUND "\e[30;48;5;208m"
-#define WHITE_PIECE 	 "\e[1;97m"
-#define BLACK_PIECE 	 ""
-#define DEFAULT		 "\e[0m"
+#define WHITE_BACKGROUND 	"\e[30;48;5;215m"
+#define BLACK_BACKGROUND 	"\e[30;48;5;208m"
+#define WHITE_PIECE 	 	"\e[1;97m"
+#define BLACK_PIECE 	 	""
+#define DEFAULT		 	"\e[0m"
 
 #define BLACK_PIECES_VALUE_MIN 1
 #define BLACK_PIECES_VALUE_MAX 16
 #define WHITE_PIECES_VALUE_MIN 17
 #define WHITE_PIECES_VALUE_MAX 32
 
-#define WHITE_KING_VALUE 29
-#define BLACK_KING_VALUE 5
+#define WHITE_KING_VALUE 	29
+#define BLACK_KING_VALUE 	5
 
 #define SWAP_PLAYER_TURN player = !player;
 
-#define color bool
-#define white true
+#define color 	bool
+#define white 	true
 
 extern int   	from_value;   
 extern int   	to_value;
@@ -53,27 +53,28 @@ extern int 	black_captures[32];
 extern bool	player;
 
 void print_chessboard_and_pieces(size_t s, int n, bool p);
+void print_capture_pieces(void);
+void print_bitboard(void);
 
 int set_move(void);
-int is_checkmate(int f, int t);
+int _set_validation(char* v[], int f, int t);
+void set_aux_board(void);
+void set_bitboard(char* f);
+
 int get_rules(char* f, char* t);
 int get_position_from_value(int p);
 int get_position_from_char(char* p);
+int get_validation(char *f, char *t, bool r);
+void get_aux_board(void);
+
+int is_checkmate(int f, int t);
+
 int pawn(void);
 int bishop(char* f, char* t);
 int knight(void);
 int rook(char* f, char* t);
 int queen(char* f, char* t);
 int king(void);
-
-void get_aux_board(void);
-void set_aux_board(void);
-void print_capture_pieces(void);
-void set_bitboard(char* f);
-void print_bitboard(void);
-
-int _set_validation(char* v[], int f, int t);
-int get_validation(char *f, char *t, bool r);
 
 
 #endif
