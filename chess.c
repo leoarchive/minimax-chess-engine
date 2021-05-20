@@ -70,17 +70,12 @@ void print_chessboard_and_pieces(size_t s, int n, bool p) {
 int set_move(void) {
 	char* from = (char*) malloc(2 * sizeof(char));
 	char* to   = (char*) malloc(2 * sizeof(char));
-
 	print_capture_pieces();
-
 	printf("%s: ", player ? "white" : "black");
 	scanf(" %s %s", from, to);
-
 	if (!strcmp(from, "e"))  return 2;
-
 	int from_position_move = get_position_from_char(from);
 	int to_position_move   = get_position_from_char(to);
-
 	if (is_checkmate(from_position_move, to_position_move)) { printf("invalid move"); return 1; }
 	set_bitboard(from);
 	if      (!bitboard[to_position_move])                   { printf("invalid move"); return 1; }
@@ -88,7 +83,6 @@ int set_move(void) {
 		if (player) white_captures[white_captures_counter++] = board[to_position_move];
 		else        black_captures[black_captures_counter++] = board[to_position_move];
 	}
-
 	board[to_position_move]   = board[from_position_move];
 	board[from_position_move] = 0;
 	SWAP_PLAYER_TURN
@@ -101,26 +95,21 @@ int is_checkmate(int f, int t) {
 	int  min_pieces_value;  
 	int  max_pieces_value;  	
 	bool INVALID_MOVE;     
-
 	if (player) {
-		min_pieces_value = BLACK_PIECES_VALUE_MIN;
-		max_pieces_value = BLACK_PIECES_VALUE_MAX;
-		king_value 	 = WHITE_KING_VALUE; 
+		min_pieces_value 	= 	BLACK_PIECES_VALUE_MIN;
+		max_pieces_value 	= 	BLACK_PIECES_VALUE_MAX;
+		king_value 	 	= 	WHITE_KING_VALUE; 
 	}
 	else {
-		min_pieces_value = WHITE_PIECES_VALUE_MIN;
-		max_pieces_value = WHITE_PIECES_VALUE_MAX;
-		king_value 	 = BLACK_KING_VALUE;
+		min_pieces_value 	= 	WHITE_PIECES_VALUE_MIN;
+		max_pieces_value 	= 	WHITE_PIECES_VALUE_MAX;
+		king_value 	 	= 	BLACK_KING_VALUE;
 	}
-
 	SWAP_PLAYER_TURN
 	set_aux_board();
-	
 	board[t] = board[f];
 	board[f] = 0;
-	
 	king_position = get_position_from_value(king_value);
-	
 	for (size_t i = min_pieces_value; i < max_pieces_value; ++i) {
 		set_bitboard(AN[get_position_from_value(i)]);
 		if (bitboard[king_position]) {
@@ -128,26 +117,21 @@ int is_checkmate(int f, int t) {
 			break;
 		}
 	}
-	
 	get_aux_board();
 	SWAP_PLAYER_TURN
-
-	if (INVALID_MOVE) return 1;
-	else 		  return 0;
+	if (INVALID_MOVE) 	return 1;
+	else 		  	return 0;
 }
 
 int get_rules(char* f, char* t) {
 	if (!strcmp(f, t)) 	return 0;
-
-	from_char     = f[0];
-	to_char       = t[0];	
-	from_value    = f[1] - '0';
-	to_value      = t[1] - '0';
-	from_position = board[get_position_from_char(f)];
-	to_position   = board[get_position_from_char(t)];
-
+	from_char     	= 	f[0];
+	to_char       	= 	t[0];	
+	from_value    	= 	f[1] - '0';
+	to_value      	= 	t[1] - '0';
+	from_position 	= 	board[get_position_from_char(f)];
+	to_position   	= 	board[get_position_from_char(t)];
 	if (!from_position) 	return 0;
-
 	if (player) {
 		if (from_position < WHITE_PIECES_VALUE_MIN || to_position > BLACK_PIECES_VALUE_MAX) 
 				return 0;
@@ -156,7 +140,6 @@ int get_rules(char* f, char* t) {
 		if (from_position > BLACK_PIECES_VALUE_MAX || to_position && to_position < WHITE_PIECES_VALUE_MIN) 
 				return 0;
 	}
-		
 	if (from_position > 16 && from_position < 25 || from_position > 8 && from_position < 17)
 		return pawn();
 	else if (from_position == 27 || from_position == 30 || from_position == 3 || from_position == 6)
@@ -194,7 +177,6 @@ int pawn(void) {
 		if (to_position > 16 && to_char == from_char || to_value > from_value)
 			return 0;
 	}
-
 	if (two_square) {
 		if (player) {
 			if (to_value != 3 && to_value != 4) 		return 0;
@@ -211,7 +193,6 @@ int pawn(void) {
 			if (to_value < (from_value - 1)) 		return 0;
 		}
 	}
-
 	if (to_char != from_char) {
 		if (to_char != (from_char + 1) && to_char != (from_char - 1) || from_value == to_value)
 			return 0;
@@ -239,19 +220,19 @@ int bishop(char* f, char* t) {
 		l = from_char;
 		while (l-- != to_char) c++;
 	}
-	if (to_value == (from_value + c) || to_value == (from_value - c)) 	return 1;
+	if (to_value == (from_value + c) || to_value == (from_value - c)) 		return 1;
 	return 0;
 }
 
 int knight(void) {
-	if (to_value == (from_value + 2) && to_char  == (from_char + 1)  ||
-	to_value     == (from_value + 2) && to_char  == (from_char - 1)  ||
-	to_value     == (from_value - 2) && to_char  == (from_char - 1)  ||
-	to_value     == (from_value - 2) && to_char  == (from_char + 1)  ||
-	to_char      == (from_char + 2)  && to_value == (from_value + 1) ||
-	to_char      == (from_char + 2)  && to_value == (from_value - 1) ||
-	to_char      == (from_char - 2)  && to_value == (from_value - 1) ||
-	to_char      == (from_char - 2)  && to_value == (from_value + 1)) 	return 1;
+	if (to_value 	== 	(from_value + 2) 	&& 	to_char  	== 	(from_char + 1)  ||
+	to_value     	== 	(from_value + 2) 	&& 	to_char  	== 	(from_char - 1)  ||
+	to_value     	== 	(from_value - 2) 	&& 	to_char  	== 	(from_char - 1)  ||
+	to_value     	== 	(from_value - 2) 	&& 	to_char  	== 	(from_char + 1)  ||
+	to_char      	== 	(from_char + 2) 	&& 	to_value 	== 	(from_value + 1) ||
+	to_char      	== 	(from_char + 2)  	&& 	to_value 	== 	(from_value - 1) ||
+	to_char      	== 	(from_char - 2)  	&& 	to_value 	== 	(from_value - 1) ||
+	to_char      	== 	(from_char - 2)  	&& 	to_value 	== 	(from_value + 1)) 	return 1;
 	return 0;
 }
 
@@ -268,18 +249,18 @@ int queen(char* f, char* t) {
 }
 
 int king(void) {
-	if (to_value == (from_value + 1) && to_char == (from_char + 1) ||
-	to_value     == (from_value + 1) && to_char == (from_char - 1) ||
-	to_value     == (from_value - 1) && to_char == (from_char - 1) ||
-	to_value     == (from_value - 1) && to_char == (from_char + 1) ||
-	to_value     == from_value       && to_char == (from_char + 1) ||
-	to_value     == from_value       && to_char == (from_char - 1) ||
-	to_value     == (from_value + 1) && to_char == from_char       ||
-	to_value     == (from_value - 1) && to_char == from_char) 		return 1;
+	if (to_value 	== 	(from_value + 1) 	&& 	to_char 	== 	(from_char + 1) ||
+	to_value     	== 	(from_value + 1) 	&& 	to_char 	== 	(from_char - 1) ||
+	to_value     	== 	(from_value - 1) 	&& 	to_char 	== 	(from_char - 1) ||
+	to_value     	== 	(from_value - 1) 	&& 	to_char 	== 	(from_char + 1) ||
+	to_value     	== 	from_value       	&& 	to_char 	== 	(from_char + 1) ||
+	to_value     	== 	from_value       	&& 	to_char 	== 	(from_char - 1) ||
+	to_value     	== 	(from_value + 1) 	&& 	to_char 	== 	from_char       ||
+	to_value     	== 	(from_value - 1) 	&& 	to_char 	== 	from_char) 		return 1;
 	return 0;
 }
 
-void get_aux_board(void) { for (size_t i = 0; i < 64; ++i) board[i]     = aux_board[i]; }
+void get_aux_board(void) { for (size_t i = 0; i < 64; ++i) board[i] = aux_board[i]; }
 
 void set_aux_board(void) { for (size_t i = 0; i < 64; ++i) aux_board[i] = board[i]; }
 
@@ -334,31 +315,31 @@ int _set_validation(char* v[], int f, int t) {
 
 int get_validation(char *f, char *t, bool r) {
 	char* AN_DIAGONAL[] = {
-       		"a8","b8","a7","c8","b7","a6","d8","c7","b6","a5","e8","d7","c6","b5","a4","f8",
-	        "e7","d6","c5","b4","a3","g8","f7","e6","d5","c4","b3","a2","h8","g7","f6","e5",
-	        "d4","c3","b2","a1","h7","g6","f5","e4","d3","c2","b1","h6","g5","f4","e3","d2",
-        	"c1","h5","g4","f3","e2","d1","h4","g3","f2","e1","h3","g2","f1","h2","g1","h1",
-	        "h8","g8","h7","f8","g7","h6","e8","f7","g6","h5","d8","e7","f6","g5","h4","c8",
-	        "d7","e6","f5","g4","h3","b8","c7","d6","e5","f4","g3","h2","a8","b7","c6","d5",
-	        "e4","f3","g2","h1","a7","b6","c5","d4","e3","f2","g1","a6","b5","c4","d3","e2",
-	        "f1","a5","b4","c3","d2","e1","a4","b3","c2","d1","a3","b2","c1","a2","b1","a1", 
+       		"a8","b8","a7","c8","b7","a6","d8","c7", 	"b6","a5","e8","d7","c6","b5","a4","f8",
+	        "e7","d6","c5","b4","a3","g8","f7","e6", 	"d5","c4","b3","a2","h8","g7","f6","e5",
+	        "d4","c3","b2","a1","h7","g6","f5","e4",	"d3","c2","b1","h6","g5","f4","e3","d2",
+        	"c1","h5","g4","f3","e2","d1","h4","g3", 	"f2","e1","h3","g2","f1","h2","g1","h1",
+	        "h8","g8","h7","f8","g7","h6","e8","f7", 	"g6","h5","d8","e7","f6","g5","h4","c8",
+	        "d7","e6","f5","g4","h3","b8","c7","d6", 	"e5","f4","g3","h2","a8","b7","c6","d5",
+	        "e4","f3","g2","h1","a7","b6","c5","d4", 	"e3","f2","g1","a6","b5","c4","d3","e2",
+	        "f1","a5","b4","c3","d2","e1","a4","b3", 	"c2","d1","a3","b2","c1","a2","b1","a1", 
 	};
 	char* AN_VERTICAL_AND_HORIZONTAL[] = {
-		"a8","b8","c8","d8","e8","f8","g8","h8","a7","b7","c7","d7","e7","f7","g7","h7",
-	        "a6","b6","c6","d6","e6","f6","g6","h6","a5","b5","c5","d5","e5","f5","g5","h5",
-	        "a4","b4","c4","d4","e4","f4","g4","h4","a3","b3","c3","d3","e3","f3","g3","h3",
-	        "a2","b2","c2","d2","e2","f2","g2","h2","a1","b1","c1","d1","e1","f1","g1","h1",
-	        "a8","a7","a6","a5","a4","a3","a2","a1","b8","b7","b6","b5","b4","b3","b2","b1",
-	        "c8","c7","c6","c5","c4","c3","c2","c1","d8","d7","d6","d5","d4","d3","d2","d1",
-	        "e8","e7","e6","e5","e4","e3","e2","e1","f8","f7","f6","f5","f4","f3","f2","f1",
-        	"g8","g7","g6","g5","g4","g3","g2","g1","h8","h7","h6","h5","h4","h3","h2","h1",	
+		"a8","b8","c8","d8","e8","f8","g8","h8",	"a7","b7","c7","d7","e7","f7","g7","h7",
+	        "a6","b6","c6","d6","e6","f6","g6","h6",	"a5","b5","c5","d5","e5","f5","g5","h5",
+	        "a4","b4","c4","d4","e4","f4","g4","h4",	"a3","b3","c3","d3","e3","f3","g3","h3",
+	        "a2","b2","c2","d2","e2","f2","g2","h2",	"a1","b1","c1","d1","e1","f1","g1","h1",
+	        "a8","a7","a6","a5","a4","a3","a2","a1",	"b8","b7","b6","b5","b4","b3","b2","b1",
+	        "c8","c7","c6","c5","c4","c3","c2","c1",	"d8","d7","d6","d5","d4","d3","d2","d1",
+	        "e8","e7","e6","e5","e4","e3","e2","e1",	"f8","f7","f6","f5","f4","f3","f2","f1",
+        	"g8","g7","g6","g5","g4","g3","g2","g1",	"h8","h7","h6","h5","h4","h3","h2","h1",	
 	};
 	if (r) {
         	for (int i = 0; i < 128; ++i) {
             		if (!strcmp(AN_VERTICAL_AND_HORIZONTAL[i], f)) {
                			for (int j = 0; j < 128; ++j) {
                    			if (!strcmp(AN_VERTICAL_AND_HORIZONTAL[j], t)) {
-                        			if   ((j - i) < -7 || (j - i) > 7) continue;
+                        			if   ((j - i) < -8 || (j - i) > 8) continue;
                         			else return _set_validation(AN_VERTICAL_AND_HORIZONTAL, i, j);
                     			}
                 		}
