@@ -1,8 +1,7 @@
 # minimax chess engine
+Simple minimax chess engine algorithm
+make move: d2 d4
+## Building
 ```
-v0.1 -- initial release 
-
-for move:
-d2 d4
-
+gcc -o chess-engine chess.c minimax.c
 ```
