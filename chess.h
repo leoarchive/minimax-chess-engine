@@ -5,6 +5,7 @@
 
 #ifdef __linux__
 	#define CLEAR "clear"
+	#define WIN_OUTPUT printf("not windows os\n");
 #elif __WIN32__
 	#include <windows.h>
 	#define CLEAR "cls"

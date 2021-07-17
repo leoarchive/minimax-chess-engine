@@ -61,7 +61,7 @@ int list_moves_check(int f, int t) {
 
 void list_print(void) {
 	for (size_t i = 0; i < TIMES; ++i) 
-		printf("%d from %s to %s eval %d\n", i, PIECES[list_from_moves[i]], AN[list_to_moves[i]], list_evaluates[i]);
+		printf("%ld from %s to %s eval %d\n", i, PIECES[list_from_moves[i]], AN[list_to_moves[i]], list_evaluates[i]);
 }
 
 void _set_move(int f, int t) {
