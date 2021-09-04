@@ -1,6 +1,6 @@
 /*
  *  Minimax Chess Engine Algorithm 
- *  Copyright (c) 2021 Leonardo Zamboni
+ *  Copyright (c) 2020 Leonardo Zamboni
  * 
  *  this program is free software: you can redistribute it and/or modify
  *  it under the terms of the gnu general public license as published by
