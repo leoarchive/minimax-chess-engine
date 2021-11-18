@@ -31,42 +31,42 @@
 	#error unsuported plataform
 #endif
 
-#define WHITE_BACKGROUND 	"\e[30;48;5;215m"
-#define BLACK_BACKGROUND 	"\e[30;48;5;208m"
-#define WHITE_PIECE 	 	"\e[1;97m"
-#define BLACK_PIECE 	 	""
-#define DEFAULT		 	"\e[0m"
+#define WHITE_BACKGROUND "\e[30;48;5;215m"
+#define BLACK_BACKGROUND "\e[30;48;5;208m"
+#define WHITE_PIECE "\e[1;97m"
+#define BLACK_PIECE	""
+#define DEFAULT "\e[0m"
 
 #define BLACK_PIECES_VALUE_MIN 1
 #define BLACK_PIECES_VALUE_MAX 16
 #define WHITE_PIECES_VALUE_MIN 17
 #define WHITE_PIECES_VALUE_MAX 32
 
-#define WHITE_KING_VALUE 	29
-#define BLACK_KING_VALUE 	5
+#define WHITE_KING_VALUE 29
+#define BLACK_KING_VALUE 5
 
 #define SWAP_PLAYER_TURN player = !player;
 
 #define color 	bool
 #define white 	true
 
-extern int   	from_value;   
-extern int   	to_value;
-extern int   	from_position;
-extern int   	to_position;
-extern char  	from_char;
-extern char  	to_char;
+extern int from_value;   
+extern int to_value;
+extern int from_position;
+extern int to_position;
+extern char from_char;
+extern char to_char;
 
-extern char* 	AN[64];
-extern char* 	PIECES[33];
-extern int   	board[64]; 
-extern int 	aux_board[64];
-extern int	bitboard[64]; 
+extern char *AN[64];
+extern char *PIECES[33];
+extern int board[64]; 
+extern int aux_board[64];
+extern int bitboard[64]; 
 
-extern int	white_captures_counter;
-extern int	black_captures_counter;
-extern int	white_captures[32];
-extern int 	black_captures[32];   	
+extern int white_captures_counter;
+extern int black_captures_counter;
+extern int white_captures[32];
+extern int black_captures[32];   	
 	
 extern bool	player;
 
